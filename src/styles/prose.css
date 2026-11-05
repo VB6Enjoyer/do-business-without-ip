@@ -188,3 +188,40 @@
 .prose .update-ref:hover {
   border-color: var(--color-accent);
 }
+
+/* Share button on pull quotes (revealed by JS). */
+.prose .quote-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  margin-top: var(--space-2xs);
+  padding: 0.25em 0.7em;
+  min-height: 1.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.prose .quote-share[hidden] {
+  display: none;
+}
+
+.prose .quote-share:hover {
+  color: var(--color-accent-strong);
+  border-color: var(--color-accent);
+}
+
+.prose .quote-share svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

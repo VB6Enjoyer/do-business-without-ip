@@ -29,6 +29,7 @@
   .fn-drawer,
   .pull-quote,
   .update-ref,
+  .quote-dialog,
   .notes .back,
   .updates .back {
     display: none !important;

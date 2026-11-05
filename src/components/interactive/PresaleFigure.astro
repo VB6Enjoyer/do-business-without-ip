@@ -1,0 +1,11 @@
+---
+import InteractiveFigure from './InteractiveFigure.astro';
+import PresaleCalculator from './PresaleCalculator.svelte';
+import { useStrings } from '../../i18n';
+
+const s = useStrings().tools.presale;
+---
+
+<InteractiveFigure id="presale-calculator" title={s.title} intro={s.intro}>
+  <PresaleCalculator client:visible strings={s} />
+</InteractiveFigure>

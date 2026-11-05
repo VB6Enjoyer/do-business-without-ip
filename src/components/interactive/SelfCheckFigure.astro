@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from 'astro:content';
+import InteractiveFigure from './InteractiveFigure.astro';
+import SelfCheck from './SelfCheck.svelte';
+import { defaultLang, useStrings } from '../../i18n';
+import { withBase } from '../../lib/paths';
+
+const t = useStrings();
+const s = t.tools.selfCheck;
+
+// Every anchor a suggestion may point to: sections, subsections, and the release tool.
+const titles: Record<string, string> = { 'release-tool': t.tools.release.title };
+for (const entry of await getCollection('guide', (e) => e.id.startsWith(`${defaultLang}/`))) {
+  titles[entry.id.replace(/^[a-z]+\/\d+-/, '')] = entry.data.title;
+  const { headings } = await render(entry);
+  for (const h of headings) if (h.depth === 3) titles[h.slug] = h.text;
+}
+---
+
+<InteractiveFigure id="self-check" title={s.title} intro={s.intro}>
+  <SelfCheck client:visible strings={s} titles={titles} base={withBase('/guide/')} />
+</InteractiveFigure>

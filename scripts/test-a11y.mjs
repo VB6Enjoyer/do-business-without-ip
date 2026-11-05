@@ -7,6 +7,7 @@
  * - footnote drawer: keyboard open, arrow navigation, Esc, focus return, deep links
  * - archive links for dead footnotes; "Since 2014" updates in the drawer
  * - interactives: covenant demo outcomes, copyright timeline values and readouts
+ * - tools: self-check suggestions, pre-sale calculator, release notice, quote sharing
  * - no-JS fallback: footnote markers jump to the notes list
  * - mobile contents bar opens and closes after following a link
  */
@@ -260,6 +261,144 @@ try {
     await ctx.close();
   }
 
+  console.log('\nTools: self-check');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const tool = page.locator('#self-check');
+    await tool.scrollIntoViewIfNeeded();
+    await page.waitForSelector('#self-check astro-island:not([ssr])');
+    const results = () => tool.locator('.results').textContent();
+    check((await results())?.includes('Choose what you make'), 'starts with no suggestions');
+    await tool.getByLabel('Music').check();
+    check(
+      (await results())?.includes('Music without Intellectual Property'),
+      'choosing Music suggests the music section',
+    );
+    const q4 = tool.locator('fieldset.question').nth(3);
+    await q4.getByLabel('No', { exact: true }).check();
+    check(
+      (await results())?.includes('IP Versus Property Rights'),
+      'answering No to the free-markets question suggests IP Versus Property Rights',
+    );
+    const link = tool.locator('.results a', { hasText: 'Music without' });
+    check(
+      (await link.getAttribute('href'))?.endsWith('/guide/#music-without-intellectual-property'),
+      'suggestions link to the right anchor',
+    );
+    await tool.getByRole('button', { name: 'Clear my answers' }).click();
+    check((await results())?.includes('Choose what you make'), 'clearing removes the suggestions');
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
+  console.log('\nTools: pre-sale calculator');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const tool = page.locator('#presale-calculator');
+    await tool.scrollIntoViewIfNeeded();
+    await page.waitForSelector('#presale-calculator astro-island:not([ssr])');
+    const val = (k) => tool.locator(`[data-presale="${k}"]`).textContent();
+    check((await val('preorders')) === '1,000,000', 'defaults: 1,000,000 pre-orders');
+    check((await val('per-book')) === '$10M', 'defaults: $10M per book');
+    check((await val('total')) === '$50M', 'defaults: $50M in total, as in the text');
+    const books = tool.getByLabel('Number of further books');
+    await books.focus();
+    for (let i = 0; i < 4; i++) await page.keyboard.press('ArrowLeft');
+    check((await val('total')) === '$10M', 'one book by keyboard: $10M');
+    check(
+      (await val('target'))?.includes('10,000 pre-orders'),
+      '$100,000 target needs 10,000 pre-orders',
+    );
+    await tool.getByRole('button', { name: 'Use the guide’s numbers' }).click();
+    check((await val('total')) === '$50M', 'reset restores the guide’s numbers');
+    await ctx.close();
+  }
+
+  console.log('\nTools: release your work');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    await ctx.grantPermissions(['clipboard-read', 'clipboard-write']);
+    const page = await ctx.newPage();
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const tool = page.locator('#release-tool');
+    await tool.scrollIntoViewIfNeeded();
+    await page.waitForSelector('#release-tool astro-island:not([ssr])');
+    const out = () => tool.locator('[data-release-output]').textContent();
+    await tool.getByLabel('Title of the work').fill('My <b>Song</b>');
+    await tool.getByLabel('Your name').fill('Ana');
+    check((await out())?.includes('public domain under CC0 1.0'), 'CC0 notice by default');
+    await tool.getByLabel(/CC BY: attribution only/).check();
+    check(
+      (await out())?.includes('© ') && (await out())?.includes('CC BY 4.0'),
+      'CC BY notice after switching license',
+    );
+    await tool.getByLabel('HTML').check();
+    const html = (await out()) ?? '';
+    check(html.includes('rel="license"'), 'HTML notice marks the license link');
+    check(html.includes('&lt;b&gt;') && !html.includes('<b>'), 'HTML notice escapes user input');
+    await tool.getByLabel('Add a defensive patent pledge').check();
+    check((await out())?.includes('defend against a patent lawsuit'), 'pledge is appended');
+    await tool.getByRole('button', { name: 'Copy notice' }).click();
+    const clip = await page.evaluate(() => navigator.clipboard.readText());
+    check(clip === (await out()), 'copy puts the notice on the clipboard');
+    check((await tool.locator('.copied').textContent()) === 'Copied', 'copy is confirmed');
+    await axe(page, 'guide after using the tools');
+    await ctx.close();
+  }
+
+  console.log('\nTools: share a quote');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce', acceptDownloads: true });
+    await ctx.grantPermissions(['clipboard-read', 'clipboard-write']);
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const buttons = page.locator('[data-quote-share]');
+    check((await buttons.count()) === 28, 'every pull quote has a share button');
+    const first = buttons.first();
+    await first.scrollIntoViewIfNeeded();
+    await first.click();
+    await page.waitForSelector('#quote-dialog[open]');
+    await page.waitForFunction(() =>
+      document
+        .querySelector('[data-quote-preview]')
+        ?.getAttribute('src')
+        ?.startsWith('data:image/png'),
+    );
+    check(true, 'dialog opens with a PNG preview of the quote card');
+    await page.click('[data-quote-copy]');
+    const clip = await page.evaluate(() => navigator.clipboard.readText());
+    check(
+      clip.includes('An IP-free world') &&
+        clip.includes('Stephan Kinsella') &&
+        clip.includes('#q-'),
+      'copied text has the quote, attribution and a link to it',
+    );
+    const [download] = await Promise.all([
+      page.waitForEvent('download'),
+      page.click('[data-quote-download]'),
+    ]);
+    check(download.suggestedFilename().endsWith('.png'), 'download gives a PNG');
+    await axe(page, 'quote dialog open');
+    await page.keyboard.press('Escape');
+    const back = await page
+      .waitForFunction(() => document.activeElement?.hasAttribute('data-quote-share'), null, {
+        timeout: 2000,
+      })
+      .then(() => true)
+      .catch(() => false);
+    check(back, 'focus returns to the share button');
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
   console.log('\nWithout JavaScript');
   {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
@@ -268,6 +407,10 @@ try {
     await page.click('#fnref-3');
     check(new URL(page.url()).hash === '#fn-3', 'marker jumps to the notes list');
     check(!(await page.isVisible('#fn-drawer')), 'drawer stays closed');
+    check(
+      (await page.locator('[data-quote-share]:visible').count()) === 0,
+      'quote share buttons stay hidden',
+    );
     await page.click('#sinceref-tpp');
     check(new URL(page.url()).hash === '#since-tpp', 'update marker jumps to the updates list');
     await ctx.close();

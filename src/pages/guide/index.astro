@@ -8,9 +8,13 @@ import Standfirst from '../../components/guide/Standfirst.astro';
 import Since2014 from '../../components/guide/Since2014.astro';
 import Covenant from '../../components/interactive/Covenant.astro';
 import Timeline from '../../components/interactive/Timeline.astro';
+import SelfCheck from '../../components/interactive/SelfCheckFigure.astro';
+import Presale from '../../components/interactive/PresaleFigure.astro';
+import ReleaseTool from '../../components/interactive/ReleaseFigure.astro';
 import Toc from '../../components/guide/Toc.astro';
 import ReadingProgress from '../../components/guide/ReadingProgress.astro';
 import FootnoteDrawer from '../../components/guide/FootnoteDrawer.astro';
+import QuoteShare from '../../components/guide/QuoteShare.astro';
 import { defaultLang, useStrings } from '../../i18n';
 import { footnoteHref, getFootnotes, usesArchive } from '../../lib/footnotes';
 import '../../styles/prose.css';
@@ -43,7 +47,18 @@ const disclaimer = await getEntry('meta', `${lang}/disclaimer`);
 const { Content: AuthorBio } = await render(author!);
 const { Content: Disclaimer } = await render(disclaimer!);
 
-const components = { Fn, Ref, PullQuote, Standfirst, Since2014, Covenant, Timeline };
+const components = {
+  Fn,
+  Ref,
+  PullQuote,
+  Standfirst,
+  Since2014,
+  Covenant,
+  Timeline,
+  SelfCheck,
+  Presale,
+  ReleaseTool,
+};
 const tocSections = sections.map((s) => ({
   slug: s.slug,
   title: s.data.title,
@@ -181,6 +196,7 @@ const tocExtra = [
     </article>
   </div>
 
+  <QuoteShare />
   <FootnoteDrawer
     footnotes={footnotes}
     updates={updates.map((u) => ({ id: u.id, title: u.data.title }))}

@@ -1,0 +1,155 @@
+---
+/**
+ * One dialog shared by every pull quote's "Share" button: copy the quote with
+ * attribution and a link, download it as an image card, or use the system
+ * share sheet where available.
+ */
+import { useStrings } from '../../i18n';
+
+const s = useStrings().tools.quote;
+const strings = { attribution: s.attribution, siteName: s.siteName, copied: s.copied };
+---
+
+<dialog id="quote-dialog" class="quote-dialog" aria-labelledby="quote-dialog-title">
+  <div class="quote-dialog__panel">
+    <div class="quote-dialog__top">
+      <h2 id="quote-dialog-title">{s.dialogTitle}</h2>
+      <button type="button" class="icon-button" data-quote-close aria-label={s.close} autofocus>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6l12 12M18 6 6 18"></path>
+        </svg>
+      </button>
+    </div>
+    <img
+      class="quote-dialog__preview"
+      data-quote-preview
+      alt={s.preview}
+      width="1200"
+      height="630"
+    />
+    <div class="quote-dialog__actions">
+      <button type="button" class="action primary" data-quote-copy>
+        {s.copyText}
+      </button>
+      <button type="button" class="action" data-quote-download>
+        {s.download}
+      </button>
+      <button type="button" class="action" data-quote-native hidden>
+        {s.nativeShare}
+      </button>
+      <span class="quote-dialog__status" role="status" data-quote-status></span>
+    </div>
+    <p class="quote-dialog__note">{s.note}</p>
+  </div>
+</dialog>
+
+<script is:inline type="application/json" id="quote-strings" set:html={JSON.stringify(strings)} />
+<script>
+  import { initQuoteShare } from '../../lib/quote-share';
+  initQuoteShare();
+</script>
+
+<style>
+  .quote-dialog {
+    width: min(40rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 2rem);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: 0 12px 48px rgb(0 0 0 / 0.3);
+  }
+
+  .quote-dialog::backdrop {
+    background: rgb(0 0 0 / 0.4);
+    backdrop-filter: blur(2px);
+  }
+
+  .quote-dialog__panel {
+    display: grid;
+    gap: var(--space-s);
+    padding: var(--space-m);
+    font-family: var(--font-sans);
+  }
+
+  .quote-dialog__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+  }
+
+  .quote-dialog__top h2 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+  }
+
+  .quote-dialog__preview {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-s);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .quote-dialog__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs);
+  }
+
+  .icon-button,
+  .action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .icon-button {
+    width: 2.5rem;
+    padding: 0;
+  }
+
+  .icon-button svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .action {
+    padding: 0 var(--space-m);
+  }
+
+  .action.primary {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+
+  .quote-dialog__status {
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--color-accent-strong);
+  }
+
+  .quote-dialog__note {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+</style>
