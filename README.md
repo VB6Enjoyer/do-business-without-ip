@@ -36,6 +36,7 @@ npm run preview    # serve dist/
 src/
   components/   UI pieces (Header, Footer, ThemeToggle, ImagePlaceholder)
     guide/      Components used inside the guide's MDX (Ref, Fn, PullQuote, …)
+    interactive/ Svelte islands embedded in the guide (covenant demo, copyright timeline)
   content/      The guide (MDX per section), footnotes, “Since 2014” updates, author bio, disclaimer, about page
   i18n/         UI strings per language; no interface text lives in components
   layouts/      Page shell (meta tags, theme bootstrap, skip link)

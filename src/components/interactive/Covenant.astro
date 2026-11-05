@@ -1,0 +1,11 @@
+---
+import InteractiveFigure from './InteractiveFigure.astro';
+import CovenantDemo from './CovenantDemo.svelte';
+import { useStrings } from '../../i18n';
+
+const s = useStrings().interactive.covenant;
+---
+
+<InteractiveFigure id="covenant-demo" title={s.title} intro={s.intro}>
+  <CovenantDemo client:visible strings={s} />
+</InteractiveFigure>

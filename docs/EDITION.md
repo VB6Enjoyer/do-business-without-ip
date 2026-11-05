@@ -104,3 +104,14 @@ Short editorial notes on examples in the text that have moved on since 2014. Rul
 | Defensive patent pools took off                   | Patents                                            |
 
 The Kim Dotcom update describes the case as of July 2026 and should be revisited.
+
+## Interactives
+
+Two interactive figures sit inside the guide. Each is framed and labelled "Interactive · added in this edition", is hidden in print, and adds no words to the author's text, so `check:text` still passes.
+
+| Interactive                                                                                                                                                                                                                                                                     | Placed after                                                 | Source                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| **Who gets a veto over your house?** Kinsella's neighborhood example: try painting your house orange under a covenant you choose whether to sign, then under a patent you never agreed to.                                                                                      | The end of _IP Versus Property Rights_                       | `src/components/interactive/CovenantDemo.svelte`                                            |
+| **How long does copyright last?** The maximum US copyright term by year from 1790, with the Statute of Anne for comparison. Sliders set the author's age at creation and death (terms since 1978 depend on the author's life). There is a corporate-work mode and a table view. | The first paragraph of _Dying without Intellectual Property_ | `src/components/interactive/CopyrightTimeline.svelte`, data in `src/lib/copyright-terms.ts` |
+
+The timeline is simplified: renewals are counted as always made, and the interim extensions of 1962–1974 are left out. Both simplifications are stated under the chart. Source: U.S. Copyright Office, Circular 15A. The patent holder in the covenant demo ("OrangeCo Holdings") is fictional and labelled as such.

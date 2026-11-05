@@ -1,0 +1,13 @@
+---
+import InteractiveFigure from './InteractiveFigure.astro';
+import CopyrightTimeline from './CopyrightTimeline.svelte';
+import { useStrings } from '../../i18n';
+
+const s = useStrings().interactive.timeline;
+// Fixed at build time so server and client render the same year.
+const currentYear = new Date().getUTCFullYear();
+---
+
+<InteractiveFigure id="copyright-timeline" title={s.title} intro={s.intro}>
+  <CopyrightTimeline client:visible strings={s} currentYear={currentYear} />
+</InteractiveFigure>
