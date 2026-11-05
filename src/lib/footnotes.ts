@@ -14,7 +14,13 @@ export async function getFootnotes(lang: Lang = defaultLang): Promise<Footnote[]
   return all.map((e) => e.data).sort((a, b) => a.n - b.n);
 }
 
-/** The URL readers should follow: the archived copy when we have one, else the original. */
+/** The URL readers should follow: the original while it is live, otherwise the archived copy. */
 export function footnoteHref(fn: Footnote): string {
+  if (fn.linkStatus === 'live') return fn.originalUrl;
   return fn.archiveUrl ?? fn.originalUrl;
+}
+
+/** True when readers are sent to the Wayback Machine instead of the original. */
+export function usesArchive(fn: Footnote): boolean {
+  return footnoteHref(fn) !== fn.originalUrl;
 }

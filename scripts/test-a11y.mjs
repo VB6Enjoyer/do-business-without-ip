@@ -5,6 +5,7 @@
  * - axe-core (WCAG 2.2 A/AA) on every page, in light and dark themes, and with
  *   the footnote drawer open
  * - footnote drawer: keyboard open, arrow navigation, Esc, focus return, deep links
+ * - archive links for dead footnotes; "Since 2014" updates in the drawer
  * - no-JS fallback: footnote markers jump to the notes list
  * - mobile contents bar opens and closes after following a link
  */
@@ -61,7 +62,7 @@ try {
     console.log(`\naxe (${scheme})`);
     const ctx = await browser.newContext({ colorScheme: scheme, reducedMotion: 'reduce' });
     const page = await ctx.newPage();
-    for (const path of ['', 'guide/', 'this-page-does-not-exist/']) {
+    for (const path of ['', 'guide/', 'about/', 'this-page-does-not-exist/']) {
       await page.goto(BASE + path, { waitUntil: 'networkidle' });
       await axe(page, `/${path || ''} ${scheme}`);
     }
@@ -82,7 +83,7 @@ try {
     await page.focus('#fnref-1');
     await page.keyboard.press('Enter');
     await page.waitForSelector('#fn-drawer[open]');
-    const kicker = () => page.textContent('[data-fn-kicker]');
+    const kicker = () => page.textContent('[data-drawer-kicker]');
     check(
       (await kicker())?.includes('1 of 41'),
       'Enter on marker 1 opens the drawer at footnote 1',
@@ -99,7 +100,10 @@ try {
     await page.keyboard.press('ArrowLeft');
     await page.keyboard.press('ArrowLeft');
     check((await kicker())?.includes('1 of 41'), 'ArrowLeft stops at footnote 1');
-    check(await page.isDisabled('[data-fn-prev]'), '"Previous" is disabled on the first footnote');
+    check(
+      await page.isDisabled('[data-drawer-prev]'),
+      '"Previous" is disabled on the first footnote',
+    );
     await page.keyboard.press('ArrowRight');
     await page.keyboard.press('Escape');
     check(!(await page.isVisible('#fn-drawer')), 'Esc closes the drawer');
@@ -113,13 +117,64 @@ try {
 
     await page.click('#fnref-41');
     await page.waitForSelector('#fn-drawer[open]');
-    check(await page.isDisabled('[data-fn-next]'), '"Next" is disabled on the last footnote');
+    check(await page.isDisabled('[data-drawer-next]'), '"Next" is disabled on the last footnote');
     await page.mouse.click(10, 10); // backdrop
     check(!(await page.isVisible('#fn-drawer')), 'clicking the backdrop closes the drawer');
 
     await page.goto(BASE + 'guide/#fn-12', { waitUntil: 'networkidle' });
     await page.waitForSelector('#fn-drawer[open]');
     check((await kicker())?.includes('12 of 41'), 'deep link #fn-12 opens footnote 12');
+
+    console.log('\nLinks in the drawer');
+    await page.goto(BASE + 'guide/#fn-4', { waitUntil: 'networkidle' });
+    await page.waitForSelector('#fn-drawer[open]');
+    check(
+      (await page.getAttribute('[data-fn-link]', 'href'))?.startsWith('https://web.archive.org/'),
+      'dead link (footnote 4) points to its archived copy',
+    );
+    check(await page.isVisible('[data-fn-link-note]'), 'dead link shows an explanatory note');
+    await page.keyboard.press('ArrowLeft');
+    await page.keyboard.press('ArrowLeft');
+    check(
+      (await page.getAttribute('[data-fn-link]', 'href')) ===
+        'http://c4sif.org/2011/03/types-of-intellectual-property/',
+      'live link (footnote 2) points to the original',
+    );
+    check(await page.isVisible('[data-fn-archive]'), 'live link also offers the archived copy');
+    await page.keyboard.press('Escape');
+
+    console.log('\nUpdates in the drawer');
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    await page.click('#sinceref-tpp');
+    await page.waitForSelector('#fn-drawer[open]');
+    check((await kicker())?.includes('1 of 6'), 'update marker opens the first update');
+    check(
+      (await page.textContent('[data-update-body]'))?.includes('CPTPP'),
+      'drawer shows the update text',
+    );
+    check(
+      (await page.$$('[data-update-body] .update-sources a')).length > 0,
+      'drawer shows the sources of the update',
+    );
+    check(new URL(page.url()).hash === '#since-tpp', 'URL reflects the open update');
+    await page.keyboard.press('ArrowRight');
+    check((await kicker())?.includes('2 of 6'), 'ArrowRight moves to the next update');
+    await page.keyboard.press('Escape');
+    const backToUpdate = await page
+      .waitForFunction(() => document.activeElement?.id === 'sinceref-smartphone-wars', null, {
+        timeout: 2000,
+      })
+      .then(() => true)
+      .catch(() => false);
+    check(backToUpdate, 'focus returns to the marker of the update last shown');
+    await page.goto(BASE + 'guide/#since-motorola', { waitUntil: 'networkidle' });
+    await page.waitForSelector('#fn-drawer[open]');
+    check(
+      (await page.textContent('[data-drawer-title]'))?.includes('Motorola'),
+      'deep link #since-motorola opens that update',
+    );
+    await axe(page, 'update drawer open');
+
     check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
     await ctx.close();
   }
@@ -132,6 +187,8 @@ try {
     await page.click('#fnref-3');
     check(new URL(page.url()).hash === '#fn-3', 'marker jumps to the notes list');
     check(!(await page.isVisible('#fn-drawer')), 'drawer stays closed');
+    await page.click('#sinceref-tpp');
+    check(new URL(page.url()).hash === '#since-tpp', 'update marker jumps to the updates list');
     await ctx.close();
   }
 

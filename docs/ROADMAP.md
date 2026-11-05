@@ -82,7 +82,7 @@ Goal: a pleasant, accessible reading experience on any device.
 
 **Done when:** the guide is fully readable with keyboard only, axe reports no violations, and Lighthouse accessibility scores 100.
 
-## Phase 3: Links and modernization
+## Phase 3: Links and modernization ✅
 
 Goal: every link works, and the 2014 context is updated without touching the original text.
 

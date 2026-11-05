@@ -34,10 +34,32 @@ const footnotes = defineCollection({
     label: z.string(),
     /** URL exactly as printed in the 2014 PDF. */
     originalUrl: z.url(),
-    /** Wayback Machine snapshot, filled in Phase 3. Preferred over originalUrl when set. */
+    /** Wayback Machine snapshot nearest July 2014, or null when none exists. */
     archiveUrl: z.url().nullable(),
-    /** Editorial "Since 2014" note for this footnote, if any. */
-    note: z.string().nullable(),
+    /**
+     * Result of the last link check: `live` (original resolves), `dead` (gone),
+     * `unverified` (the site blocks automated checks). Readers are sent to the
+     * original only when it is live; otherwise to the archived copy.
+     */
+    linkStatus: z.enum(['live', 'dead', 'unverified']),
+    /** Date of the last link check (YYYY-MM-DD). */
+    checkedOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    /** Short editorial remark about the link itself (e.g. why the archive is used). */
+    linkNote: z.string().nullable(),
+  }),
+});
+
+/**
+ * "Since 2014" editorial updates. Each is anchored in the text with
+ * <Since2014 id="…" /> and must cite its sources.
+ */
+const updates = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/updates' }),
+  schema: z.object({
+    title: z.string(),
+    /** Display order; should follow the order of the markers in the guide. */
+    order: z.number().int().positive(),
+    sources: z.array(z.object({ title: z.string(), publisher: z.string(), url: z.url() })).min(1),
   }),
 });
 
@@ -51,4 +73,4 @@ const meta = defineCollection({
   }),
 });
 
-export const collections = { guide, footnotes, meta };
+export const collections = { guide, footnotes, updates, meta };

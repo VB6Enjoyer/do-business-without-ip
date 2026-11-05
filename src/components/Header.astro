@@ -18,6 +18,9 @@ const t = useStrings();
       <a class="nav-link" href={withBase('/guide/')}>
         {t.nav.guide}
       </a>
+      <a class="nav-link" href={withBase('/about/')}>
+        {t.nav.about}
+      </a>
       <ThemeToggle />
     </nav>
   </div>
@@ -95,6 +98,6 @@ const t = useStrings();
   nav {
     display: flex;
     align-items: center;
-    gap: var(--space-xs);
+    gap: var(--space-s);
   }
 </style>

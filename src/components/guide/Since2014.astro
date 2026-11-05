@@ -1,21 +1,22 @@
 ---
 /**
- * Editorial update on something in the 2014 text. Always visually marked as an
- * addition so it is never mistaken for the author's words. Phase 3 fills these
- * in; Phase 2 moves them into the drawer.
+ * Marker for an editorial "Since 2014" update. A plain link to the updates
+ * list at the end of the guide; with JS, the drawer opens it in place.
  */
-import { useStrings } from '../../i18n';
+import { getEntry } from 'astro:content';
+import { defaultLang, useStrings } from '../../i18n';
 
 interface Props {
-  /** Stable identifier, e.g. "sopa-pipa". */
+  /** File name of the update in src/content/updates/<lang>/ (without .md). */
   id: string;
 }
 
 const { id } = Astro.props;
 const t = useStrings();
+const update = await getEntry('updates', `${defaultLang}/${id}`);
+if (!update) throw new Error(`Since2014 marker references unknown update "${id}"`);
+const label = `${t.guide.since2014}: ${update.data.title}`;
 ---
 
-<aside class="since-2014" id={`since-${id}`} aria-label={t.guide.since2014}>
-  <p class="since-2014__label">{t.guide.since2014}</p>
-  <slot />
-</aside>
+<!-- prettier-ignore -->
+<a class="update-ref" href={`#since-${id}`} id={`sinceref-${id}`} data-update={id} aria-label={label}>{t.guide.since2014}</a>
