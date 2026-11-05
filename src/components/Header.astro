@@ -15,6 +15,9 @@ const t = useStrings();
       <span>{t.site.shortTitle}</span>
     </a>
     <nav aria-label={t.a11y.mainNav}>
+      <a class="nav-link" href={withBase('/guide/')}>
+        {t.nav.guide}
+      </a>
       <ThemeToggle />
     </nav>
   </div>
@@ -58,6 +61,18 @@ const t = useStrings();
     stroke-width: 1.75;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent);
   }
 
   nav {

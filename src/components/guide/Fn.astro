@@ -1,0 +1,24 @@
+---
+/**
+ * Footnote reference marker. Phase 2 turns this into a button that opens the
+ * footnote drawer; without JS it remains a plain jump link to the notes list.
+ */
+import { useStrings } from '../../i18n';
+
+interface Props {
+  n: number;
+}
+
+const { n } = Astro.props;
+const t = useStrings();
+---
+
+<sup class="fn-ref">
+  <a
+    href={`#fn-${n}`}
+    id={`fnref-${n}`}
+    aria-label={t.guide.footnoteLabel.replace('{n}', String(n))}
+  >
+    {n}
+  </a>
+</sup>

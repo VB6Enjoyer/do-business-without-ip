@@ -2,7 +2,7 @@
   "name": "do-business-without-ip",
   "version": "0.1.0",
   "private": true,
-  "description": "A modern web edition of Stephan Kinsella’s CC0 guide “Do Business Without Intellectual Property” (2014).",
+  "description": "A modern web edition of Stephan Kinsella\u2019s CC0 guide \u201cDo Business Without Intellectual Property\u201d (2014).",
   "license": "Unlicense",
   "type": "commonjs",
   "engines": {
@@ -15,9 +15,11 @@
     "check": "astro check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check:text": "node scripts/check-text.mjs"
   },
   "dependencies": {
+    "@astrojs/mdx": "^8.1.2",
     "@astrojs/svelte": "^9.1.2",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource-variable/source-serif-4": "^5.3.1",

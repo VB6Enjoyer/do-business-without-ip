@@ -1,0 +1,179 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Fn from '../../components/guide/Fn.astro';
+import Ref from '../../components/guide/Ref.astro';
+import PullQuote from '../../components/guide/PullQuote.astro';
+import Standfirst from '../../components/guide/Standfirst.astro';
+import Since2014 from '../../components/guide/Since2014.astro';
+import { defaultLang, useStrings } from '../../i18n';
+import { footnoteHref, getFootnotes } from '../../lib/footnotes';
+
+const lang = defaultLang;
+const t = useStrings(lang);
+
+const entries = (await getCollection('guide', (e) => e.id.startsWith(`${lang}/`))).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const sections = await Promise.all(
+  entries.map(async (entry) => ({
+    slug: entry.id.replace(/^[a-z]+\/\d+-/, ''),
+    data: entry.data,
+    ...(await render(entry)),
+  })),
+);
+const footnotes = await getFootnotes(lang);
+const author = await getEntry('meta', `${lang}/author`);
+const disclaimer = await getEntry('meta', `${lang}/disclaimer`);
+const { Content: AuthorBio } = await render(author!);
+const { Content: Disclaimer } = await render(disclaimer!);
+
+const components = { Fn, Ref, PullQuote, Standfirst, Since2014 };
+---
+
+<BaseLayout title={t.guide.title}>
+  <article class="guide container">
+    <header class="guide-header">
+      <p class="kicker">{t.home.kicker}</p>
+      <h1>{t.site.title}</h1>
+      <p class="byline">{t.home.byline}</p>
+    </header>
+
+    <nav class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title">{t.guide.contents}</h2>
+      <ol>
+        {sections.map((s) => (
+          <li>
+            <a href={`#${s.slug}`}>{s.data.title}</a>
+            {s.headings.some((h) => h.depth === 3) && (
+              <ol>
+                {s.headings
+                  .filter((h) => h.depth === 3)
+                  .map((h) => (
+                    <li>
+                      <a href={`#${h.slug}`}>{h.text}</a>
+                    </li>
+                  ))}
+              </ol>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    {sections.map(({ slug, data, Content }) => (
+      <section id={slug} class="guide-section" aria-labelledby={`${slug}-title`}>
+        <h2 id={`${slug}-title`}>{data.title}</h2>
+        <Content components={components} />
+      </section>
+    ))}
+
+    <section id="notes" class="notes" aria-labelledby="notes-title">
+      <h2 id="notes-title">{t.guide.notes}</h2>
+      <ol>
+        {footnotes.map((fn) => (
+          <li id={`fn-${fn.n}`} value={fn.n}>
+            <a href={footnoteHref(fn)} rel="noopener">
+              {fn.label}
+            </a>
+            <span class="note-url">{fn.originalUrl}</span>
+            <a
+              href={`#fnref-${fn.n}`}
+              class="back"
+              aria-label={t.guide.backToText.replace('{n}', String(fn.n))}
+            >
+              ↩
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="author" aria-labelledby="author-title">
+      <h2 id="author-title">{t.guide.aboutAuthor}</h2>
+      <AuthorBio />
+    </section>
+
+    <section class="disclaimer" aria-labelledby="disclaimer-title">
+      <h2 id="disclaimer-title">{disclaimer!.data.title}</h2>
+      <Disclaimer />
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  /* Minimal readable defaults; the full reading design arrives in Phase 2. */
+  .guide {
+    max-width: var(--measure);
+    padding-block: var(--space-xl);
+  }
+
+  .kicker {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  .byline {
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  .toc,
+  .guide-section,
+  .notes,
+  .author,
+  .disclaimer {
+    margin-top: var(--space-xl);
+  }
+
+  .guide-section :global(h2),
+  .guide-section > h2 {
+    font-size: var(--step-2);
+  }
+
+  .guide-section :global(h3) {
+    font-size: var(--step-1);
+    margin-top: var(--space-l);
+  }
+
+  .guide :global(.pull-quote) {
+    border-inline-start: 3px solid var(--color-accent);
+    padding-inline-start: var(--space-s);
+    margin-block: var(--space-m);
+    font-family: var(--font-sans);
+    color: var(--color-text-muted);
+  }
+
+  .guide :global(.standfirst) {
+    font-weight: 600;
+  }
+
+  .notes li {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .note-url {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .back {
+    text-decoration: none;
+  }
+
+  .disclaimer {
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+</style>
