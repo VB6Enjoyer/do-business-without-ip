@@ -24,6 +24,7 @@ npm run dev        # http://localhost:4321/do-business-without-ip/
 npm run check      # type-check .astro/.ts files
 npm run check:text # verify the guide text against the 2014 original
 npm run test:a11y  # axe + drawer/keyboard/no-JS checks on the built site (build first)
+npm run check:links # recheck footnote links, archived copies and update sources
 npm run format     # Prettier
 npm run build      # static site in dist/
 npm run preview    # serve dist/
@@ -35,7 +36,7 @@ npm run preview    # serve dist/
 src/
   components/   UI pieces (Header, Footer, ThemeToggle, ImagePlaceholder)
     guide/      Components used inside the guide's MDX (Ref, Fn, PullQuote, …)
-  content/      The guide (MDX per section), footnotes, author bio, disclaimer
+  content/      The guide (MDX per section), footnotes, “Since 2014” updates, author bio, disclaimer, about page
   i18n/         UI strings per language; no interface text lives in components
   layouts/      Page shell (meta tags, theme bootstrap, skip link)
   lib/          Small helpers (base-path links, theme, external links)

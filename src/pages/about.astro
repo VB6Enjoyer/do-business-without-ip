@@ -1,0 +1,144 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultLang, useStrings } from '../i18n';
+import { getFootnotes, usesArchive } from '../lib/footnotes';
+import { links } from '../lib/links';
+import { withBase } from '../lib/paths';
+import '../styles/prose.css';
+
+const lang = defaultLang;
+const t = useStrings(lang);
+
+const about = await getEntry('meta', `${lang}/about`);
+const { Content } = await render(about!);
+const footnotes = await getFootnotes(lang);
+const archived = footnotes.filter(usesArchive).length;
+const lastChecked = footnotes
+  .map((f) => f.checkedOn)
+  .sort()
+  .at(-1)!;
+const lastCheckedLabel = new Date(`${lastChecked}T00:00:00Z`).toLocaleDateString('en', {
+  dateStyle: 'long',
+  timeZone: 'UTC',
+});
+const updates = (await getCollection('updates', (e) => e.id.startsWith(`${lang}/`))).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout title={about!.data.title}>
+  <article class="about prose container">
+    <h1>{about!.data.title}</h1>
+    <Content />
+
+    <section aria-labelledby="link-stats">
+      <h2 id="link-stats">{t.about.linkStats}</h2>
+      <dl class="stats">
+        <div>
+          <dt>{t.about.live}</dt>
+          <dd>{footnotes.length - archived}</dd>
+        </div>
+        <div>
+          <dt>{t.about.archived}</dt>
+          <dd>{archived}</dd>
+        </div>
+      </dl>
+      <p class="muted">{t.about.lastChecked.replace('{date}', lastCheckedLabel)}</p>
+    </section>
+
+    <section aria-labelledby="updates-list">
+      <h2 id="updates-list">{t.about.updatesList}</h2>
+      <ul>
+        {updates.map((u) => (
+          <li>
+            <a href={withBase(`/guide/#since-${u.id.replace(/^[a-z]+\//, '')}`)}>{u.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <p class="actions">
+      <a class="button" href={withBase('/guide/')}>
+        {t.home.startReading}
+      </a>
+      <a href={links.originalPdf}>{t.about.originalPdf}</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .about {
+    max-width: var(--measure);
+    padding-block: var(--space-xl);
+  }
+
+  .about h1 {
+    font-size: var(--step-4);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+  }
+
+  .about :global(h2) {
+    font-size: var(--step-2);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-s);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--space-s);
+    margin: 0 0 var(--space-s);
+  }
+
+  .stats div {
+    padding: var(--space-s) var(--space-m);
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .stats dt {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  .stats dd {
+    margin: 0;
+    font-size: var(--step-3);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .muted {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-m);
+    margin-top: var(--space-xl);
+    font-family: var(--font-sans);
+  }
+
+  .button {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-m);
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .button:hover {
+    background: var(--color-accent-strong);
+    color: var(--color-accent-contrast);
+  }
+</style>

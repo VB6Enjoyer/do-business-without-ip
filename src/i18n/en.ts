@@ -21,7 +21,7 @@ export const en = {
   nav: {
     home: 'Home',
     guide: 'Read the guide',
-    about: 'About this edition',
+    about: 'About',
   },
   home: {
     kicker: 'Guide 1.0 · July 2014 · Web edition',
@@ -40,6 +40,12 @@ export const en = {
     aboutAuthor: 'About the author',
     originalPage: 'Page {n} of the original',
     readingProgress: 'Reading progress',
+    updates: 'Updates since 2014',
+    updatesIntro:
+      'Editorial notes added in this web edition. They are not part of the original text, and each one cites its sources.',
+    sources: 'Sources',
+    archivedCopy: 'archived copy',
+    backToUpdate: 'Back to the text for “{title}”',
   },
   drawer: {
     kicker: 'Footnote {n} of {total}',
@@ -49,9 +55,24 @@ export const en = {
     previousLabel: 'Previous footnote',
     nextLabel: 'Next footnote',
     openLink: 'Open the linked page',
-    openArchived: 'Open the archived copy',
+    openArchived: 'Open the archived copy ({year})',
+    archivedCopy: 'Archived copy ({year})',
+    checkedOn: 'Link checked on {date}.',
+    updateKicker: 'Since 2014 · {n} of {total}',
+    closeUpdate: 'Close update',
+    previousUpdateLabel: 'Previous update',
+    nextUpdateLabel: 'Next update',
+    keyboardHintUpdates: 'Use ← and → to move between updates, Esc to close.',
     originalUrl: 'URL as printed in 2014',
     keyboardHint: 'Use ← and → to move between footnotes, Esc to close.',
+  },
+  about: {
+    linkStats: 'Link status',
+    live: 'Original page still works',
+    archived: 'Served from an archived copy',
+    lastChecked: 'Last checked {date}.',
+    updatesList: 'Updates in this edition',
+    originalPdf: 'Read the original 2014 PDF',
   },
   footer: {
     license:

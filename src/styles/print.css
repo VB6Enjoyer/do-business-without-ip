@@ -28,7 +28,9 @@
   .toc-mobile,
   .fn-drawer,
   .pull-quote,
-  .notes .back {
+  .update-ref,
+  .notes .back,
+  .updates .back {
     display: none !important;
   }
 

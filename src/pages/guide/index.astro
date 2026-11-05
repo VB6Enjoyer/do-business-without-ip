@@ -10,7 +10,7 @@ import Toc from '../../components/guide/Toc.astro';
 import ReadingProgress from '../../components/guide/ReadingProgress.astro';
 import FootnoteDrawer from '../../components/guide/FootnoteDrawer.astro';
 import { defaultLang, useStrings } from '../../i18n';
-import { footnoteHref, getFootnotes } from '../../lib/footnotes';
+import { footnoteHref, getFootnotes, usesArchive } from '../../lib/footnotes';
 import '../../styles/prose.css';
 
 const lang = defaultLang;
@@ -27,6 +27,15 @@ const sections = await Promise.all(
   })),
 );
 const footnotes = await getFootnotes(lang);
+const updates = await Promise.all(
+  (await getCollection('updates', (e) => e.id.startsWith(`${lang}/`)))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (entry) => ({
+      id: entry.id.replace(/^[a-z]+\//, ''),
+      data: entry.data,
+      ...(await render(entry)),
+    })),
+);
 const author = await getEntry('meta', `${lang}/author`);
 const disclaimer = await getEntry('meta', `${lang}/disclaimer`);
 const { Content: AuthorBio } = await render(author!);
@@ -40,6 +49,7 @@ const tocSections = sections.map((s) => ({
 }));
 const tocExtra = [
   { slug: 'notes', title: t.guide.notes },
+  { slug: 'updates', title: t.guide.updates },
   { slug: 'author', title: t.guide.aboutAuthor },
 ];
 ---
@@ -100,7 +110,18 @@ const tocExtra = [
               <a href={footnoteHref(fn)} rel="noopener">
                 {fn.label}
               </a>
+              {!usesArchive(fn) && fn.archiveUrl && (
+                <>
+                  {' '}
+                  (
+                  <a href={fn.archiveUrl} rel="noopener">
+                    {t.guide.archivedCopy}
+                  </a>
+                  )
+                </>
+              )}
               <span class="note-url">{fn.originalUrl}</span>
+              {fn.linkNote && <span class="note-link-note">{fn.linkNote}</span>}
               <a
                 href={`#fnref-${fn.n}`}
                 class="back"
@@ -111,6 +132,39 @@ const tocExtra = [
             </li>
           ))}
         </ol>
+      </section>
+
+      <section id="updates" class="updates" aria-labelledby="updates-title">
+        <h2 id="updates-title">{t.guide.updates}</h2>
+        <p class="updates-intro">{t.guide.updatesIntro}</p>
+        {updates.map(({ id, data, Content }) => (
+          <article id={`since-${id}`} class="update" aria-labelledby={`since-${id}-title`}>
+            <h3 id={`since-${id}-title`}>{data.title}</h3>
+            <div data-update-content>
+              <Content />
+              <div class="update-sources">
+                <h4>{t.guide.sources}</h4>
+                <ul>
+                  {data.sources.map((src) => (
+                    <li>
+                      <a href={src.url} rel="noopener">
+                        {src.title}
+                      </a>
+                      , {src.publisher}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <a
+              href={`#sinceref-${id}`}
+              class="back"
+              aria-label={t.guide.backToUpdate.replace('{title}', data.title)}
+            >
+              ↩
+            </a>
+          </article>
+        ))}
       </section>
 
       <section id="author" class="author" aria-labelledby="author-title">
@@ -125,7 +179,10 @@ const tocExtra = [
     </article>
   </div>
 
-  <FootnoteDrawer footnotes={footnotes} />
+  <FootnoteDrawer
+    footnotes={footnotes}
+    updates={updates.map((u) => ({ id: u.id, title: u.data.title }))}
+  />
 </BaseLayout>
 
 <script>
@@ -173,6 +230,7 @@ const tocExtra = [
 
   .guide-section,
   .notes,
+  .updates,
   .author,
   .disclaimer {
     margin-top: var(--space-2xl);
@@ -317,6 +375,54 @@ const tocExtra = [
     color: var(--color-text-muted);
     overflow-wrap: anywhere;
     hyphens: none;
+  }
+
+  .note-link-note {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  .updates-intro {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  .update {
+    margin-top: var(--space-m);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    background: var(--color-highlight);
+  }
+
+  .update:target {
+    outline: 2px solid var(--color-accent);
+  }
+
+  .update h3 {
+    margin-top: 0;
+    font-size: var(--step-1);
+    font-variant: normal;
+  }
+
+  .update-sources {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  .update-sources h4 {
+    margin: var(--space-s) 0 var(--space-2xs);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+  }
+
+  .update-sources ul {
+    margin: 0;
   }
 
   .back {

@@ -31,7 +31,7 @@ In the MDX, the following components are used:
 - `<Fn n={…} />`: a footnote marker
 - `<PullQuote side="left|right">`: a margin call-out from the original layout, repeating body text
 - `<Standfirst>`: the introduction's opening paragraphs, set in bold in the original
-- `<Since2014 id="…">`: an editorial update (none yet; Phase 3)
+- `<Since2014 id="…" />`: a marker for an editorial update (see below)
 
 ## Typographic fixes
 
@@ -67,3 +67,40 @@ Possible slips in the 2014 text that are kept verbatim because they involve word
 - _IP, Innovation, and Freedom_: "the Stationer’s Company" (historically the _Stationers’_ Company)
 
 Whether to correct these is the author's call (or a future 2026 edition's).
+
+## Links
+
+Each footnote records the result of the last link check:
+
+| Field         | Meaning                                                                                   |
+| ------------- | ----------------------------------------------------------------------------------------- |
+| `originalUrl` | The URL exactly as printed in 2014                                                        |
+| `archiveUrl`  | Wayback Machine snapshot closest to July 2014 (`null` if none exists)                     |
+| `linkStatus`  | `live` (still resolves), `dead` (gone) or `unverified` (the site blocks automated checks) |
+| `checkedOn`   | Date of the last check                                                                    |
+| `linkNote`    | Shown in the drawer and notes list when the archive is used, explaining why               |
+
+Readers follow the original while it is `live`. Otherwise they get the archived copy. The drawer always shows the 2014 URL, and offers the archived copy as a secondary link for live pages.
+
+Status as of the first check (2026-11-05): 31 live, 4 dead (footnotes 3, 4, 27, 40), 6 unverified (the five mises.org links and Amazon). Footnote 3 has no archived copy.
+
+`npm run check:links` rechecks every live link, every archived copy and every update source. A scheduled workflow (`.github/workflows/links.yml`) runs it every Monday. When a link dies, set its `linkStatus` to `dead` and add a `linkNote`.
+
+## “Since 2014” updates
+
+Short editorial notes on examples in the text that have moved on since 2014. Rules:
+
+- Written for this edition, never presented as the author’s words. They are marked “Since 2014” in the text and listed under “Updates since 2014.”
+- Each cites at least one source (enforced by the content schema).
+- Each is anchored after the sentence it updates with `<Since2014 id="…" />`. The marker adds no words, so `check:text` still passes.
+
+| Update                                            | Anchored in                                        |
+| ------------------------------------------------- | -------------------------------------------------- |
+| The TPP’s IP chapter was shelved                  | Intellectual Property Is Contrary to Free Markets… |
+| The Apple–Samsung “smartphone wars” ended in 2018 | History of Patent and Copyright Law                |
+| Kim Dotcom is still fighting extradition          | Intellectual Property Is Contrary to Free Markets… |
+| Google sold Motorola but kept the patents         | Examples of IP Contrarianism                       |
+| “Eat More Kale” won its trademark                 | IP, Innovation, and Freedom                        |
+| Defensive patent pools took off                   | Patents                                            |
+
+The Kim Dotcom update describes the case as of July 2026 and should be revisited.

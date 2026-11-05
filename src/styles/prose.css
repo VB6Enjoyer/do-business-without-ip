@@ -166,20 +166,25 @@
   display: flow-root;
 }
 
-/* Editorial additions */
-.prose .since-2014 {
-  margin: var(--space-m) 0;
-  padding: var(--space-s) var(--space-m);
-  border-radius: var(--radius-m);
+/* "Since 2014" markers: visibly editorial, distinct from footnote numbers. */
+.prose .update-ref {
+  display: inline-block;
+  margin-inline-start: 0.3em;
+  padding: 0.1em 0.5em;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
   background: var(--color-highlight);
+  color: var(--color-accent-strong);
   font-family: var(--font-sans);
-  font-size: var(--step--1);
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  text-decoration: none;
+  vertical-align: 0.15em;
+  white-space: nowrap;
 }
 
-.prose .since-2014__label {
-  margin: 0 0 var(--space-3xs);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-accent-strong);
+.prose .update-ref:hover {
+  border-color: var(--color-accent);
 }
