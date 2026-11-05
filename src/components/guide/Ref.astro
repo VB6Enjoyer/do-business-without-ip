@@ -1,0 +1,17 @@
+---
+/**
+ * A linked phrase in the guide. The URL comes from footnote `n`, so links are
+ * maintained in one place (src/content/footnotes/<lang>.json).
+ */
+import { footnoteHref, getFootnote } from '../../lib/footnotes';
+
+interface Props {
+  n: number;
+}
+
+const fn = await getFootnote(Astro.props.n);
+---
+
+<a class="ref" href={footnoteHref(fn)} rel="noopener">
+  <slot />
+</a>

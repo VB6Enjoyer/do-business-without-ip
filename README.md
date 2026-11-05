@@ -7,6 +7,7 @@ unofficial and is also dedicated to the public domain (see [`LICENSE`](LICENSE))
 
 - Original PDF: <https://stephankinsella.com/wp-content/uploads/publications/kinsella-do-business-without-ip-2014.pdf>
 - Roadmap: [`docs/ROADMAP.md`](docs/ROADMAP.md)
+- Edition notes (what was changed from the PDF, and why): [`docs/EDITION.md`](docs/EDITION.md)
 
 ## Stack
 
@@ -21,6 +22,7 @@ Requires Node 22.23.4 or newer.
 npm install
 npm run dev        # http://localhost:4321/do-business-without-ip/
 npm run check      # type-check .astro/.ts files
+npm run check:text # verify the guide text against the 2014 original
 npm run format     # Prettier
 npm run build      # static site in dist/
 npm run preview    # serve dist/
@@ -31,6 +33,8 @@ npm run preview    # serve dist/
 ```
 src/
   components/   UI pieces (Header, Footer, ThemeToggle, ImagePlaceholder)
+    guide/      Components used inside the guide's MDX (Ref, Fn, PullQuote, …)
+  content/      The guide (MDX per section), footnotes, author bio, disclaimer
   i18n/         UI strings per language; no interface text lives in components
   layouts/      Page shell (meta tags, theme bootstrap, skip link)
   lib/          Small helpers (base-path links, theme, external links)

@@ -1,0 +1,6 @@
+---
+title: 'Disclaimer'
+source: 'Adapted from the original disclaimer on page 2 of the 2014 guide: references to the original publisher (Liberty.me) are replaced with “the editors of this web edition.”'
+---
+
+This guide is for informational purposes only. The author and the editors of this web edition make no representations or warranties with respect to the accuracy or completeness of the contents of this guide and specifically disclaim any implied warranties of merchantability or fitness for a particular purpose. The advice and strategies contained herein may not be suitable for your situation. The editors of this web edition are not engaged in rendering legal, accounting, investing, medical or other professional services. If professional assistance is required, the services of a competent professional should be sought. Neither the editors of this web edition nor the author shall be liable for damages arising herefrom. The fact that an organization, book or website may be referred to in this guide does not mean that the author or the editors of this web edition endorse the information that the organization, book or website may provide or recommendations it may make. The views expressed in this guide are not necessarily those of the editors of this web edition.

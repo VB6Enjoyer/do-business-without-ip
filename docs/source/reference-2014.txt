@@ -1,0 +1,609 @@
+[[page 3]]
+INTRODUCTION
+One of the most egregious government in-
+terventions in the digital age flies under
+the label intellectual property (IP). This type
+of intervention has been around since the
+advent of modern capitalism and the Indus-
+trial Revolution. Originally recognized as ex-
+ceptional, state-granted monopoly privileges,
+even by their earliest proponents, IP rights are
+now referred to as a type of “property right”;
+IP is thought of as a natural and essential part
+of a capitalist, free market order.
+We are told that IP is a type of property right. We are told
+that it is necessary for innovation. Without patent and copy-
+right, we would live in a world of stagnation. There would be
+no innovation, no artistic works. Who would bother, if the
+state did not properly incentivize us? But the astounding
+truth is that IP is completely incompatible with a free market
+[[page 4]]
+system. It is not necessary for innovation at all. Far from it:
+it actually gives rise to monopolies that dampen creativity
+and stultify free market competition. It distorts the market,
+innovation, and creative culture. And it leads individuals
+and businesses to adopt coping strategies that are often to
+their long-run detriment.
+An IP-free world would be one of com-
+petition, innovation, and prosperity,
+contrary to the claims of IP’s defenders.
+But in today’s world, patent and copyright exist whether we
+like it or not. Individuals and businesses need to be aware
+of the reality of IP and take it into account in their business
+strategies. An open-eyed approach as to the true nature of
+IP is essential to understanding what IP policy should be in
+a free society. Understanding what IP is, how it arose, and its
+role in today’s economy can help entrepreneurs develop the
+proper strategies to thrive and prosper in a mixed economy.
+The purpose of this guide is to expose the true nature of IP
+and to provide guidance to entrepreneurs and individuals
+about the pitfalls of over-reliance on modern IP.
+[[page 5]]
+WHAT IS IP?
+Intellectual property refers to laws that protect the products of the intellect, as opposed to laws
+dealing with ownership of commonplace physical or material goods. IP is a broad term that in-
+cludes several types of legal rights: copyright (which gives authors a right in original works such as
+novels or paintings); patent (which gives inventors rights in practical inventions like a mousetrap);
+trademark (which gives companies rights in names used to identify products such as Coca-Cola);
+and trade secret. Trademark is said to have its basis in protecting consumers from deception and
+fraud by unscrupulous vendors who falsely use others’ names and reputations. (My Against Intel-
+lectual Property has further detail on the types of IP; see also “Types of Intellectual Property.” )
+WHY DO BUSINESSES NEED TO CARE ABOUT IP?
+I have been a registered US patent lawyer for 20 years. I’ve helped clients obtain hundreds of
+patents, and have been called on many times to help defend them from patent and other IP
+threats. I’ve also been a very strong advocate of free markets, private enterprise, and private prop-
+erty rights for my entire professional life. People are often confused about my personal situation:
+“You’re anti-IP but you’re an IP lawyer? What gives?” So I’ve been
+asked many times, “How can you be an IP lawyer if you think IP is
+illegitimate?” This type of question highlights a dilemma that lib-
+ertarians and entrepreneurs living in the real world must face. We
+recognize that some policies are harmful and unjust, but they exist
+and have to be dealt with. Their existence cannot be ignored but
+their essential nature should not be either.
+Here’s one approach I take when re-
+sponding to such queries. I view IP as
+similar to, say, taxes. High taxes and IP are both harmful to prosper-
+ity and freedom. But given the existence of these laws and systems,
+there is a need for companies to be aware of and deal with these
+laws. Given high taxes, there is a need for CPAs, tax software, and
+tax attorneys who defend people being threatened with prison for
+tax evasion.
+Likewise, given the existing IP system, there is a need for companies
+to adopt IP strategies, which sometimes include using IP attorneys and specialists. There is a need
+to be aware of the contours of the system, to navigate it, even to use it. Given the existence of the
+[[page 6]]
+patent system, high-tech companies often need to spend resources obtaining patents, if only to
+be able to defend themselves from patent threats by competitors or patent trolls. Granted, if there
+were no patent law, then the need to waste funds on such acquisitions and on lawsuits and distort-
+ing business strategies would evaporate. Also, if taxes were lower, tax lawyers would have to find
+a new profession. If we cure cancer, oncologists might be out of a job, too, but I suspect a decent
+oncologist really hopes that his job is someday rendered unnecessary.
+I view my own profession as something like IP oncologists. The cancer of IP exists, and unfortu-
+nately, IP attorneys are necessary so long as it does. I wish more IP attorneys would at least oppose
+IP like most oncologists oppose cancer. But until our thinking about the nature of property rights
+is changed, we can expect IP professionals, along with the general public, to support some kind of
+patent and copyright regime.
+Individuals living in today’s world, faced with the IP system, cannot ignore this prevalent system
+and mode of thinking—this way of doing business. They must take it into account. There are two
+fundamental approaches one can take to such matters: political-normative, i.e., What kind of legal
+system should you favor?; and practical-ethical: given the existing IP system, how should you react
+to it? How should you use it? What actions, in personal or business life, are right or wrong, or are
+practical and profitable, destructive and wasteful?
+Let’s take these issues in turn.
+SHOULD WE ABOLISH IP?
+As to the policy issues—what the law should be—it is clear that pat-
+ent and copyright should be abolished immediately and completely
+(and so should other forms of IP, such as trademark, trade secret,
+and defamation law, but let’s leave those to the side for now). There
+are a number of reasons for this conclusion. First, most advocates
+of IP admit that IP rights are temporary monopoly privileges, that
+such laws are deviations from the free market. But they argue that
+the harm done by these statutes is somehow outweighed by innova-
+tion gains. That is, they argue that, without IP, we would have less artistic creation and less inno-
+vation, that with these laws we have far more innovation and creativity than we would otherwise
+(in a purely free market), and that the value of this extra innovation is far greater than the costs of
+these laws. (For example, see “There’s No Such Thing as a Free Patent.” )
+[[page 7]]
+However, these claims are completely unfounded, and in fact are counterintuitive and implausible;
+IP proponents do not provide serious arguments or evidence for their pro-IP position. Most of the
+proponents are special-interest lobbyists—the pharmaceutical industry, Hollywood, or the music
+industry—who don’t really care whether IP is a good idea in a free market; they are simply out for
+their own interests. They then lobby Congress, who in turn enacts laws that benefit these special
+interests. Then the guy on the street repeats, fairly mindlessly, the propaganda he’s heard filtered
+down from the special interests, lobbyists, and legislators in groundless pro-IP slogans.
+For example, the typical person has an assumption that IP is part of a free market and private prop-
+erty system, that it incentivizes artists and inventors, that it protects
+the small guy innovating in his basement. This is contrary to reality,
+but the average person does not always have time to examine these
+common arguments and assumptions, and so the propagandists
+succeed. Again, we see this in the very term intellectual property, a
+misleading label that serves the purposes of the IP lobby.
+The empirical evidence we do have suggests strongly that patent and
+copyright heavily distort the creative and innovative fields and low-
+er the total amount of innovation in society. IP imposes huge costs
+on society and the economy: probably hundreds of billions of dol-
+lars a year, if not more. (See, for example: “Legal Scholars: Thumbs
+Down on Patent and Copyright,” “The Overwhelming Empirical
+Case Against Patent and Copyright,” and “Costs of the Patent System Revisited.” )
+But the main reason I oppose IP—especially and primarily patent and copyright—is that not only
+does it impose unnecessary costs on society, slow down progress, impede freedom, and distort
+culture, research, and development: but it is a blatant infringement of property rights.
+IP VERSUS PROPERTY RIGHTS
+Over the years, I and others have given a variety of arguments to explain why IP is not compatible
+with a free market. One explanation I have given runs like this. Imagine you live in a neighbor-
+hood of 100 people, where everyone owns his own home and the tract of land it sits on. The neigh-
+bors might enter into a restrictive covenant that prohibits certain uses of one’s home.
+For example, everyone might agree to use their property for residential use only and not to paint
+their house bright orange. If you want to paint your house orange, you can’t do it unless you get
+[[page 8]]
+the neighbors’ permission. In effect, everyone has agreed to grant their neighbors a limited, partial
+property right in their own home: a veto right. The neighbors can prevent you from using your
+property in certain ways. This practice is common and popular because it can provide benefits to
+all the members of the covenant.
+That is why people enter into these arrangements voluntarily. And that is really why they make
+sense, why they are compatible with private property rights: because they are entered into by the
+homeowners voluntarily. In fact, such agreements are exercises of private property rights—the
+owners agree to transfer some of their property rights to others in
+exchange for similar transfers, in the hopes that the overall value
+of their homes, in the neighborhood, will increase. These property
+arrangements can be classified as “negative easements” or “negative
+servitudes.” They are “negative” since a person’s neighbors cannot
+use his property, but can prohibit certain uses of his property. The
+owner of property that is subject to such an easement or servitude
+is said to have a “burdened” estate. He owns the main use of the
+property, but it is subject to the veto of others, a veto right that he
+contractually agreed to.
+And this brings me to my primary objection to patent and copy-
+right. These rights are types of negative servitudes. A copyright
+holder can use state force to stop you from printing a given pat-
+tern of words on your own paper with your own ink and printer.
+A patent holder can prevent you from using your own materials to
+shape them into certain arrangements. In effect, copyright and pat-
+ent holders retain a negative servitude over others’ property. But
+the owners of the burdened estates—you and me—never agreed
+to this. We didn’t contractually grant this servitude to patent and
+copyright holders. The state simply grants it to them by fiat. (See “Intellectual Property Rights
+as Negative Servitudes.” )
+So in effect, through the use of IP statutes, the state makes patentees and copyright holders co-
+owners of everyone else’s property, but without the property owners’ consent. This results in an
+erosion of property rights, a seizure of property, a redistribution of wealth. It is a limitation on
+competition, learning, and emulation. This is exactly the type of policy that free market advocates
+oppose when implemented under more explicitly socialist governments. Yet when special inter-
+ests that benefit from these wealth transfers label them “property rights,” many people lose sight
+of the essentially interventionist, anticompetitive nature of these policies.
+[[page 9]]
+HISTORY OF PATENT AND COPYRIGHT LAW
+Modern patent and copyright regimes became prominent in Western countries about 200 years
+ago. Patent law emerged from older mercantilist, protectionist practices where the crown would
+grant monopolies to court favorites (as authorized in the Statute of Monopolies of 1624 ).Copy-
+right law finds its origins in the censorship of prohibited books and
+ideas (such as the Statute of Anne of 1710 ). (See also Karl Fogel,
+“The Surprising History of Copyright and The Promise of a Post-
+Copyright World.” )
+Free market economists were suspicious of or even hostile to these
+laws and practices, so defenders of patent and copyright started
+referring to them as “intellectual
+property” to appeal to the pro-prop-
+erty sentiments of legislators and the
+populace. (See “Intellectual Pro-
+perganda.” ) But in truth, patent
+and copyright are state-granted monopoly privileges, not natural
+property rights.
+Individuals and companies use these laws to varying degrees, de-
+pending on their industry and interests. Software and video game
+vendors, Hollywood, and the music industry rely widely on copy-
+right and related laws in an attempt
+to stop “piracy,” though a large number of software producers in ef-
+fect opt out of the copyright system through the use of open licens-
+es, and an increasing number of independent musicians and artists
+are opting out of copyright protection through the use of Creative
+Commons licenses. (See “Let‘s Make Copyright Opt-OUT.” )
+Pharmaceutical and high-tech companies rely more heavily on pat-
+ent law. Pharmaceutical companies claim that they need the patent
+monopoly to help make up for the costs imposed on them during
+the expensive and lengthy FDA drug-approval process. But think
+about that: the state imposes heavy costs on pharmaceutical com-
+panies, then tries to partially make up for it by granting an anticompetitive, monopoly privilege
+right to these companies. High-tech companies stockpile thousands of patents, mainly to use as
+[[page 10]]
+defensive weapons against patent lawsuits filed against them by their competitors. (Patent lawyers
+and IP litigators profit handsomely from all this activity, siphoning tens, hundreds of millions of
+dollars a year from the productive economy.) As an example, consider the ongoing “smartphone“
+wars between Apple and Samsung and others, which are being waged in dozens of countries and
+costing tens of millions of dollars or more.
+The effect of this is to entrench the monopoly positions of the larger players who can afford to ac-
+quire thousands of patents and pay millions of dollars to lawyers in litigation costs, and to pay each
+other royalties after the inevitable settlements, then pass most of this cost on to the consumer in the
+form of higher prices. Smaller companies cannot afford to defend against such lawsuits and have no
+large patent arsenal to draw on defensively, so the effect of this is to erect barriers against entry, leav-
+ing large markets under the control of a small number of large, patent-wielding companies.
+This is a monopoly- or oligopoly-type situation. The dominant firms have less incentive to in-
+novate, since they face less competition and can collect monopoly profits from earlier innovation
+because it has been patented. (See, e.g., “The Microsoft-Apple Gesture Oligopoly.” )
+To obtain a patent, the inventor has to disclose the details of his invention; that is the so-called pat-
+ent bargain. The public can learn about the invention, and eventually use it, after the 17-or-so year
+term expires, in exchange for the inventor being granted a temporary monopoly. (See, e.g., “The
+Purpose of Patent Law.” ) Some companies, however, find it in their interest to keep a portion of
+their innovations and other confidential information (like client lists) secret rather than publicize
+it by filing for a patent application. This is what trade secret law covers.
+Most companies with trade names, brand names, and so on rely to some extent on trademark
+as well.
+INTELLECTUAL PROPERTY IS CONTRARY TO
+FREE MARKETS AND HUMAN FREEDOM
+The common view of IP is misguided, not necessarily dishonest.
+But when proponents of IP say that they are for it because it en-
+hances innovation and welfare, while all the studies point the oth-
+er way, one has to assume that they are dishonest. They remind me
+of the liberal advocates of failed welfare policies who continue to
+advocate for them even after it becomes clear that they cause hu-
+[[page 11]]
+man misery and devastation. These are the types of people right-
+fully skewered by Thomas Sowell in his great book The Vision of
+the Anointed: Self-Congratulation as a Basis for Social Policy.
+And then we see attempts to apply, enforce, and expand patent
+and copyright, which do not merely retard innovation or impose
+some dollar costs on society, but which are truly fascistic and
+scary, such as the attempt to reduce Internet freedom with SOPA
+and PIPA in the name of stopping copyright piracy, imprison-
+ing people for years for uploading or downloading a few movies,
+extraditing foreign students and nationals to face US jail time for
+having websites with links to piracy sites, invading the homes of
+people in foreign countries (Kim Dotcom of Megaupload in New
+Zealand) in the name of protecting intellectual property. The In-
+ternet is a key development and tool for the defense of freedom.
+Anything that imperils freedom of commerce or communication
+on the Internet should be taken very seriously. (See, e.g., “SOPA
+is the Symptom, Copyright is the Disease: The SOPA Wakeup
+Call to Abolish Copyright.” )
+The state has an interest in restricting digital, technological, and Internet freedom, and uses various
+excuses to do this this: terrorism, child pornography, tax evasion, prostitution, drugs and Silk Road,
+digital money (bitcoin), online gambling, money laundering, and copyright “piracy.” And then we
+have the US government, at the behest of very powerful American special interests (big pharmaceu-
+ticals, Hollywood, the music industry) twisting the arms of developing countries to adopt draconian
+US-style patent and copyright laws, all in the name of “capitalism” and “private property rights.” Re-
+cently, these industries have pressured the United States to try imposing increased IP standards on
+other countries through the use of the Trans-Pacific Partnership, or TPP, and other measures. (See
+“Longer copyright terms, stiffer copyright penalties coming, thanks to TPP and ACTA…” )
+Most free market advocates and libertarians oppose laws against
+narcotics, high taxes, and so on, but when the state labels its mo-
+nopoly patent and copyright privileges as property, it befuddles and
+confuses the opposition.
+The bottom line is that we have to recognize laws and policies that
+limit competition and restrict freedom for what they are, no matter
+what the label given by legislators and lobbyists. We have to recognize,
+expose, and oppose policies that restrict property rights and freedom.
+[[page 12]]
+WHY DOES IP PERSIST?
+Many intellectuals—legal experts/lawyers in particular— defend what they perceive to be in their
+personal self-interest. I imagine a large percentage of federal government employees think the
+state is necessary; and a large number of government school teachers believe in the legitimacy
+and necessity of public education. Likewise, those in the big pharma want patents, and Hollywood
+wants copyright to stop piracy. Patent lawyers make their living on this system and so likewise
+have an interest in promoting it.
+But I think the main reason people without such strong interests continue to support IP is a lack of
+principled thinking. Most people think they are being pragmatic and practical when they eschew
+principled thinking about rights and property and justice, instead favoring “what works.” So they
+think in empirical, utilitarian terms and reject principle, which they regard as impractical or ex-
+tremist. They are used to the current system; they assume that the
+IP we have had for 200 years is part of our private property system;
+they assume that it must have played some role in the prosper-
+ity we’ve had. They confuse correlation for causation. Even if they
+recognize that the system is broken, they only advocate reform, never a radical rethinking of the
+whole system. Radical change frightens people.
+However, the tides are changing and many free market economists seem to have long been skepti-
+cal of IP. A growing number of legal scholars do as well, though only a handful of them seem to
+want to go so far as to abolish the whole system. Among free market proponents such as libertar-
+ians, my impression is that since the advent of the Internet in the mid-90s, when copyright and
+patent enforcement started becoming more visible and viru-
+lent, there has been increasing skepticism of IP’s legitimacy.
+Among free-culture types, the free software movement, Aus-
+trian libertarians, anarchist libertarians, and left-libertarians
+there is a large and growing opposition to IP. (See “The Death
+Throes of Pro-IP Libertarianism;” “The Four Historical Phases of IP Abolitionism;” and
+“The Origins of Libertarian IP Abolitionism.” )
+[[page 13]]
+IP, INNOVATION, AND FREEDOM
+I am often asked for examples of how innovation and creativity could or would develop absent
+patent and copyright law. It is hard to predict the future. It is hard to predict what regimes, prac-
+tices, products, and services will emerge after freedom or in a future, more advanced technological
+world. And yet even today, we have widespread piracy—copying in contravention of copyright
+law—and violation of patent law as well (and this trend should speed up after 3D printing starts to
+mature). So let’s consider some examples or possible ways creators could profit either in an IP-free
+world or in a world—like today’s—in which piracy is rampant.
+First, I have collected a large number of examples of how IP law
+has harmed innovation or those it was intended to help. I recount
+them regularly on the blog, but there are too many to keep up
+with. But for a few examples, copyright is said to be necessary to
+help struggling authors. Yet copyright grew out of a guild-censor-
+ship system in Europe, which resulted in the Statute of Anne in 1710. Before this, the Stationer’s
+Company had a state-protected monopoly over which books could be published and circulated
+using the printing press. Without official approval, authors could not be sure their works would
+be published.
+The Statute of Anne pretended to give authors the right to decide, but the publishing industry
+quickly co-opted these author-based copyrights, resulting
+in the system still prevalent today, in which an author is
+forced to sign his rights away to some publishing house
+in order to get published. Then the publisher can refuse
+to reprint the work when sales fall, yet copyright prohib-
+its others from reviving the work for over a century. So
+many works disappear (so-called orphan works) or are lost
+or too obscure. I discuss this in my post “How long copy-
+right terms make art disappear.”
+In the case of patent, we have the phenomenon of pat-
+ent trolling, where patentees who sell no products basi-
+cally extort money from small companies and individuals,
+who buckle under because they know they cannot afford
+a multi-million-dollar patent lawsuit. We have high-tech
+startup companies who receive patent infringement lawsuits just days before an IPO, designed to
+delay or ruin the IPO. We have the independent seller of “Eat more Kale” t-shirts being bullied by
+[[page 14]]
+Chick-Fil-A because it allegedly infringes their “Eat mor chikin” slogan. Documentary produc-
+ers are unable to get their films cleared because of outrageous copyright claims.
+Copyright holders use the Digital Millennium Copyright Act procedure to get criticisms taken off
+YouTube since there is little penalty or sanction for abuse of this process. It exerts a chilling effect
+on freedom of expression and it distorts the culture. More mindless Hollywood sequels are made
+than would be the case absent copyright; novels and films have—quite literally—been banned by
+judicial order because of copyright, such as a sequel to Catcher in the Rye. (See “Book Banning
+Courtesy of Copyright Law.” )
+WHAT SHOULD YOU DO?
+First, Do No Harm
+Before turning to some practical ways to navigate the
+modern business world, including patent and copyright
+law, let’s consider the proper stance toward IP law. Each
+person, in his private capacity, recognizing the immoral-
+ity of IP and its incompatibility with justice, free markets,
+capitalism, and private property rights, should never advocate or support IP law.
+Your business should not lobby for it, and you should not vote for it. You could
+condemn it and speak against it, oppose it whenever possible.
+IP law is like the drug war. Even if you recognize that narcotics should not be crimi-
+nalized—that the state has no right to lock people up for using or selling drugs—
+you might choose to respect the law to avoid the risk of jail. Your stance would be:
+the law is immoral and should be repealed, even if you warily abide by such laws
+out of prudential concerns.
+Likewise, whatever your practical coping strategy for dealing with IP law (discussed
+below), you should always make it clear that you oppose patent and copyright law,
+that you do not condone or endorse it, that you recognize it as unjust and com-
+pletely incompatible with individual rights and freedom. The moral, principled,
+and practical businessman must denounce IP law while finding ways to cope with
+it, so long as it exists
+[[page 15]]
+But While IP Exists …
+Opposing IP is all well and good. But for now it permeates our legal system. Even
+the most morally punctilious of businessmen have to recognize that patent and
+copyright law exist and must be taken into account. These legal systems infect, dis-
+tort, and corrupt the modern business environment, no doubt. But they exist and
+are enforced.
+What does one do, in the face of such legal and business practices, if one is aware of
+the deficiencies of IP law?
+It is obvious that law cannot be ignored. This is a recipe for disaster. In a free soci-
+ety based on private law, you could start a business that streams popular songs; in
+today’s world this may get you shut down, arrested, and invaded by FBI agents.
+So one response is to just play the game like everyone else does. Assume that the
+law is what it is, forget about legitimacy, and focus on
+profit only. Use copyright and patent to your advantage
+where necessary, regardless of its legitimacy or moral-
+ity. Do what other companies do.
+But is this the wisest approach? If we know that there is
+something wrong with the very basis of IP law, maybe
+there is something wrong with going along lock-step
+with the standard way of dealing with IP. One should
+not be a Pollyanna martyr and act as if IP law does not
+exist; but perhaps there is a different position one can
+take—one that is more profitable both in monetary and
+moral terms. My contention is that individual human
+beings, in their capacity as entrepreneurs and business-
+men, should strive for both morality and profit. By un-
+derstanding the corrupting nature of IP, we can avoid some of its pitfalls, and
+earn both moral and monetary profit.
+[[page 16]]
+To IP or Not to IP
+The standard advice given to businessmen is to simply take the existing legal system
+for granted, and to work within it. If the system permits you to obtain patent and
+copyright, apply for or obtain them. If it permits you to sue your competitors, sue. If
+the system permits you to lobby legislators through campaign contributions, influ-
+ence their votes, and give you preference over competitors, do it.
+But the success of the Internet and open models of innovation and development
+in the digital age should give one pause before adopting the business models
+and approaches mired in the fallacious reasoning of bureaucrats and special
+interest groups.
+The entrepreneur who sees the benefits of freedom and openness and the harm
+wrought by patent and copyright law should ask himself several questions:
+• Do I really want my business model to depend on patent or copyright?
+• Do I really want to turn my customers into enemies if they actually use and
+profit from the information I provide to them?
+• Do I want to spend tens or hundreds of thousands or millions of dollars,
+on legal fees to secure and enforce IP rights?
+• Do I really believe in free markets and fair competition?
+• Do I want to prosper, flourish, and profit on my own merits, or rely on the
+state to protect me from competition?
+• Do I want to be free to innovate and change business strategy and direc-
+tion as I see fit, or be mired in some IP-maximization strategy?
+Below, we’ll examine some case studies, examples, and practical strategies and
+considerations entrepreneurs can contemplate when faced with an IP-laced
+business environment.
+[[page 17]]
+Steps You Can Take Now
+For the sake of liberty, freedom, free markets, and prosperity, IP should be abol-
+ished completely and immediately. And everyone should oppose patent and copy-
+right law when they have the chance.
+However, given the entrenched interests and the state’s con-
+trol of the legal system, immediate and radical progress is un-
+likely. Political action is not the only response that can be tak-
+en against corrupt and antiquated systems. Individuals and
+entrepreneurs can first educate themselves to become aware
+of the nature of the system we face. They can seek to educate
+themselves and others and to push for political change. But in
+their private capacities, they can use their knowledge of the
+true nature of the laws and institutions that exist to inform their actions. They can
+begin to confront the IP paradigm with action that is both principled and self-aware,
+and that also benefits the actor and complements forces of social change. The law
+tends to follow on the footprints of social change, but there are many ways to reduce
+the damage of IP to your own work and business right now.
+The initial step is one of orientation. Be aware of the nature of the system and what
+can be done within the system or to navigate around the system. Sometimes the
+existing legal rules need to be abided by and even employed and manipulated, but
+sometimes this can lead to a trap.
+For example, if you buy into the logic behind the patent system, you file for patents
+for your employees’ innovations. Then, perhaps, you start relying on your domi-
+nant position or royalties for a given patent-protected product line instead of being
+flexible and moving to a different strategy that is not yet patented. This can cause
+ossification and open the door for newcomers to overwhelm you. Or you might rely
+overmuch on copyright and sit on your rights, refuse to permit openness, refuse
+to permit your customers to share your MP3 or video files, refuse to permit your
+fans to take photographs or make homemade recordings at a concert. Refuse even
+to make a legally available version of a 15-year-old movie, for a reasonable fee, on
+convenient stream or other platforms like Netflix or AppleTV or iTunes. This leads
+would-be customers to simply resort to piracy, or avoid your content altogether and
+resent you.
+[[page 18]]
+So, before adopting the standard strategy of rely-
+ing on IP laws like patent, copyright, and trade-
+mark, to try to suppress competition and treat
+your customers like enemies and thieves, consid-
+er whether a more open, nimble, flexible strategy
+is preferable. Consumers and fans like openness.
+They think it’s “awesome,” in the words of Mike
+Masnick. It’s a good strategy to make your cus-
+tomers and employees love you.
+EXAMPLES OF IP CONTRARIANISM
+Companies often rely overmuch on IP. Consider how the movie industry’s reliance on copyright
+and refusal to make content available to users in an easy way
+and at a reasonable price leads to resentment and widespread
+piracy. Some tech companies obtain patents on their key
+products and thus are locked into that product category since
+it is protected. They are protected, for a while, from compe-
+tition, and their incentive to innovate is reduced. And they
+need to recoup the tens of thousands of dollars spent on pat-
+ent lawyers’ fees. In the past, it was routine for some famous
+musician to file a copyright suit against competitors or even fans. Now, copyright holders are often
+thinking twice. As the quasi-libertarian sci-fi author Cory Doctorow has observed, “for pretty
+much every writer—the big problem isn’t piracy, it’s obscurity.”
+Doctorow himself releases his novels for free via a Creative Commons license. You can download
+it for free or pay for a paper copy or other version.
+We are familiar with Google’s “Don’t be evil” corporate motto. Many thought this meant Google
+would not be a patent aggressor. Yet it was sucked into the patent morass when it acquired Mo-
+torola Mobility and its pending lawsuits, which it did not drop.
+A better example would be Twitter, which found a way to prevent itself from using patents in an
+aggressive manner. As noted in “Twitter Heroically Promises Not to Use Patents Offensively,”
+Twitter adopted a patent policy where they assigned rights to employees, tying their own hands
+against using patents offensively, in order to fulfill the promise to engage in true innovation and
+fair competition and not rely on any state-granted monopoly privilege right.
+[[page 19]]
+PUBLISHING AND COPYRIGHT
+The standard approach for authors is to rely on copyrights in their published works and be ready
+to threaten suit against others for copying or unauthorized use. Of course, we all know that today
+any novel, movie, or song can be easily copied without permission via torrenting, The Pirate Bay,
+or related technology or sites.
+The question is often asked: how can an author make money without copyright? Here are a few
+responses. First, as noted, the reality of modern piracy means that even with copyright, an author’s
+work can and will be copied very soon after being made public. This is a reality, even given cur-
+rent copyright law. Second, we have to realize most nonfiction authors—authors of law review ar-
+ticles or academic or scholarly works—never make a dime off of them anyway. Academics publish
+scholarly articles to get their ideas out there or to cement their reputations, or in pursuit of tenure.
+Sometimes they or their employers have to pay a publishing fee, in fact; and often, the published
+book or article is kept behind a paywall or priced at a prohibitive level so that few people have ac-
+cess to the author’s work.
+And even novelists have a hard time making a profit given
+the traditional publisher model. A few lucky ones make
+it big, but most authors eke out a meager living at best.
+This is in part a relic of the publisher-guild system that is
+partly perpetuated even today by copyright.
+As noted above, the fundamental danger faced by authors
+is obscurity. Authors want their work to be widespread
+and widely available. Once you have notoriety you can
+parlay this into other opportunities. So it’s in the author’s
+interest to release published works with as little restric-
+tion as possible. Since it’s not even possible at present for
+an author to opt out of copyright protection (it’s auto-
+matic and basically inalienable), the best one can do is
+employ some kind of license, such as Creative Commons, to release one’s work to the public. I
+recommend a CC-BY (attribution only) or CC0 license.
+As an example of how a novelist might profit in a copyright free world, consider the examples
+provided in my post “Conversation with an author about copyright and publishing in a free
+society.” An author such as J. K. Rowling, of Harry Potter fame, writes a first novel out of passion.
+[[page 20]]
+She self-publishes on Amazon’s service or some other, or even has a normal publisher. Her popu-
+lar book is soon knocked off and millions of kids are reading
+her book. Some paid for it, others didn’t. No matter; she has
+a new, built-in audience of millions. She announces she has
+book number two ready to go, and will release it after 1 mil-
+lion people pre-purchase it for $10 each. That’s $10 million.
+And so it goes, through all of the sequels. Soon Ms. Rowling
+is worth $50 million without relying on copyright.
+And then people start making movies based on the novels (and don’t think there wouldn’t be
+blockbuster movies absent copyright; see Rick Falkvinge, “Debunking The Argument That No
+Blockbusters Would Be Made Without The Copyright Monopoly”). Maybe there are three
+versions of the first Harry Potter novel being considered. One of the studios approaches Rowling
+and asks her to consult on their version, for a share of the profits. Her involvement will improve
+the movie’s quality and her endorsement will bring in more fans, who would rather see her autho-
+rized version than that of others. So she rakes in a few more million dollars that way. All fine. All
+without copyright.
+Other examples of how creators have or can profit without patent and copyright are given else-
+where, e.g.:
+• “Innovations that Thrive without IP”
+• “Examples of Ways Content Creators Can Profit Without Intellectual
+Property”
+• “The Creator-Endorsed Mark as an Alternative to Copyright”
+The basic point is that innovators and entrepreneurs do not need
+to rely on IP to profit and succeed. They need to continually in-
+novate, rely on their reputation, and please their fans and cus-
+tomers. That is ultimately the entrepreneurial function.
+With the foregoing examples and lessons in mind, consider:
+[[page 21]]
+Music without Intellectual Property
+• Free distribution. Musicians make their money from other sources. Let
+people copy your hits. Let YouTube flourish. People will want to buy tick-
+ets to hear your concerts.
+• Artists have learned that covers are actually great. It’s a great compliment.
+It never harms the original artist.
+• If someone steals your stuff, try cheering for a change. Welcome
+emulation and competition!
+Inventing without Intellectual Property
+• Patents tie your hands. If you get a patent on a key
+product, you might think twice before being willing to
+adapt. Patents are stultifying.
+• Defensive patents are sometimes necessary, but beware the lure of
+using them as profit center; consider adopting a policy like Twitter
+has, of using patents only defensively.
+Dying without Intellectual Property
+One of the most critical issues of our day is that, as noted above, copyright cannot
+be opted out of and it lasts for a long time (life of author plus 70 years). This gives
+rise to the orphan works problem and the literal disappear-
+ance of copyright-protected works. Copyright kills creative
+works. It causes them to literally disappear. (See “How long
+copyright terms make art disappear.” )
+If you have works subject to copyright, you want them to out-
+live you. You don’t want legal uncertainty or squabbling among
+descendants to doom your work to obscurity. Release them.
+Release them now, while you live, using CC0 or CC-BY, or put something in your will
+to accomplish a similar result; one emerging possibility authors can consider is the Free
+[[page 22]]
+Culture Trust, a group that you can dedicate your
+copyright to upon death, to ensure it stays alive and
+is not buried by orphan works or other problems.
+Patents
+In today’s world, businessmen and tech com-
+panies cannot ignore the problem of patents. It
+is unfortunately necessary to acquire patents as
+an adjunct to innovation, if only for defensive
+purposes or bargaining chips. Yet one does not
+have to reserve the right to use patents aggres-
+sively; this can safely be given away, as Twitter
+has done, reserving the right to use patents de-
+fensively. This is all a good free market compa-
+ny should want: the right
+to compete on a fair, free
+market—not the right to
+shut down competitors
+with the help of the state.
+An emerging mechanism
+that might prove to be use-
+ful, so long as the patent
+system exists, is the use of ad hoc or more sys-
+temic patent defense pools or leagues (see my
+post “The Patent Defense League and Defensive
+Patent Pooling” ). Any high-tech company to-
+day that is pressured to expend hundreds of
+thousands of dollars on patent acquisition should
+consider such alternative mechanisms to cope
+with the modern quasi-mercantilist system.

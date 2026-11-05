@@ -28,7 +28,7 @@ signed off.
 
 ---
 
-## Phase 0: Foundation
+## Phase 0: Foundation ✅
 
 Goal: an empty but real site, deployed.
 
@@ -44,7 +44,7 @@ Goal: an empty but real site, deployed.
 
 **Done when:** the Pages URL serves the shell in both themes, and CI is green.
 
-## Phase 1: Content extraction
+## Phase 1: Content extraction ✅
 
 Goal: the full guide as structured, faithful source content.
 

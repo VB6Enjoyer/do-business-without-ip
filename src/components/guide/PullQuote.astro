@@ -1,0 +1,17 @@
+---
+/**
+ * Margin call-out repeating a line from the surrounding text, as in the
+ * original layout. Hidden from assistive tech because it duplicates the body.
+ */
+interface Props {
+  side?: 'left' | 'right';
+}
+
+const { side = 'right' } = Astro.props;
+---
+
+<aside class="pull-quote" data-side={side} aria-hidden="true">
+  <p>
+    <slot />
+  </p>
+</aside>

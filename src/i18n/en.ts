@@ -28,7 +28,17 @@ export const en = {
     byline: 'by Stephan Kinsella',
     lede: 'Why patents and copyright are incompatible with a free market, and what entrepreneurs and creators can do about it today.',
     startReading: 'Start reading',
-    comingSoon: 'The full guide is being prepared for this edition.',
+    readingTime: 'About a 30-minute read',
+  },
+  guide: {
+    title: 'The guide',
+    contents: 'Contents',
+    notes: 'Notes',
+    footnoteLabel: 'Footnote {n}',
+    backToText: 'Back to the text for footnote {n}',
+    since2014: 'Since 2014',
+    aboutAuthor: 'About the author',
+    originalPage: 'Page {n} of the original',
   },
   footer: {
     license:
