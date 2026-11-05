@@ -110,7 +110,7 @@ Goal: every link works, and the 2014 context is updated without touching the ori
 
 Both must work with keyboard and screen readers, show an accessible text alternative and respect reduced motion.
 
-## Phase 5: Interactives II (practical tools)
+## Phase 5: Interactives II (practical tools) ✅
 
 - **"To IP or Not to IP" self-check:** Kinsella's six questions as a reflection tool that points readers to the relevant sections (music, inventing, publishing, patents). It has no scoring and no "right answers"
 - **Pre-sale calculator:** the Rowling thought experiment, with sliders for audience size, conversion rate, price and number of sequels

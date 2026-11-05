@@ -1,17 +1,45 @@
 ---
 /**
  * Margin call-out repeating a line from the surrounding text, as in the
- * original layout. Hidden from assistive tech because it duplicates the body.
+ * original layout. The quote itself is hidden from assistive tech because it
+ * duplicates the body; the share button (revealed by JS) names it instead.
  */
+import { useStrings } from '../../i18n';
+
 interface Props {
   side?: 'left' | 'right';
 }
 
 const { side = 'right' } = Astro.props;
+const t = useStrings();
+
+const html = await Astro.slots.render('default');
+const text = html
+  .replace(/<[^>]+>/g, '')
+  .replace(/&#39;|&#x27;/g, '’')
+  .replace(/&quot;/g, '"')
+  .replace(/&amp;/g, '&')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+// Stable id from the quote text (djb2), used for share links.
+let hash = 5381;
+for (const ch of text) hash = ((hash << 5) + hash + ch.codePointAt(0)!) >>> 0;
+const id = `q-${hash.toString(36)}`;
 ---
 
-<aside class="pull-quote" data-side={side} aria-hidden="true">
-  <p>
-    <slot />
-  </p>
-</aside>
+<div class="pull-quote" id={id} data-side={side} data-quote={text}>
+  <p aria-hidden="true" set:html={html} />
+  <button
+    type="button"
+    class="quote-share"
+    data-quote-share={id}
+    aria-label={t.tools.quote.shareLabel.replace('{quote}', text)}
+    hidden
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"></path>
+    </svg>
+    <span aria-hidden="true">{t.tools.quote.share}</span>
+  </button>
+</div>

@@ -1,0 +1,12 @@
+---
+import InteractiveFigure from './InteractiveFigure.astro';
+import ReleaseTool from './ReleaseTool.svelte';
+import { useStrings } from '../../i18n';
+
+const s = useStrings().tools.release;
+const currentYear = new Date().getUTCFullYear();
+---
+
+<InteractiveFigure id="release-tool" title={s.title} intro={s.intro}>
+  <ReleaseTool client:visible strings={s} currentYear={currentYear} />
+</InteractiveFigure>
