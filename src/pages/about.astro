@@ -62,6 +62,9 @@ const updates = (await getCollection('updates', (e) => e.id.startsWith(`${lang}/
       <a class="button" href={withBase('/guide/')}>
         {t.home.startReading}
       </a>
+      <a href={withBase('/downloads/do-business-without-ip.epub')} download>
+        {t.guide.downloadEpub}
+      </a>
       <a href={links.originalPdf}>{t.about.originalPdf}</a>
     </p>
   </article>

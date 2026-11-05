@@ -9,6 +9,7 @@ export const en = {
     description:
       'A modern, accessible web edition of Stephan Kinsella’s 2014 guide on how individuals and businesses can thrive without relying on patents and copyright.',
     author: 'Stephan Kinsella',
+    ogImageAlt: 'Do Business Without Intellectual Property, by Stephan Kinsella. Web edition.',
   },
   a11y: {
     skipToContent: 'Skip to content',
@@ -40,6 +41,9 @@ export const en = {
     aboutAuthor: 'About the author',
     originalPage: 'Page {n} of the original',
     readingProgress: 'Reading progress',
+    downloadEpub: 'Download EPUB',
+    downloadEpubHint:
+      'For e-readers. The text, notes and author bio, without the interactive parts.',
     updates: 'Updates since 2014',
     updatesIntro:
       'Editorial notes added in this web edition. They are not part of the original text, and each one cites its sources.',

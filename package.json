@@ -2,7 +2,7 @@
   "name": "do-business-without-ip",
   "version": "0.1.0",
   "private": true,
-  "description": "A modern web edition of Stephan Kinsella’s CC0 guide “Do Business Without Intellectual Property” (2014).",
+  "description": "A modern web edition of Stephan Kinsella\u2019s CC0 guide \u201cDo Business Without Intellectual Property\u201d (2014).",
   "license": "Unlicense",
   "type": "commonjs",
   "engines": {
@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/build-epub.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "format": "prettier --write .",
@@ -18,10 +18,13 @@
     "prepare": "husky",
     "check:text": "node scripts/check-text.mjs",
     "test:a11y": "node scripts/test-a11y.mjs",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "assets": "node scripts/generate-assets.mjs",
+    "check:epub": "python3 -I scripts/check-epub.py dist/downloads/do-business-without-ip.epub"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.2",
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/svelte": "^9.1.2",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource-variable/source-serif-4": "^5.3.1",
@@ -34,6 +37,8 @@
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "husky": "^9.1.7",
+    "jszip": "^3.10.2",
+    "node-html-parser": "^9.0.6",
     "playwright": "^1.63.0",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.2",

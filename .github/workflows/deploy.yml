@@ -23,6 +23,7 @@ jobs:
       - run: npm run check
       - run: npm run check:text
       - run: npm run build
+      - run: npm run check:epub
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

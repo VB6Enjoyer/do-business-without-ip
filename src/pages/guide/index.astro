@@ -16,6 +16,8 @@ import ReadingProgress from '../../components/guide/ReadingProgress.astro';
 import FootnoteDrawer from '../../components/guide/FootnoteDrawer.astro';
 import QuoteShare from '../../components/guide/QuoteShare.astro';
 import { defaultLang, useStrings } from '../../i18n';
+import { links } from '../../lib/links';
+import { withBase } from '../../lib/paths';
 import { footnoteHref, getFootnotes, usesArchive } from '../../lib/footnotes';
 import '../../styles/prose.css';
 
@@ -47,6 +49,20 @@ const disclaimer = await getEntry('meta', `${lang}/disclaimer`);
 const { Content: AuthorBio } = await render(author!);
 const { Content: Disclaimer } = await render(disclaimer!);
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  name: t.site.title,
+  author: { '@type': 'Person', name: t.site.author },
+  datePublished: '2014-07',
+  inLanguage: lang,
+  bookFormat: 'https://schema.org/EBook',
+  isAccessibleForFree: true,
+  license: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  isBasedOn: links.originalPdf,
+};
+
 const components = {
   Fn,
   Ref,
@@ -71,7 +87,7 @@ const tocExtra = [
 ];
 ---
 
-<BaseLayout title={t.guide.title}>
+<BaseLayout title={t.guide.title} ogType="book" jsonLd={jsonLd}>
   <ReadingProgress />
 
   <div class="guide-layout">
@@ -102,6 +118,12 @@ const tocExtra = [
         <p class="kicker">{t.home.kicker}</p>
         <h1>{t.site.title}</h1>
         <p class="byline">{t.home.byline}</p>
+        <p class="download">
+          <a href={withBase('/downloads/do-business-without-ip.epub')} download>
+            {t.guide.downloadEpub}
+          </a>
+          <span>{t.guide.downloadEpubHint}</span>
+        </p>
       </header>
 
       {sections.map(({ slug, data, Content }) => (
@@ -252,6 +274,30 @@ const tocExtra = [
   .author,
   .disclaimer {
     margin-top: var(--space-2xl);
+  }
+
+  .download {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2xs) var(--space-s);
+    margin-top: var(--space-m);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  .download a {
+    font-weight: 600;
+  }
+
+  .download span {
+    color: var(--color-text-muted);
+  }
+
+  @media print {
+    .download {
+      display: none;
+    }
   }
 
   /* ---------- Mobile / tablet contents bar ---------- */

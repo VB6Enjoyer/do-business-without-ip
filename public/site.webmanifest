@@ -1,0 +1,20 @@
+{
+  "name": "Do Business Without Intellectual Property",
+  "short_name": "Do Business Without IP",
+  "description": "A web edition of Stephan Kinsella's 2014 guide.",
+  "start_url": "/do-business-without-ip/",
+  "scope": "/do-business-without-ip/",
+  "display": "standalone",
+  "background_color": "#f8f5ef",
+  "theme_color": "#2f6b3c",
+  "icons": [
+    { "src": "/do-business-without-ip/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    {
+      "src": "/do-business-without-ip/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    { "src": "/do-business-without-ip/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
