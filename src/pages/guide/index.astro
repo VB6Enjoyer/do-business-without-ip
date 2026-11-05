@@ -6,6 +6,8 @@ import Ref from '../../components/guide/Ref.astro';
 import PullQuote from '../../components/guide/PullQuote.astro';
 import Standfirst from '../../components/guide/Standfirst.astro';
 import Since2014 from '../../components/guide/Since2014.astro';
+import Covenant from '../../components/interactive/Covenant.astro';
+import Timeline from '../../components/interactive/Timeline.astro';
 import Toc from '../../components/guide/Toc.astro';
 import ReadingProgress from '../../components/guide/ReadingProgress.astro';
 import FootnoteDrawer from '../../components/guide/FootnoteDrawer.astro';
@@ -41,7 +43,7 @@ const disclaimer = await getEntry('meta', `${lang}/disclaimer`);
 const { Content: AuthorBio } = await render(author!);
 const { Content: Disclaimer } = await render(disclaimer!);
 
-const components = { Fn, Ref, PullQuote, Standfirst, Since2014 };
+const components = { Fn, Ref, PullQuote, Standfirst, Since2014, Covenant, Timeline };
 const tocSections = sections.map((s) => ({
   slug: s.slug,
   title: s.data.title,

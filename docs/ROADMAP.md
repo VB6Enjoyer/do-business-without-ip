@@ -100,7 +100,7 @@ Goal: every link works, and the 2014 context is updated without touching the ori
 
 **Done when:** the link checker passes and every editorial addition is visibly marked as such.
 
-## Phase 4: Interactives I (core argument)
+## Phase 4: Interactives I (core argument) ✅
 
 - **Neighborhood covenant demo** ("IP versus property rights"): a grid of 100 homes where you try to paint yours orange. Mode A is a covenant you agreed to. Mode B is a patent/copyright holder you never contracted with. It shows the "negative servitude" argument directly
 - **Copyright term timeline** ("History" + "Dying without IP"):

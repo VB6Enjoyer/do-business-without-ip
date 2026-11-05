@@ -53,6 +53,9 @@
   --color-highlight: #e3efd9;
   --color-focus: #1a5fb4;
   --color-placeholder: #ece6dc;
+  --chart-line: #2b7a3d;
+  --chart-grid: #e8e1d6;
+  --paint-orange: #e2731f;
 }
 
 /* Dark: follows the OS unless the visitor picked light explicitly. */
@@ -70,6 +73,9 @@
     --color-highlight: #24331f;
     --color-focus: #78aeff;
     --color-placeholder: #262a2f;
+    --chart-line: #58a862;
+    --chart-grid: #2c3036;
+    --paint-orange: #f08a3c;
   }
 }
 
@@ -86,4 +92,7 @@
   --color-highlight: #24331f;
   --color-focus: #78aeff;
   --color-placeholder: #262a2f;
+  --chart-line: #58a862;
+  --chart-grid: #2c3036;
+  --paint-orange: #f08a3c;
 }

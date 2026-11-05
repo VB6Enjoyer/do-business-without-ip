@@ -1,0 +1,67 @@
+---
+/**
+ * Frame for an interactive piece placed inside the guide. Always labelled as
+ * an addition of this edition so it is never mistaken for the author's text.
+ */
+import { useStrings } from '../../i18n';
+
+interface Props {
+  id: string;
+  title: string;
+  intro?: string;
+}
+
+const { id, title, intro } = Astro.props;
+const t = useStrings();
+---
+
+<figure class="interactive" id={id} aria-labelledby={`${id}-title`}>
+  <p class="interactive__badge">{t.interactive.badge}</p>
+  <h3 class="interactive__title" id={`${id}-title`}>
+    {title}
+  </h3>
+  {intro && <p class="interactive__intro">{intro}</p>}
+  <slot />
+</figure>
+
+<style>
+  .interactive {
+    clear: both;
+    margin: var(--space-xl) 0;
+    padding: var(--space-m);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
+    hyphens: manual;
+  }
+
+  .interactive__badge {
+    margin: 0 0 var(--space-2xs);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .interactive__title {
+    margin: 0 0 var(--space-2xs);
+    font-size: var(--step-1);
+    font-variant: normal;
+    letter-spacing: 0;
+  }
+
+  .interactive__intro {
+    margin: 0 0 var(--space-s);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  @media print {
+    .interactive {
+      display: none;
+    }
+  }
+</style>

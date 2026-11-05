@@ -6,6 +6,7 @@
  *   the footnote drawer open
  * - footnote drawer: keyboard open, arrow navigation, Esc, focus return, deep links
  * - archive links for dead footnotes; "Since 2014" updates in the drawer
+ * - interactives: covenant demo outcomes, copyright timeline values and readouts
  * - no-JS fallback: footnote markers jump to the notes list
  * - mobile contents bar opens and closes after following a link
  */
@@ -175,6 +176,86 @@ try {
     );
     await axe(page, 'update drawer open');
 
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
+  console.log('\nInteractive: covenant demo');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const demo = page.locator('#covenant-demo');
+    await demo.scrollIntoViewIfNeeded();
+    await page.waitForSelector('#covenant-demo astro-island:not([ssr])');
+    const paint = demo.getByRole('button', { name: 'Paint my house orange' });
+    const result = () => demo.locator('[role="status"]').textContent();
+
+    await paint.click();
+    check((await result())?.includes('Painted.'), 'unsigned owner can paint under the covenant');
+    await demo.getByRole('button', { name: 'Start over' }).click();
+    await demo.getByLabel('I sign the covenant too').check();
+    await paint.click();
+    check(
+      (await result())?.includes('When you signed'),
+      'signed owner is vetoed, with consent explained',
+    );
+    await demo.getByLabel('Patent or copyright').check();
+    check((await result())?.trim() === '', 'switching arrangement resets the outcome');
+    await paint.click();
+    check((await result())?.includes('never agreed'), 'patent holder vetoes without consent');
+    check(
+      (await demo.locator('[role="img"]').getAttribute('aria-label'))?.includes('vetoed'),
+      'neighborhood image describes the outcome',
+    );
+    await axe(page, 'guide after using the covenant demo');
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
+  console.log('\nInteractive: copyright timeline');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const chart = page.locator('#copyright-timeline');
+    await chart.scrollIntoViewIfNeeded();
+    await page.waitForSelector('#copyright-timeline astro-island:not([ssr])');
+    const today = () => chart.locator('.today').textContent();
+
+    check((await today())?.includes('113 years'), 'default author (35, dies at 78): 113 years');
+    await chart.getByLabel('Made for hire (by a company)').check();
+    check((await today())?.includes('95 years'), 'work made for hire: 95 years');
+    check(
+      (await chart.locator('input[type="range"]').count()) === 0,
+      'age sliders hide for corporate works',
+    );
+    await chart.getByLabel('By an individual author').check();
+    const created = chart.locator('input[type="range"]').first();
+    await created.focus();
+    for (let i = 0; i < 5; i++) await page.keyboard.press('ArrowRight');
+    check((await today())?.includes('108 years'), 'slider by keyboard (created at 40): 108 years');
+
+    await chart.locator('circle.marker').nth(2).focus();
+    const tip = await chart.locator('.tooltip').textContent();
+    check(
+      tip?.includes('56 years') && tip.includes('1909'),
+      'focusing a law marker shows its readout (1909: 56 years)',
+    );
+    const box = await chart.locator('svg').boundingBox();
+    await page.mouse.move(box.x + box.width * 0.62, box.y + box.height * 0.5);
+    check(
+      await chart.locator('.tooltip').isVisible(),
+      'hovering the plot shows the crosshair readout',
+    );
+
+    await chart.locator('summary').click();
+    check((await chart.locator('tbody tr').count()) === 6, 'table view lists all six laws');
+    await axe(page, 'guide after using the timeline');
     check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
     await ctx.close();
   }
