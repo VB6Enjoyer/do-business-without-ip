@@ -1,0 +1,51 @@
+---
+import { useStrings } from '../i18n';
+import { links } from '../lib/links';
+
+const t = useStrings();
+---
+
+<footer class="site-footer">
+  <div class="container inner">
+    <p class="license">{t.footer.license}</p>
+    <ul class="links" role="list">
+      <li>
+        <a href={links.originalPdf}>{t.footer.originalPdf}</a>
+      </li>
+      <li>
+        <a href={links.repo}>{t.footer.source}</a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-2xl);
+    padding-block: var(--space-l);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-s) var(--space-l);
+  }
+
+  .license {
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  .links {
+    display: flex;
+    gap: var(--space-m);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>

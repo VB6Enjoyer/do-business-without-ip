@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+import { useStrings } from '../i18n';
+
+const t = useStrings();
+---
+
+<BaseLayout title="Page not found">
+  <section class="container notfound">
+    <h1>Page not found</h1>
+    <p>This page doesn’t exist, which, for once, nobody holds the rights to.</p>
+    <p>
+      <a href={withBase('/')}>{t.nav.home}</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding-block: var(--space-2xl);
+    max-width: var(--measure);
+  }
+</style>

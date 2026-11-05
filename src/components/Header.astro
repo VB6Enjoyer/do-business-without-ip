@@ -1,0 +1,68 @@
+---
+import { useStrings } from '../i18n';
+import { withBase } from '../lib/paths';
+import ThemeToggle from './ThemeToggle.astro';
+
+const t = useStrings();
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href={withBase('/')}>
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"></path>
+      </svg>
+      <span>{t.site.shortTitle}</span>
+    </a>
+    <nav aria-label={t.a11y.mainNav}>
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    min-height: 3.75rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--step--1);
+    letter-spacing: 0.01em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .mark {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+</style>
