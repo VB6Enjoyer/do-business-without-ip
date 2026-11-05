@@ -1,7 +1,7 @@
 # Development roadmap
 
-A modern, accessible web edition of Stephan Kinsella's *Do Business Without
-Intellectual Property* (Liberty.me Guide 1.0, July 2014). Kinsella released the
+A modern, accessible web edition of Stephan Kinsella's _Do Business Without
+Intellectual Property_ (Liberty.me Guide 1.0, July 2014). Kinsella released the
 original under CC0 (page 2 of the PDF).
 
 We work one phase at a time. Each phase ends with something deployed and
@@ -12,19 +12,19 @@ signed off.
 
 ## Guiding decisions
 
-| Topic | Decision |
-| --- | --- |
-| Framework | **Astro** (static output, zero JS by default) with **TypeScript** |
-| Interactive pieces | **Svelte 5** islands, loaded only where used. Small UI behavior (drawer, theme toggle) in plain TS |
-| Hosting | **GitHub Pages**, deployed by GitHub Actions on push to `main` |
-| URL | `https://vb6enjoyer.github.io/do-business-without-ip/` until a custom domain is chosen (Astro `site` + `base` config) |
-| Original text | Kinsella's words stay verbatim. Only typographic fixes (PDF hyphenation, spacing, smart quotes) |
-| Modernization | Kept in a separate layer: replacement links plus clearly marked "Since 2014" notes |
-| Footnotes | Open in an accessible **drawer**, not at the bottom of the page. Without JS they fall back to a normal endnotes list |
-| Images | **Placeholders only** for now. A placeholder component records the intended size and subject so real assets can be dropped in later |
-| Branding | No Liberty.me logos or stock imagery from the PDF. Presented as an unofficial edition with a link to the original |
-| i18n | English only for now, but **built i18n-ready** from day one (see "Future: translations") |
-| Commits | Conventional Commits, enforced by the existing commitlint + husky setup |
+| Topic              | Decision                                                                                                                            |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Framework          | **Astro** (static output, zero JS by default) with **TypeScript**                                                                   |
+| Interactive pieces | **Svelte 5** islands, loaded only where used. Small UI behavior (drawer, theme toggle) in plain TS                                  |
+| Hosting            | **GitHub Pages**, deployed by GitHub Actions on push to `main`                                                                      |
+| URL                | `https://vb6enjoyer.github.io/do-business-without-ip/` until a custom domain is chosen (Astro `site` + `base` config)               |
+| Original text      | Kinsella's words stay verbatim. Only typographic fixes (PDF hyphenation, spacing, smart quotes)                                     |
+| Modernization      | Kept in a separate layer: replacement links plus clearly marked "Since 2014" notes                                                  |
+| Footnotes          | Open in an accessible **drawer**, not at the bottom of the page. Without JS they fall back to a normal endnotes list                |
+| Images             | **Placeholders only** for now. A placeholder component records the intended size and subject so real assets can be dropped in later |
+| Branding           | No Liberty.me logos or stock imagery from the PDF. Presented as an unofficial edition with a link to the original                   |
+| i18n               | English only for now, but **built i18n-ready** from day one (see "Future: translations")                                            |
+| Commits            | Conventional Commits, enforced by the existing commitlint + husky setup                                                             |
 
 ---
 
