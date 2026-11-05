@@ -117,7 +117,7 @@ Both must work with keyboard and screen readers, show an accessible text alterna
 - **"Release your work" tool:** pick CC0 or CC-BY, get the badge and the text to paste. Optional defensive-only patent pledge text modeled on Twitter's
 - **Share a quote:** one click to copy any pull quote as text or as a generated card image
 
-## Phase 6: Polish and launch
+## Phase 6: Polish and launch ✅
 
 - SEO: titles, descriptions, sitemap, `robots.txt`, canonical URLs. Open Graph images (placeholders until assets arrive)
 - Favicon and app icons (placeholders), 404 page

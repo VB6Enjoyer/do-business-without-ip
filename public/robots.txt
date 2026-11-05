@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vb6enjoyer.github.io/do-business-without-ip/sitemap-index.xml
