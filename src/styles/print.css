@@ -1,0 +1,71 @@
+@media print {
+  :root {
+    --color-bg: #fff;
+    --color-surface: #fff;
+    --color-text: #000;
+    --color-text-muted: #333;
+    --color-accent: #000;
+    --color-accent-strong: #000;
+    --color-border: #999;
+    --color-highlight: #eee;
+  }
+
+  html {
+    font-size: 11pt;
+  }
+
+  body {
+    display: block;
+    background: #fff;
+    color: #000;
+  }
+
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .reading-progress,
+  .guide-toc,
+  .toc-mobile,
+  .fn-drawer,
+  .pull-quote,
+  .notes .back {
+    display: none !important;
+  }
+
+  .guide-layout {
+    display: block !important;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .guide-section {
+    break-before: page;
+  }
+
+  .guide-section:first-of-type {
+    break-before: auto;
+  }
+
+  /* Footnotes print as endnotes; show their URLs. */
+  .notes {
+    break-before: page;
+  }
+
+  .notes .note-url {
+    display: block !important;
+  }
+}

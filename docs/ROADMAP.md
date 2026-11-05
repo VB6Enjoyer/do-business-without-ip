@@ -63,7 +63,7 @@ Goal: the full guide as structured, faithful source content.
 
 **Done when:** the whole guide renders as plain, unstyled pages and the faithfulness check shows only the intended typographic fixes.
 
-## Phase 2: Reading experience
+## Phase 2: Reading experience ✅
 
 Goal: a pleasant, accessible reading experience on any device.
 

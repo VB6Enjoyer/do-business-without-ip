@@ -29,7 +29,10 @@
   --space-xl: 3rem;
   --space-2xl: 4.5rem;
   --gutter: clamp(1rem, 4vw, 2.5rem);
-  --page-max: 72rem;
+  --page-max: 84rem;
+  --header-h: 3.75rem;
+  --sidebar-w: 15rem;
+  --margin-w: 14rem;
 
   /* Shape & motion */
   --radius-s: 4px;

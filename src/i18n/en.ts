@@ -39,6 +39,19 @@ export const en = {
     since2014: 'Since 2014',
     aboutAuthor: 'About the author',
     originalPage: 'Page {n} of the original',
+    readingProgress: 'Reading progress',
+  },
+  drawer: {
+    kicker: 'Footnote {n} of {total}',
+    close: 'Close footnote',
+    previous: 'Previous',
+    next: 'Next',
+    previousLabel: 'Previous footnote',
+    nextLabel: 'Next footnote',
+    openLink: 'Open the linked page',
+    openArchived: 'Open the archived copy',
+    originalUrl: 'URL as printed in 2014',
+    keyboardHint: 'Use ← and → to move between footnotes, Esc to close.',
   },
   footer: {
     license:

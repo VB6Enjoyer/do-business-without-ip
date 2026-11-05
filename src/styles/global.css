@@ -2,6 +2,7 @@
 @import '@fontsource-variable/source-serif-4/opsz-italic.css';
 @import '@fontsource-variable/inter';
 @import './tokens.css';
+@import './print.css';
 
 *,
 *::before,
@@ -12,7 +13,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scroll-padding-top: var(--space-xl);
+  scroll-padding-top: calc(var(--header-h) + var(--space-l));
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -97,4 +99,9 @@ svg {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* A modal dialog (e.g. the footnote drawer) locks page scroll behind it. */
+html:has(dialog[open]) {
+  overflow: hidden;
 }

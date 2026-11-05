@@ -1,0 +1,302 @@
+---
+/**
+ * Footnote drawer. Footnote markers (<Fn>) stay plain links to the notes list,
+ * so everything works without JS; with JS, activating a marker opens this
+ * modal <dialog> instead (native focus trap, Esc, inert background).
+ */
+import { useStrings } from '../../i18n';
+import { footnoteHref, type Footnote } from '../../lib/footnotes';
+
+interface Props {
+  footnotes: Footnote[];
+}
+
+const t = useStrings();
+const data = Astro.props.footnotes.map((fn) => ({
+  n: fn.n,
+  label: fn.label,
+  href: footnoteHref(fn),
+  originalUrl: fn.originalUrl,
+  archived: fn.archiveUrl !== null,
+  note: fn.note,
+}));
+const strings = {
+  kicker: t.drawer.kicker,
+  openLink: t.drawer.openLink,
+  openArchived: t.drawer.openArchived,
+};
+---
+
+<dialog id="fn-drawer" class="fn-drawer" aria-labelledby="fn-drawer-title">
+  <div class="fn-drawer__panel">
+    <div class="fn-drawer__top">
+      <p class="fn-drawer__kicker" data-fn-kicker></p>
+      <button type="button" class="icon-button" data-fn-close aria-label={t.drawer.close} autofocus>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6l12 12M18 6 6 18"></path>
+        </svg>
+      </button>
+    </div>
+
+    <h2 id="fn-drawer-title" class="fn-drawer__title" data-fn-label></h2>
+
+    <p class="fn-drawer__link">
+      <a data-fn-link href="#" rel="noopener" target="_blank">
+        <span data-fn-link-text></span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path>
+        </svg>
+      </a>
+    </p>
+
+    <dl class="fn-drawer__meta">
+      <dt>{t.drawer.originalUrl}</dt>
+      <dd>
+        <code data-fn-url></code>
+      </dd>
+    </dl>
+
+    <div class="fn-drawer__note" data-fn-note hidden>
+      <p class="fn-drawer__note-label">{t.guide.since2014}</p>
+      <p data-fn-note-text></p>
+    </div>
+
+    <div class="fn-drawer__nav">
+      <button type="button" class="nav-button" data-fn-prev aria-label={t.drawer.previousLabel}>
+        <span aria-hidden="true">←</span>
+        {t.drawer.previous}
+      </button>
+      <button type="button" class="nav-button" data-fn-next aria-label={t.drawer.nextLabel}>
+        {t.drawer.next}
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+    <p class="fn-drawer__hint">{t.drawer.keyboardHint}</p>
+  </div>
+</dialog>
+
+<script is:inline type="application/json" id="fn-data" set:html={JSON.stringify(data)} />
+<script is:inline type="application/json" id="fn-strings" set:html={JSON.stringify(strings)} />
+<script>
+  import { initFootnoteDrawer } from '../../lib/footnote-drawer';
+  initFootnoteDrawer();
+</script>
+
+<style>
+  .fn-drawer {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-width: none;
+    max-height: none;
+    background: transparent;
+    color: var(--color-text);
+    overflow: visible;
+  }
+
+  .fn-drawer::backdrop {
+    background: rgb(0 0 0 / 0.4);
+    backdrop-filter: blur(2px);
+  }
+
+  .fn-drawer__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    height: 100%;
+    overflow-y: auto;
+    padding: var(--space-m);
+    background: var(--color-surface);
+    font-family: var(--font-sans);
+    box-shadow: 0 0 40px rgb(0 0 0 / 0.25);
+  }
+
+  /* Bottom sheet on small screens. */
+  .fn-drawer[open] {
+    position: fixed;
+    inset: auto 0 0 0;
+    width: 100%;
+    max-height: 85dvh;
+  }
+
+  .fn-drawer[open] .fn-drawer__panel {
+    border-radius: var(--radius-m) var(--radius-m) 0 0;
+    max-height: 85dvh;
+  }
+
+  /* Side panel on wider screens. */
+  @media (min-width: 48rem) {
+    .fn-drawer[open] {
+      inset: 0 0 0 auto;
+      width: min(28rem, 100vw);
+      height: 100dvh;
+      max-height: none;
+    }
+
+    .fn-drawer[open] .fn-drawer__panel {
+      border-radius: 0;
+      max-height: none;
+      padding: var(--space-l);
+    }
+  }
+
+  .fn-drawer[open] .fn-drawer__panel {
+    animation: drawer-in var(--duration) var(--ease);
+  }
+
+  @keyframes drawer-in {
+    from {
+      transform: translateY(1.5rem);
+      opacity: 0;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    @keyframes drawer-in {
+      from {
+        transform: translateX(2rem);
+        opacity: 0;
+      }
+    }
+  }
+
+  .fn-drawer__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+  }
+
+  .fn-drawer__kicker {
+    margin: 0;
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .fn-drawer__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    font-weight: 600;
+  }
+
+  .fn-drawer__link {
+    margin: 0;
+  }
+
+  .fn-drawer__link a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-weight: 600;
+  }
+
+  .fn-drawer__link svg,
+  .icon-button svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .fn-drawer__meta {
+    margin: 0;
+    font-size: var(--step--1);
+  }
+
+  .fn-drawer__meta dt {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3xs);
+  }
+
+  .fn-drawer__meta dd {
+    margin: 0;
+  }
+
+  .fn-drawer__meta code {
+    display: block;
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-s);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    font-size: 0.8125rem;
+    overflow-wrap: anywhere;
+  }
+
+  .fn-drawer__note {
+    padding: var(--space-xs) var(--space-s);
+    border-radius: var(--radius-s);
+    background: var(--color-highlight);
+  }
+
+  .fn-drawer__note-label {
+    margin: 0 0 var(--space-3xs);
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .fn-drawer__nav {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-s);
+    margin-top: auto;
+    padding-top: var(--space-s);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .icon-button,
+  .nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+    min-height: 2.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .icon-button {
+    width: 2.5rem;
+    padding: 0;
+  }
+
+  .nav-button {
+    padding: 0 var(--space-s);
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  .icon-button:hover,
+  .nav-button:hover:not(:disabled) {
+    border-color: var(--color-accent);
+  }
+
+  .nav-button:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .fn-drawer__hint {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (hover: none) {
+    .fn-drawer__hint {
+      display: none;
+    }
+  }
+</style>

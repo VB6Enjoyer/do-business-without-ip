@@ -6,8 +6,12 @@ import Ref from '../../components/guide/Ref.astro';
 import PullQuote from '../../components/guide/PullQuote.astro';
 import Standfirst from '../../components/guide/Standfirst.astro';
 import Since2014 from '../../components/guide/Since2014.astro';
+import Toc from '../../components/guide/Toc.astro';
+import ReadingProgress from '../../components/guide/ReadingProgress.astro';
+import FootnoteDrawer from '../../components/guide/FootnoteDrawer.astro';
 import { defaultLang, useStrings } from '../../i18n';
 import { footnoteHref, getFootnotes } from '../../lib/footnotes';
+import '../../styles/prose.css';
 
 const lang = defaultLang;
 const t = useStrings(lang);
@@ -29,83 +33,120 @@ const { Content: AuthorBio } = await render(author!);
 const { Content: Disclaimer } = await render(disclaimer!);
 
 const components = { Fn, Ref, PullQuote, Standfirst, Since2014 };
+const tocSections = sections.map((s) => ({
+  slug: s.slug,
+  title: s.data.title,
+  headings: s.headings,
+}));
+const tocExtra = [
+  { slug: 'notes', title: t.guide.notes },
+  { slug: 'author', title: t.guide.aboutAuthor },
+];
 ---
 
 <BaseLayout title={t.guide.title}>
-  <article class="guide container">
-    <header class="guide-header">
-      <p class="kicker">{t.home.kicker}</p>
-      <h1>{t.site.title}</h1>
-      <p class="byline">{t.home.byline}</p>
-    </header>
+  <ReadingProgress />
 
-    <nav class="toc" aria-labelledby="toc-title">
-      <h2 id="toc-title">{t.guide.contents}</h2>
-      <ol>
-        {sections.map((s) => (
-          <li>
-            <a href={`#${s.slug}`}>{s.data.title}</a>
-            {s.headings.some((h) => h.depth === 3) && (
-              <ol>
-                {s.headings
-                  .filter((h) => h.depth === 3)
-                  .map((h) => (
-                    <li>
-                      <a href={`#${h.slug}`}>{h.text}</a>
-                    </li>
-                  ))}
-              </ol>
-            )}
-          </li>
-        ))}
-      </ol>
-    </nav>
+  <div class="guide-layout">
+    <details class="toc-mobile" data-toc-mobile>
+      <summary>
+        <span class="toc-mobile__label">{t.guide.contents}</span>
+        <span class="toc-mobile__current" data-toc-current></span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </summary>
+      <nav aria-label={t.guide.contents}>
+        <Toc sections={tocSections} extra={tocExtra} />
+      </nav>
+    </details>
 
-    {sections.map(({ slug, data, Content }) => (
-      <section id={slug} class="guide-section" aria-labelledby={`${slug}-title`}>
-        <h2 id={`${slug}-title`}>{data.title}</h2>
-        <Content components={components} />
+    <aside class="guide-toc">
+      <nav aria-labelledby="toc-title">
+        <h2 id="toc-title" class="toc-title">
+          {t.guide.contents}
+        </h2>
+        <Toc sections={tocSections} extra={tocExtra} />
+      </nav>
+    </aside>
+
+    <article class="guide prose" data-guide-article>
+      <header class="guide-header">
+        <p class="kicker">{t.home.kicker}</p>
+        <h1>{t.site.title}</h1>
+        <p class="byline">{t.home.byline}</p>
+      </header>
+
+      {sections.map(({ slug, data, Content }) => (
+        <section id={slug} class="guide-section" aria-labelledby={`${slug}-title`}>
+          <header class="section-head">
+            <span class="section-num" aria-hidden="true">
+              {String(data.order).padStart(2, '0')}
+            </span>
+            <h2 id={`${slug}-title`}>{data.title}</h2>
+            <p class="section-page">
+              {t.guide.originalPage.replace('{n}', String(data.originalPage))}
+            </p>
+          </header>
+          <Content components={components} />
+        </section>
+      ))}
+
+      <section id="notes" class="notes" aria-labelledby="notes-title">
+        <h2 id="notes-title">{t.guide.notes}</h2>
+        <ol>
+          {footnotes.map((fn) => (
+            <li id={`fn-${fn.n}`} value={fn.n}>
+              <a href={footnoteHref(fn)} rel="noopener">
+                {fn.label}
+              </a>
+              <span class="note-url">{fn.originalUrl}</span>
+              <a
+                href={`#fnref-${fn.n}`}
+                class="back"
+                aria-label={t.guide.backToText.replace('{n}', String(fn.n))}
+              >
+                ↩
+              </a>
+            </li>
+          ))}
+        </ol>
       </section>
-    ))}
 
-    <section id="notes" class="notes" aria-labelledby="notes-title">
-      <h2 id="notes-title">{t.guide.notes}</h2>
-      <ol>
-        {footnotes.map((fn) => (
-          <li id={`fn-${fn.n}`} value={fn.n}>
-            <a href={footnoteHref(fn)} rel="noopener">
-              {fn.label}
-            </a>
-            <span class="note-url">{fn.originalUrl}</span>
-            <a
-              href={`#fnref-${fn.n}`}
-              class="back"
-              aria-label={t.guide.backToText.replace('{n}', String(fn.n))}
-            >
-              ↩
-            </a>
-          </li>
-        ))}
-      </ol>
-    </section>
+      <section id="author" class="author" aria-labelledby="author-title">
+        <h2 id="author-title">{t.guide.aboutAuthor}</h2>
+        <AuthorBio />
+      </section>
 
-    <section class="author" aria-labelledby="author-title">
-      <h2 id="author-title">{t.guide.aboutAuthor}</h2>
-      <AuthorBio />
-    </section>
+      <section class="disclaimer" aria-labelledby="disclaimer-title">
+        <h2 id="disclaimer-title">{disclaimer!.data.title}</h2>
+        <Disclaimer />
+      </section>
+    </article>
+  </div>
 
-    <section class="disclaimer" aria-labelledby="disclaimer-title">
-      <h2 id="disclaimer-title">{disclaimer!.data.title}</h2>
-      <Disclaimer />
-    </section>
-  </article>
+  <FootnoteDrawer footnotes={footnotes} />
 </BaseLayout>
 
+<script>
+  import { initScrollspy } from '../../lib/scrollspy';
+  initScrollspy();
+</script>
+
 <style>
-  /* Minimal readable defaults; the full reading design arrives in Phase 2. */
+  .guide-layout {
+    width: min(100% - 2 * var(--gutter), var(--measure));
+    margin-inline: auto;
+  }
+
   .guide {
-    max-width: var(--measure);
-    padding-block: var(--space-xl);
+    padding-block: var(--space-xl) 0;
+    min-width: 0;
+  }
+
+  /* ---------- Header ---------- */
+  .guide-header {
+    margin-bottom: var(--space-2xl);
   }
 
   .kicker {
@@ -117,63 +158,193 @@ const components = { Fn, Ref, PullQuote, Standfirst, Since2014 };
     color: var(--color-accent);
   }
 
-  h1 {
-    font-size: var(--step-3);
+  .guide-header h1 {
+    font-size: var(--step-4);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+    margin-bottom: var(--space-s);
   }
 
   .byline {
+    font-size: var(--step-1);
     font-style: italic;
     color: var(--color-text-muted);
   }
 
-  .toc,
   .guide-section,
   .notes,
   .author,
   .disclaimer {
-    margin-top: var(--space-xl);
+    margin-top: var(--space-2xl);
   }
 
-  .guide-section :global(h2),
-  .guide-section > h2 {
-    font-size: var(--step-2);
-  }
-
-  .guide-section :global(h3) {
-    font-size: var(--step-1);
-    margin-top: var(--space-l);
-  }
-
-  .guide :global(.pull-quote) {
-    border-inline-start: 3px solid var(--color-accent);
-    padding-inline-start: var(--space-s);
-    margin-block: var(--space-m);
+  /* ---------- Mobile / tablet contents bar ---------- */
+  .toc-mobile {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 5;
+    margin-inline: calc(-1 * var(--gutter));
+    background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
     font-family: var(--font-sans);
-    color: var(--color-text-muted);
   }
 
-  .guide :global(.standfirst) {
+  .toc-mobile summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-height: 2.75rem;
+    padding-inline: var(--gutter);
+    cursor: pointer;
+    list-style: none;
+    font-size: var(--step--1);
+  }
+
+  .toc-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-mobile__label {
     font-weight: 600;
   }
 
+  .toc-mobile__current {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--color-text-muted);
+  }
+
+  .toc-mobile summary svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    transition: transform var(--duration) var(--ease);
+  }
+
+  .toc-mobile[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  .toc-mobile nav {
+    max-height: 65dvh;
+    overflow-y: auto;
+    padding: 0 var(--gutter) var(--space-s);
+  }
+
+  .guide-toc {
+    display: none;
+  }
+
+  /* ---------- Wide: sidebar + text + margin ---------- */
+  @media (min-width: 75rem) {
+    .guide-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) minmax(0, var(--measure)) var(--margin-w);
+      column-gap: var(--space-xl);
+      width: min(100% - 2 * var(--gutter), 84rem);
+    }
+
+    .toc-mobile {
+      display: none;
+    }
+
+    .guide-toc {
+      display: block;
+      grid-column: 1;
+    }
+
+    .guide-toc nav {
+      position: sticky;
+      top: calc(var(--header-h) + var(--space-l));
+      max-height: calc(100dvh - var(--header-h) - var(--space-2xl));
+      overflow-y: auto;
+      padding-top: var(--space-xl);
+      scrollbar-width: thin;
+    }
+
+    .toc-title {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-xs) var(--space-2xs);
+    }
+
+    .guide {
+      grid-column: 2;
+    }
+
+    /* Every pull quote moves into the right margin column. */
+    .guide :global(.pull-quote[data-side]) {
+      float: right;
+      clear: right;
+      width: var(--margin-w);
+      margin: 0.3rem calc(-1 * (var(--margin-w) + var(--space-xl))) var(--space-m) 0;
+      padding: 0 0 0 var(--space-s);
+      border: 0;
+      border-inline-start: 2px solid var(--color-accent);
+      font-size: 1.05rem;
+    }
+  }
+
+  /* ---------- Notes, author, disclaimer ---------- */
+  .notes ol {
+    padding-inline-start: 2.2em;
+    font-size: var(--step--1);
+  }
+
   .notes li {
-    margin-bottom: var(--space-2xs);
+    margin-bottom: var(--space-xs);
+  }
+
+  .notes li:target {
+    background: var(--color-highlight);
+    border-radius: var(--radius-s);
   }
 
   .note-url {
     display: block;
     font-family: var(--font-sans);
-    font-size: var(--step--1);
+    font-size: 0.8125rem;
     color: var(--color-text-muted);
     overflow-wrap: anywhere;
+    hyphens: none;
   }
 
   .back {
     text-decoration: none;
+    margin-inline-start: var(--space-3xs);
+  }
+
+  .author {
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .author h2,
+  .notes h2,
+  .disclaimer h2 {
+    font-size: var(--step-2);
+    margin-bottom: var(--space-s);
   }
 
   .disclaimer {
-    font-size: var(--step--1);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
     color: var(--color-text-muted);
+  }
+
+  .disclaimer h2 {
+    font-size: var(--step-0);
   }
 </style>
