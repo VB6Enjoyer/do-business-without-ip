@@ -23,6 +23,7 @@ npm install
 npm run dev        # http://localhost:4321/do-business-without-ip/
 npm run check      # type-check .astro/.ts files
 npm run check:text # verify the guide text against the 2014 original
+npm run test:a11y  # axe + drawer/keyboard/no-JS checks on the built site (build first)
 npm run format     # Prettier
 npm run build      # static site in dist/
 npm run preview    # serve dist/

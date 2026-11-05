@@ -1,0 +1,103 @@
+---
+/**
+ * Table of contents. Rendered twice by the guide page: as a sticky sidebar on
+ * wide screens and as a collapsible bar on narrower ones. Scrollspy (in
+ * guide.ts) marks the current entry with aria-current="location".
+ */
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  sections: Array<{ slug: string; title: string; headings: MarkdownHeading[] }>;
+  extra?: Array<{ slug: string; title: string }>;
+}
+
+const { sections, extra = [] } = Astro.props;
+---
+
+<ol class="toc-list">
+  {sections.map((s, i) => (
+    <li>
+      <a href={`#${s.slug}`} data-toc-target={s.slug}>
+        <span class="toc-num" aria-hidden="true">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <span>{s.title}</span>
+      </a>
+      {s.headings.some((h) => h.depth === 3) && (
+        <ol>
+          {s.headings
+            .filter((h) => h.depth === 3)
+            .map((h) => (
+              <li>
+                <a href={`#${h.slug}`} data-toc-target={h.slug}>
+                  {h.text}
+                </a>
+              </li>
+            ))}
+        </ol>
+      )}
+    </li>
+  ))}
+  {extra.map((e) => (
+    <li class="toc-extra">
+      <a href={`#${e.slug}`} data-toc-target={e.slug}>
+        {e.title}
+      </a>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .toc-list,
+  .toc-list ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc-list {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  .toc-list a {
+    display: flex;
+    gap: var(--space-2xs);
+    padding: 0.35rem var(--space-2xs);
+    border-radius: var(--radius-s);
+    border-inline-start: 2px solid transparent;
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .toc-list a:hover {
+    color: var(--color-text);
+    background: var(--color-highlight);
+  }
+
+  .toc-list a[aria-current='location'] {
+    color: var(--color-accent-strong);
+    border-inline-start-color: var(--color-accent);
+    background: var(--color-highlight);
+    font-weight: 600;
+  }
+
+  .toc-list ol a {
+    padding-inline-start: 2.1rem;
+    font-size: 0.8125rem;
+  }
+
+  .toc-num {
+    flex: none;
+    width: 1.4rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-accent);
+  }
+
+  .toc-extra {
+    margin-top: var(--space-2xs);
+    padding-top: var(--space-2xs);
+    border-top: 1px solid var(--color-border);
+  }
+</style>

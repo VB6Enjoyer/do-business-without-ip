@@ -1,0 +1,185 @@
+/*
+ * Long-form reading styles for the guide. Scoped to `.prose` so they never
+ * leak into UI chrome.
+ */
+.prose {
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+  hyphens: auto;
+  hanging-punctuation: first;
+}
+
+.prose p {
+  margin-block: 0 var(--space-s);
+}
+
+.prose h2 {
+  font-size: var(--step-3);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.prose h3 {
+  font-size: var(--step-1);
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: 0.02em;
+  margin: var(--space-xl) 0 var(--space-s);
+}
+
+.prose ul {
+  padding-inline-start: 1.25em;
+  margin: 0 0 var(--space-m);
+}
+
+.prose li {
+  margin-bottom: var(--space-2xs);
+  padding-inline-start: 0.25em;
+}
+
+.prose li::marker {
+  color: var(--color-accent);
+}
+
+/* Links to footnoted sources */
+.prose .ref {
+  text-decoration-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+.prose .ref:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Footnote markers: small, but with a comfortable hit area. */
+.prose .fn-ref {
+  font-size: 0.68em;
+  line-height: 0;
+  vertical-align: super;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.prose .fn-ref a {
+  display: inline-block;
+  /* Padding enlarges the hit area; equal negative margins keep it from adding space. */
+  padding: 0.35em 0.2em;
+  margin: -0.35em -0.2em -0.35em -0.05em;
+  border-radius: var(--radius-s);
+  text-align: center;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.prose .fn-ref a:hover {
+  background: var(--color-highlight);
+}
+
+/* Section header */
+.section-head {
+  margin-bottom: var(--space-m);
+}
+
+.section-num {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2xs);
+}
+
+.section-page {
+  margin: var(--space-2xs) 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+/* Introduction: drop cap and standfirst */
+.prose .guide-section:first-of-type > p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.85;
+  font-weight: 400;
+  padding: 0.08em 0.1em 0 0;
+  color: var(--color-accent);
+}
+
+.prose .standfirst {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  font-weight: 600;
+  margin-block: var(--space-m);
+}
+
+/* Pull quotes: inline on phones, wrapped by the text on tablets, in the
+   right margin on wide screens (see .guide-layout). */
+.prose .pull-quote {
+  margin: var(--space-l) 0;
+  padding: var(--space-s) 0;
+  border-block: 1px solid var(--color-border);
+  font-family: var(--font-sans);
+  font-size: var(--step-1);
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--color-accent-strong);
+  text-wrap: balance;
+  hyphens: manual;
+}
+
+.prose .pull-quote p {
+  margin: 0;
+}
+
+.prose .pull-quote p::before {
+  content: '“';
+}
+
+.prose .pull-quote p::after {
+  content: '”';
+}
+
+@media (min-width: 40rem) {
+  .prose .pull-quote {
+    width: 42%;
+    margin-block: var(--space-2xs) var(--space-s);
+    font-size: var(--step-0);
+  }
+
+  .prose .pull-quote[data-side='right'] {
+    float: right;
+    clear: right;
+    margin-inline: var(--space-m) 0;
+  }
+
+  .prose .pull-quote[data-side='left'] {
+    float: left;
+    clear: left;
+    margin-inline: 0 var(--space-m);
+  }
+}
+
+/* Sections clear floats so a quote never hangs into the next section. */
+.prose .guide-section {
+  display: flow-root;
+}
+
+/* Editorial additions */
+.prose .since-2014 {
+  margin: var(--space-m) 0;
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--radius-m);
+  background: var(--color-highlight);
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+}
+
+.prose .since-2014__label {
+  margin: 0 0 var(--space-3xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-strong);
+}
