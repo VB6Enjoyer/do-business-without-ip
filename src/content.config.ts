@@ -85,6 +85,29 @@ const glossary = defineCollection({
   }),
 });
 
+/** Myth vs. reality cards: a common claim, the guide's answer, and a verbatim quote from it. */
+const myths = defineCollection({
+  loader: file('src/content/myths/en.json', {
+    parser: (text) =>
+      (JSON.parse(text) as Array<{ id: string }>).map((m) => ({
+        ...m,
+        id: `en-${m.id}`,
+        slug: m.id,
+        lang: 'en',
+      })),
+  }),
+  schema: z.object({
+    lang: z.string(),
+    slug: z.string(),
+    claim: z.string(),
+    answer: z.string(),
+    /** Must be the author's exact words (checked by check:text). */
+    quote: z.string(),
+    /** Section slug where the guide makes the case. */
+    section: z.string(),
+  }),
+});
+
 /** Supporting text: author bio, disclaimer. */
 const meta = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/meta' }),
@@ -95,4 +118,4 @@ const meta = defineCollection({
   }),
 });
 
-export const collections = { guide, footnotes, updates, glossary, meta };
+export const collections = { guide, footnotes, updates, glossary, myths, meta };

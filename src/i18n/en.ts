@@ -80,6 +80,29 @@ export const en = {
   },
   interactive: {
     badge: 'Interactive · added in this edition',
+    myths: {
+      title: 'Myth or reality?',
+      intro:
+        'Common claims about IP, and how the guide answers them. Turn a card over to see the answer and where the guide makes the case.',
+      claimLabel: 'The claim',
+      answerLabel: 'The guide’s answer',
+      reveal: 'Turn over',
+      inTheGuide: 'In the guide:',
+      readSection: 'Read “{section}”',
+    },
+    scrolly: {
+      title: 'Consent makes the difference',
+      intro:
+        'The neighborhood argument, step by step. Scroll through the steps to build the picture.',
+      figureLabel: 'Diagram of a neighborhood of eight houses. Current step: {step}',
+      steps: [
+        'A neighborhood of eight houses. Each owner decides how to use their own home.',
+        'Seven owners sign a covenant: no orange houses without the neighbors’ permission. Each gives up a little control over their own house in exchange for the same say over the others.',
+        'Because they agreed, the covenant is an exercise of their property rights, not a violation of them. The eighth owner never signed, so it doesn’t bind them: they can paint their house orange.',
+        'Now a patent holder outside the neighborhood gets a veto over every house, granted by the state. Nobody signed anything.',
+        'In effect, the patent holder has become a part-owner of every house: a negative servitude imposed without anyone’s consent.',
+      ],
+    },
     covenant: {
       title: 'Who gets a veto over your house?',
       intro:

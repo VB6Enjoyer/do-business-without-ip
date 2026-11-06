@@ -9,6 +9,7 @@
  * - interactives: covenant demo outcomes, copyright timeline values and readouts
  * - tools: self-check suggestions, pre-sale calculator, release notice, quote sharing
  * - section summaries and term explainers (also without JavaScript)
+ * - myth cards and the scroll-driven covenant diagram
  * - no-JS fallback: footnote markers jump to the notes list
  * - mobile contents bar opens and closes after following a link
  */
@@ -452,6 +453,80 @@ try {
     await ctx.close();
   }
 
+  console.log('\nMyth cards and scroll diagram');
+  {
+    const ctx = await browser.newContext({
+      reducedMotion: 'reduce',
+      viewport: { width: 1280, height: 900 },
+    });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+
+    const cards = page.locator('#myth-cards details.myth');
+    check((await cards.count()) === 6, 'six myth cards');
+    const card = page.locator('#myth-innovation');
+    await card.scrollIntoViewIfNeeded();
+    check(
+      !(await card.locator('.myth__back').isVisible()),
+      'cards start with only the claim showing',
+    );
+    await card.locator('summary').click();
+    check(await card.locator('.myth__back').isVisible(), 'turning a card over shows the answer');
+    check(
+      (await card.locator('.myth__back a').getAttribute('href')) === '#should-we-abolish-ip',
+      'the card links to the section that makes the case',
+    );
+    await page.keyboard.press('Enter');
+    check(
+      !(await card.locator('.myth__back').isVisible()),
+      'the card turns back with the keyboard',
+    );
+
+    const fig = page.locator('[data-scrolly-figure]');
+    check(
+      (await fig.getAttribute('data-step')) === '1',
+      'the diagram starts at step 1 once enhanced',
+    );
+    const opacity = (steps) =>
+      page.$eval(
+        `[data-scrolly-figure] .layer[data-steps="${steps}"]`,
+        (el) => getComputedStyle(el).opacity,
+      );
+    check((await opacity('4 5')) === '0', 'the patent holder is hidden at step 1');
+    for (const n of [2, 4, 5]) {
+      await page.evaluate((n) => {
+        const el = document.querySelector(`.scrolly__step[data-step="${n}"]`);
+        scrollTo(
+          0,
+          el.getBoundingClientRect().top + scrollY - innerHeight / 2 + el.offsetHeight / 2,
+        );
+      }, n);
+      await page
+        .waitForFunction(
+          (n) => document.querySelector('[data-scrolly-figure]')?.dataset.step === String(n),
+          n,
+          {
+            timeout: 3000,
+          },
+        )
+        .catch(() => {});
+      check(
+        (await fig.getAttribute('data-step')) === String(n),
+        `scrolling to step ${n} updates the diagram`,
+      );
+    }
+    check((await opacity('4 5')) === '1', 'the patent holder appears in the final steps');
+    check(
+      (await fig.getAttribute('aria-label'))?.includes('part-owner'),
+      'the diagram’s label describes the current step',
+    );
+    await axe(page, 'guide with myth card open and diagram at step 5');
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
   console.log('\nWithout JavaScript');
   {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
@@ -460,6 +535,15 @@ try {
     await page.click('#fnref-3');
     check(new URL(page.url()).hash === '#fn-3', 'marker jumps to the notes list');
     check(!(await page.isVisible('#fn-drawer')), 'drawer stays closed');
+    check(
+      (await page.getAttribute('[data-scrolly-figure]', 'data-step')) === '5',
+      'without JavaScript the diagram shows its final state',
+    );
+    await page.click('#myth-free-market summary');
+    check(
+      await page.isVisible('#myth-free-market .myth__back'),
+      'myth cards work without JavaScript',
+    );
     await page.click('button.term[data-term="orphan-works"]');
     check(await page.isVisible('#term-orphan-works'), 'term explanations work without JavaScript');
     check(

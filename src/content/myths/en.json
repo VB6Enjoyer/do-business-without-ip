@@ -1,0 +1,44 @@
+[
+  {
+    "id": "property-right",
+    "claim": "IP is just another kind of property right.",
+    "answer": "Ordinary property rights are about owning scarce things. Patent and copyright let one person control how everyone else uses their own property, without their consent.",
+    "quote": "In effect, copyright and patent holders retain a negative servitude over others’ property.",
+    "section": "ip-versus-property-rights"
+  },
+  {
+    "id": "innovation",
+    "claim": "Without patents and copyright, nobody would bother to innovate.",
+    "answer": "The evidence points the other way: IP raises costs, entrenches incumbents and reduces the total amount of innovation.",
+    "quote": "The empirical evidence we do have suggests strongly that patent and copyright heavily distort the creative and innovative fields and lower the total amount of innovation in society.",
+    "section": "should-we-abolish-ip"
+  },
+  {
+    "id": "small-inventor",
+    "claim": "Patents protect the small inventor working in a garage.",
+    "answer": "Large companies stockpile patents and use them as weapons. Small companies can’t afford the lawsuits, so patents become a barrier to entry.",
+    "quote": "Smaller companies cannot afford to defend against such lawsuits and have no large patent arsenal to draw on defensively",
+    "section": "history"
+  },
+  {
+    "id": "struggling-authors",
+    "claim": "Copyright exists to help struggling authors.",
+    "answer": "Copyright grew out of a printers’ guild monopoly. Today publishers usually end up holding the rights, and long terms let works disappear.",
+    "quote": "Then the publisher can refuse to reprint the work when sales fall, yet copyright prohibits others from reviving the work for over a century.",
+    "section": "innovation-and-freedom"
+  },
+  {
+    "id": "making-a-living",
+    "claim": "Authors can’t make a living if anyone can copy their work.",
+    "answer": "Copying happens anyway. For most authors the bigger danger is obscurity, and an audience can be turned into income, for example by pre-selling the next book.",
+    "quote": "As noted above, the fundamental danger faced by authors is obscurity.",
+    "section": "publishing-and-copyright"
+  },
+  {
+    "id": "free-market",
+    "claim": "IP is a natural part of the free market.",
+    "answer": "Patent and copyright are privileges granted by the state, and early free-market economists were suspicious of them for exactly that reason.",
+    "quote": "But in truth, patent and copyright are state-granted monopoly privileges, not natural property rights.",
+    "section": "history"
+  }
+]

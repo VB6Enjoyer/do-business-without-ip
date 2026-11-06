@@ -1,0 +1,289 @@
+---
+/**
+ * Scroll-driven diagram of the covenant argument. The figure stays pinned
+ * while the steps scroll past; each step reveals a layer. Without JS (or
+ * before it runs) the figure shows the final state and all steps are listed.
+ */
+import InteractiveFigure from './InteractiveFigure.astro';
+import { useStrings } from '../../i18n';
+
+const s = useStrings().interactive.scrolly;
+const steps = s.steps;
+
+// Geometry
+const W = 900;
+const H = 360;
+const G = 300; // ground line
+const xs = Array.from({ length: 8 }, (_, i) => 40 + i * 82);
+const HW = 56;
+const HH = 74;
+const optOut = 7;
+const towerX = 780;
+
+const housePath = (x: number) =>
+  `M${x},${G} V${G - HH + HH * 0.45} L${x + HW / 2},${G - HH} L${x + HW},${G - HH + HH * 0.45} V${G} Z`;
+const door = (x: number) => `M${x + HW / 2 - 6},${G} v-24 h12 v24`;
+const roof = (x: number) => ({ x: x + HW / 2, y: G - HH });
+---
+
+<InteractiveFigure id="covenant-scrolly" title={s.title} intro={s.intro}>
+  <div class="scrolly" data-scrolly>
+    <div class="scrolly__figure">
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        role="img"
+        aria-label={s.figureLabel.replace('{step}', steps.at(-1)!)}
+        data-scrolly-figure
+        data-step={steps.length}
+      >
+        <line x1="20" y1={G} x2={W - 20} y2={G} class="ink-acc thin" />
+
+        {/* Step 2–3: covenant arcs between the seven signers */}
+        <g class="layer" data-steps="2 3">
+          {xs.slice(0, optOut - 1).map((x, i) => {
+            const a = roof(x);
+            const b = roof(xs[i + 1]);
+            return (
+              <path
+                d={`M${a.x},${a.y - 8} Q${(a.x + b.x) / 2},${a.y - 46} ${b.x},${b.y - 8}`}
+                class="ink-acc thin dashed"
+              />
+            );
+          })}
+          {xs.slice(0, optOut).map((x) => (
+            <circle cx={x + HW - 6} cy={G - 30} r="7" class="badge-ok" />
+          ))}
+        </g>
+
+        {/* Step 4–5: the patent holder's tower and its lines to every house */}
+        <g class="layer" data-steps="4 5">
+          <rect x={towerX} y={G - 230} width="80" height="230" class="ink" />
+          {[0, 1, 2, 3, 4, 5].map((r) =>
+            [0, 1].map((c) => (
+              <rect
+                x={towerX + 16 + c * 30}
+                y={G - 212 + r * 34}
+                width="18"
+                height="16"
+                class="ink thin"
+              />
+            )),
+          )}
+          {xs.map((x) => {
+            const a = roof(x);
+            return (
+              <path
+                d={`M${towerX},${G - 200} Q${(towerX + a.x) / 2},${G - 300} ${a.x},${a.y - 10}`}
+                class="ink thin dashed"
+              />
+            );
+          })}
+        </g>
+
+        {/* Houses */}
+        {xs.map((x, i) => (
+          <g>
+            <path d={housePath(x)} class={i === optOut ? 'house house--optout' : 'house'} />
+            <path d={door(x)} class="ink-acc" />
+          </g>
+        ))}
+
+        {/* Step 5: every house now partly owned by the patent holder */}
+        <g class="layer" data-steps="5">
+          {xs.map((x) => (
+            <g>
+              <rect x={x + 6} y={G - 40} width="16" height="14" rx="2" class="lock" />
+              <path d={`M${x + 9},${G - 40} v-5 a5,5 0 0 1 10,0 v5`} class="ink thin" />
+            </g>
+          ))}
+        </g>
+      </svg>
+    </div>
+
+    <ol class="scrolly__steps">
+      {steps.map((text, i) => (
+        <li class="scrolly__step" data-step={i + 1}>
+          <span class="scrolly__num" aria-hidden="true">
+            {i + 1}
+          </span>
+          <p>{text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</InteractiveFigure>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-scrolly]')) {
+    const figure = root.querySelector<SVGElement>('[data-scrolly-figure]')!;
+    const steps = [...root.querySelectorAll<HTMLElement>('.scrolly__step')];
+    const label = figure.getAttribute('aria-label') ?? '';
+    const prefix = label.slice(0, label.lastIndexOf(':') + 1);
+    root.classList.add('is-enhanced');
+
+    const show = (n: number) => {
+      figure.dataset.step = String(n);
+      figure.setAttribute('aria-label', `${prefix} ${steps[n - 1].textContent?.trim() ?? ''}`);
+      steps.forEach((s, i) => s.classList.toggle('is-active', i === n - 1));
+    };
+    show(1);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) show(Number((e.target as HTMLElement).dataset.step));
+        }
+      },
+      { rootMargin: '-45% 0px -45% 0px' },
+    );
+    steps.forEach((s) => io.observe(s));
+  }
+</script>
+
+<style>
+  .scrolly {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  /* Pinned flush under the header (and, below 75rem, the 2.75rem contents bar). */
+  .scrolly__figure {
+    position: sticky;
+    top: calc(var(--header-h) + 2.75rem);
+    z-index: 1;
+    padding: var(--space-s) 0 var(--space-xs);
+    background: var(--color-surface);
+  }
+
+  @media (min-width: 75rem) {
+    .scrolly__figure {
+      top: var(--header-h);
+    }
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  svg :global(*) {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .house {
+    fill: var(--ill-paper);
+    stroke: var(--ill-accent);
+    stroke-width: 3;
+    transition: fill 300ms var(--ease);
+  }
+
+  .ink-acc {
+    stroke: var(--ill-accent);
+    stroke-width: 3;
+  }
+
+  .ink {
+    stroke: var(--ill-ink);
+    stroke-width: 3;
+    fill: var(--ill-paper);
+  }
+
+  .thin {
+    stroke-width: 2;
+  }
+
+  .dashed {
+    stroke-dasharray: 3 7;
+    fill: none;
+  }
+
+  .badge-ok {
+    fill: var(--ill-accent);
+    stroke: var(--ill-paper);
+    stroke-width: 2;
+  }
+
+  .lock {
+    fill: var(--ill-ink);
+    stroke: var(--ill-paper);
+    stroke-width: 1.5;
+  }
+
+  .layer {
+    opacity: 1;
+    transition: opacity 300ms var(--ease);
+  }
+
+  /* Layers are shown only on the steps listed in data-steps. */
+  [data-step] .layer {
+    opacity: 0;
+  }
+  [data-step='2'] .layer[data-steps~='2'],
+  [data-step='3'] .layer[data-steps~='3'],
+  [data-step='4'] .layer[data-steps~='4'],
+  [data-step='5'] .layer[data-steps~='5'] {
+    opacity: 1;
+  }
+
+  /* The opt-out owner paints their house orange from step 3 on. */
+  [data-step='3'] .house--optout,
+  [data-step='4'] .house--optout,
+  [data-step='5'] .house--optout {
+    fill: var(--ill-orange);
+  }
+
+  .scrolly__steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .scrolly__step {
+    display: flex;
+    gap: var(--space-xs);
+    margin: var(--space-s) 0;
+    padding: var(--space-s);
+    border-radius: var(--radius-m);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .scrolly__step p {
+    margin: 0;
+  }
+
+  .scrolly__num {
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: var(--color-highlight);
+    color: var(--color-accent-strong);
+    font-weight: 700;
+  }
+
+  /* Enhanced: generous spacing so each step gets its own moment on screen. */
+  .is-enhanced .scrolly__step {
+    margin: 0 0 32vh;
+    transition:
+      border-color var(--duration) var(--ease),
+      background var(--duration) var(--ease);
+  }
+
+  .is-enhanced .scrolly__step:last-child {
+    margin-bottom: var(--space-s);
+  }
+
+  /* The active step is marked by its frame, never by dimming the others,
+     so every step keeps full text contrast. */
+  .is-enhanced .scrolly__step.is-active {
+    border-color: var(--color-accent);
+    background: var(--color-highlight);
+    box-shadow: inset 4px 0 0 var(--color-accent);
+  }
+</style>
