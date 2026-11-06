@@ -5,6 +5,11 @@ type: software
 authors:
   - alias: VB6Enjoyer
 license: Unlicense
+doi: 10.5281/zenodo.23998195
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23998195
+    description: 'Zenodo DOI for all versions of this web edition'
 repository-code: 'https://github.com/VB6Enjoyer/do-business-without-ip'
 url: 'https://vb6enjoyer.github.io/do-business-without-ip/'
 abstract: >-

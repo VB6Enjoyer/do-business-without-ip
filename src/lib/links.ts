@@ -1,5 +1,7 @@
 export const links = {
   repo: 'https://github.com/vb6enjoyer/do-business-without-ip',
+  /** Zenodo DOI covering all versions of this edition. */
+  doi: 'https://doi.org/10.5281/zenodo.23998195',
   /** The original 2014 PDF, as hosted on the author's site. */
   originalPdf:
     'https://stephankinsella.com/wp-content/uploads/publications/kinsella-do-business-without-ip-2014.pdf',
