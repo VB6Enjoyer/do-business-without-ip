@@ -30,6 +30,14 @@ Some of the examples in the guide were news in 2014 and have moved on since. Sho
 
 The guide was written by Stephan Kinsella. This web edition, including its design, illustrations and editorial additions, was made by [VB6Enjoyer](https://github.com/VB6Enjoyer).
 
+## Cite this edition
+
+This edition is archived on Zenodo with a permanent DOI: [10.5281/zenodo.23998195](https://doi.org/10.5281/zenodo.23998195). A suggested citation:
+
+> VB6Enjoyer. _Do Business Without Intellectual Property: web edition._ Zenodo. https://doi.org/10.5281/zenodo.23998195. Based on Stephan Kinsella, _Do Business Without Intellectual Property_ (Liberty.me, 2014).
+
+When quoting the guide itself, please cite Kinsella’s original as well.
+
 ## Source and license
 
 The code and editorial additions of this edition are also dedicated to the public domain. The source is on [GitHub](https://github.com/vb6enjoyer/do-business-without-ip), where corrections are welcome.

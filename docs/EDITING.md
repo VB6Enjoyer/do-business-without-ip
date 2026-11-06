@@ -73,7 +73,7 @@ All interface strings, including those of the interactives, are in `src/i18n/en.
 ## Archiving
 
 - **Wayback Machine:** after every deploy, `deploy.yml` asks the Internet Archive to snapshot the main pages, the EPUB and the feed. This is best effort and never fails a deploy.
-- **Zenodo (citable DOI):** the repository is connected to Zenodo. Publishing a GitHub release (Releases, then Draft a new release, with a tag such as `v1.0.0`) archives that version and mints a DOI. The record's metadata comes from `.zenodo.json`, and GitHub's “Cite this repository” comes from `CITATION.cff`. Keep both in sync.
+- **Zenodo (citable DOI):** the repository is connected to Zenodo. Publishing a GitHub release (Releases, then Draft a new release, with a tag such as `v1.0.0`) archives that version and mints a DOI. The record's metadata comes from `.zenodo.json`, and GitHub's “Cite this repository” comes from `CITATION.cff`. Keep both in sync. The DOI for all versions is [10.5281/zenodo.23998195](https://doi.org/10.5281/zenodo.23998195); later releases are added to it automatically.
 
 ## Moving to a custom domain
 

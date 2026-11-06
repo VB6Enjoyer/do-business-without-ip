@@ -1,5 +1,7 @@
 # Do Business Without Intellectual Property: web edition
 
+[![DOI](https://zenodo.org/badge/1446588812.svg)](https://doi.org/10.5281/zenodo.23998195)
+
 A modern, accessible web edition of Stephan Kinsella's guide _Do Business Without Intellectual Property_ (Liberty.me Guide 1.0, July 2014), which the author released under [CC0](https://creativecommons.org/publicdomain/zero/1.0/). This edition is unofficial and is also dedicated to the public domain (see [`LICENSE`](LICENSE)).
 
 **Live site:** <https://vb6enjoyer.github.io/do-business-without-ip/>
