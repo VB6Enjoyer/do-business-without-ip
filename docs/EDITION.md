@@ -56,6 +56,8 @@ Other changes that come from converting the layout, not from editing:
 ## Adapted text
 
 - **Disclaimer:** references to the original publisher (Liberty.me) are replaced with "the editors of this web edition." The original publisher is not involved with this site.
+- **Author bio:** Kinsella’s 2014 bio is kept as written (it calls him a patent attorney). A marked “Since 2014” note beneath it says he has since retired from practicing law, citing his own website, which is linked as well.
+- **Author photo:** a current portrait of Kinsella, supplied by the editor, is shown with the bio and in the About page credits. It is not part of the project’s public-domain dedication (see `src/assets/CREDITS.md`) and is not included in the EPUB.
 - Liberty.me branding, the cover stock photo, the author photo and the closing Liberty.me promotion are not reproduced.
 
 ## Left as in the original

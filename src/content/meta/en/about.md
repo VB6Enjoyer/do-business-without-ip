@@ -26,10 +26,6 @@ The guide cites 41 sources. Many of them have moved or disappeared since 2014. E
 
 Some of the examples in the guide were news in 2014 and have moved on since. Short editorial updates, marked **Since 2014** in the text, explain what happened next. They are not part of Kinsella’s guide, and each one cites its sources.
 
-## Credits
-
-The guide was written by Stephan Kinsella. This web edition, including its design, illustrations and editorial additions, was made by [VB6Enjoyer](https://github.com/VB6Enjoyer).
-
 ## Cite this edition
 
 This edition is archived on Zenodo with a permanent DOI: [10.5281/zenodo.23998195](https://doi.org/10.5281/zenodo.23998195). A suggested citation:

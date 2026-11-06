@@ -1,5 +1,9 @@
 export const links = {
   repo: 'https://github.com/vb6enjoyer/do-business-without-ip',
+  /** Stephan Kinsella's website. */
+  authorSite: 'https://stephankinsella.com/',
+  /** His own bio, which describes him as a retired attorney (source for the update note). */
+  authorAbout: 'https://stephankinsella.com/about/',
   /** Zenodo DOI covering all versions of this edition. */
   doi: 'https://doi.org/10.5281/zenodo.23998195',
   /** The original 2014 PDF, as hosted on the author's site. */

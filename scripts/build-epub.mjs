@@ -37,6 +37,8 @@ function clean(node) {
   for (const term of node.querySelectorAll('button.term')) term.replaceWith(term.text);
   for (const sel of [
     '[popover]',
+    'img',
+    'picture',
     '.creators-callout',
     '.pull-quote',
     '.interactive',
