@@ -1,4 +1,5 @@
 ---
+added: 2026-11-05
 title: '“Eat More Kale” won its trademark'
 order: 5
 sources:

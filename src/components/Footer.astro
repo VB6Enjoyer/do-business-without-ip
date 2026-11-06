@@ -1,6 +1,7 @@
 ---
 import { useStrings } from '../i18n';
 import { links } from '../lib/links';
+import { withBase } from '../lib/paths';
 
 const t = useStrings();
 ---
@@ -14,6 +15,9 @@ const t = useStrings();
       </li>
       <li>
         <a href={links.repo}>{t.footer.source}</a>
+      </li>
+      <li>
+        <a href={withBase('/rss.xml')}>{t.footer.rss}</a>
       </li>
     </ul>
   </div>

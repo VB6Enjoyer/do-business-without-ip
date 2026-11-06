@@ -64,6 +64,18 @@ The social preview image and app icons are rendered by `scripts/generate-assets.
 
 All interface strings, including those of the interactives, are in `src/i18n/en.ts`. Components never hard-code text. The `UIStrings` type means TypeScript flags a missing or misspelled key.
 
+## Sharing, resume reading and the feed
+
+- **Share links** (`src/components/ShareLinks.astro`, URLs in `src/lib/share.ts`) are plain links to each network's share page. No third-party script is loaded, so nothing tracks readers. To add or remove a network, edit `shareTargets`.
+- **Resume reading** (`src/lib/resume.ts`) stores the last section read in the reader's own browser (`localStorage`). It is never sent anywhere, and the site sets no cookies.
+- **The RSS feed** (`/rss.xml`, `src/pages/rss.xml.ts`) lists "Since 2014" updates and gallery entries by their `added` date. Set `added` on every new entry.
+
+## Archiving
+
+- **Wayback Machine:** after every deploy, `deploy.yml` asks the Internet Archive to snapshot the main pages, the EPUB and the feed. This is best effort and never fails a deploy.
+- **Zenodo (citable DOI), a one-time manual step:** sign in at zenodo.org with GitHub, enable this repository under _GitHub_ in your Zenodo account, then publish a GitHub release. Each release is archived with a DOI.
+- **IPFS:** not set up. It needs an account with a pinning service and a build with relative links (the site currently uses the `/do-business-without-ip/` base path). It's worth revisiting after a custom domain.
+
 ## Moving to a custom domain
 
 1. In `astro.config.mjs`, set `site` to the domain and `base` to `'/'`.

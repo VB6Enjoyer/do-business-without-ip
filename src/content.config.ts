@@ -61,6 +61,8 @@ const updates = defineCollection({
     title: z.string(),
     /** Display order; should follow the order of the markers in the guide. */
     order: z.number().int().positive(),
+    /** Date the update was added (used by the RSS feed). */
+    added: z.coerce.date(),
     sources: z.array(z.object({ title: z.string(), publisher: z.string(), url: z.url() })).min(1),
   }),
 });
@@ -145,6 +147,8 @@ const creators = defineCollection({
     ]),
     headline: z.string(),
     story: z.string(),
+    /** Date the entry was added (used by the RSS feed). */
+    added: z.coerce.date(),
     sources: z.array(z.object({ title: z.string(), publisher: z.string(), url: z.url() })).min(1),
   }),
 });

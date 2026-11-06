@@ -60,6 +60,30 @@ export const en = {
     archivedCopy: 'archived copy',
     backToUpdate: 'Back to the text for “{title}”',
   },
+  rss: {
+    title: 'Do Business Without IP: updates',
+    description:
+      'New “Since 2014” updates and new entries in the creators gallery of the web edition of Stephan Kinsella’s guide.',
+    updatePrefix: 'Since 2014',
+    creatorPrefix: 'New in the gallery',
+  },
+  share: {
+    heading: 'Share',
+    guideHeading: 'Share the guide',
+    on: 'Share on {network} (opens in a new tab)',
+    copy: 'Copy link',
+    copied: 'Link copied',
+    native: 'More…',
+    guideText: 'Do Business Without Intellectual Property, by Stephan Kinsella: a free web edition',
+    creatorsText:
+      'Thriving without IP: creators and companies who succeed without patents and copyright',
+  },
+  resume: {
+    label: 'Resume reading',
+    lead: 'Pick up where you left off?',
+    go: 'Continue',
+    dismiss: 'Dismiss',
+  },
   drawer: {
     kicker: 'Footnote {n} of {total}',
     close: 'Close footnote',
@@ -299,6 +323,7 @@ export const en = {
       attribution: 'Stephan Kinsella, Do Business Without Intellectual Property',
       note: 'The guide is in the public domain (CC0), so share it however you like.',
       siteName: 'Do Business Without IP',
+      onSocial: 'Share on social media',
     },
   },
   creators: {
@@ -347,6 +372,7 @@ export const en = {
     license:
       'The original guide was released by Stephan Kinsella under CC0. This web edition is unofficial and is also dedicated to the public domain.',
     originalPdf: 'Original PDF (2014)',
+    rss: 'RSS feed',
     source: 'Source code',
   },
 } as const;

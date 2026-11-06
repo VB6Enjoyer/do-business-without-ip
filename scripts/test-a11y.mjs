@@ -11,6 +11,7 @@
  * - section summaries and term explainers (also without JavaScript)
  * - myth cards and the scroll-driven covenant diagram
  * - creators gallery filters
+ * - resume reading, share links and the RSS feed
  * - no-JS fallback: footnote markers jump to the notes list
  * - mobile contents bar opens and closes after following a link
  */
@@ -563,6 +564,89 @@ try {
       'the guide links to the gallery',
     );
     check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
+  console.log('\nResume reading');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    check(await page.locator('[data-resume]').isHidden(), 'no prompt on a first visit');
+    const goTo = async (id) => {
+      await page.evaluate((id) => {
+        const el = document.getElementById(id);
+        scrollTo(0, el.getBoundingClientRect().top + scrollY - 60);
+      }, id);
+      await page.waitForTimeout(1200);
+      await page.mouse.wheel(0, 40); // a second scroll event after the 1s throttle
+      await page.waitForTimeout(300);
+    };
+    await goTo('history');
+    const saved = await page.evaluate(() =>
+      JSON.parse(localStorage.getItem('resume:guide') ?? 'null'),
+    );
+    check(saved?.id === 'history', 'the reading position is saved on the device');
+    await page.goto('about:blank');
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const prompt = page.locator('[data-resume]');
+    check(await prompt.isVisible(), 'returning readers are offered to resume');
+    check(
+      (await prompt.textContent())?.includes('History of Patent'),
+      'the prompt names the section',
+    );
+    await prompt.getByRole('button', { name: 'Continue' }).click();
+    const top = await page.evaluate(
+      () => document.getElementById('history').getBoundingClientRect().top,
+    );
+    check(Math.abs(top) < 200, 'Continue goes back to that section');
+    check(await prompt.isHidden(), 'the prompt closes after continuing');
+    await page.goto('about:blank');
+    await page.goto(BASE + 'guide/#fn-3', { waitUntil: 'networkidle' });
+    check(
+      await page.locator('[data-resume]').isHidden(),
+      'no prompt when following a link to a specific spot',
+    );
+    await ctx.close();
+  }
+
+  console.log('\nShare links and feed');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    await ctx.grantPermissions(['clipboard-read', 'clipboard-write']);
+    const page = await ctx.newPage();
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const bar = page.locator('.guide-share').first();
+    const x = await bar.locator('a', { hasText: 'X' }).first().getAttribute('href');
+    check(
+      x?.startsWith('https://x.com/intent/post?') &&
+        x.includes(encodeURIComponent('/do-business-without-ip/guide/')),
+      'the X link shares the guide’s address',
+    );
+    check((await bar.locator('a').count()) >= 8, 'eight networks are offered');
+    check(
+      (await bar.locator('a[target="_blank"]').first().getAttribute('rel'))?.includes('noopener'),
+      'share links open safely in a new tab',
+    );
+    await bar.getByRole('button', { name: 'Copy link' }).click();
+    const clip = await page.evaluate(() => navigator.clipboard.readText());
+    check(clip.endsWith('/do-business-without-ip/guide/'), 'Copy link copies the page address');
+    await page.locator('[data-quote-share]').first().click();
+    await page.waitForSelector('#quote-dialog[open]');
+    const quoteX = await page
+      .locator('[data-quote-social] a', { hasText: 'X' })
+      .getAttribute('href');
+    check(
+      decodeURIComponent(quoteX ?? '').includes('An IP-free world'),
+      'the quote dialog offers social links with the quote',
+    );
+    await page.keyboard.press('Escape');
+    const feed = await (await fetch(BASE + 'rss.xml')).text();
+    check((feed.match(/<item>/g) ?? []).length === 20, 'the RSS feed lists the 20 additions');
+    check(
+      (await page.getAttribute('link[type="application/rss+xml"]', 'href'))?.endsWith('/rss.xml'),
+      'pages advertise the feed',
+    );
     await ctx.close();
   }
 

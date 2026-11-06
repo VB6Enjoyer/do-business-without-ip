@@ -36,3 +36,18 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+  # Ask the Internet Archive to snapshot the new version. Best effort: a
+  # failure here never fails the deploy.
+  archive:
+    needs: deploy
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Save pages to the Wayback Machine
+        run: |
+          base="https://vb6enjoyer.github.io/do-business-without-ip"
+          for path in / /guide/ /creators/ /about/ /downloads/do-business-without-ip.epub /rss.xml; do
+            echo "Saving ${base}${path}"
+            curl -sS -o /dev/null -w "%{http_code}\n" --max-time 120 "https://web.archive.org/save/${base}${path}" || true
+            sleep 15
+          done

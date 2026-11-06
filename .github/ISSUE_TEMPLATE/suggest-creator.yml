@@ -1,0 +1,45 @@
+name: Suggest a creator
+description: Propose an example for the "Thriving without IP" gallery.
+title: 'Gallery: '
+labels: [gallery]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Good examples are people or companies who succeed **without leaning on patents or copyright**: by letting people copy, releasing work freely, using open licenses or pledges, or working in fields where IP doesn't apply. Every entry needs at least one reliable source.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The person, group or company.
+    validations:
+      required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: Field
+      options:
+        - Music
+        - Writing
+        - Software
+        - Film & animation
+        - Fashion & food
+        - Comedy & performance
+        - Business
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What did they do, and how did it work out?
+      description: A few sentences are enough.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Links to articles, interviews or official pages that back this up (one per line).
+    validations:
+      required: true

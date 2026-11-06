@@ -16,8 +16,12 @@ A modern, accessible web edition of Stephan Kinsella's guide _Do Business Withou
   - the pre-sale calculator
   - a CC0/CC BY notice generator
   - quote cards to share
-- **Reading features:** light and dark themes, a print stylesheet, and an EPUB download.
+- **Reading features:** light and dark themes, resume-where-you-left-off, a print stylesheet, an EPUB download, share links (no trackers) and an [RSS feed](https://vb6enjoyer.github.io/do-business-without-ip/rss.xml) of new additions.
 - **Accessibility:** WCAG 2.2 AA, checked with axe on every pull request. Lighthouse scores are 100 across the board.
+
+## Contributing
+
+Suggestions, corrections, broken links and translations are welcome. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and the issue forms.
 
 ## Documentation
 

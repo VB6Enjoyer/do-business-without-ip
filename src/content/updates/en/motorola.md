@@ -1,4 +1,5 @@
 ---
+added: 2026-11-05
 title: 'Google sold Motorola but kept the patents'
 order: 4
 sources:

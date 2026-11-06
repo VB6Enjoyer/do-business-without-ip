@@ -1,0 +1,150 @@
+---
+/**
+ * Share bar: plain links to each network's share page, plus "Copy link" and
+ * the system share sheet (both need JS and stay hidden without it).
+ */
+import { useStrings } from '../i18n';
+import { shareTargets } from '../lib/share';
+
+interface Props {
+  /** Absolute URL to share. */
+  url: string;
+  /** Text to accompany the link. */
+  text: string;
+  heading?: string;
+  class?: string;
+}
+
+const { url, text, heading, class: className } = Astro.props;
+const t = useStrings();
+const targets = shareTargets(url, text);
+const headingId = `share-${Math.abs([...url].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7)).toString(36)}`;
+---
+
+<section
+  class:list={['share', className]}
+  aria-labelledby={headingId}
+  data-share
+  data-url={url}
+  data-text={text}
+>
+  <h2 class="share__heading" id={headingId}>
+    {heading ?? t.share.heading}
+  </h2>
+  <ul class="share__list" role="list">
+    {targets.map((target) => (
+      <li>
+        <a
+          href={target.href}
+          target={target.id === 'email' ? undefined : '_blank'}
+          rel="noopener noreferrer"
+          aria-label={t.share.on.replace('{network}', target.name)}
+        >
+          {target.name}
+        </a>
+      </li>
+    ))}
+    <li>
+      <button type="button" data-share-copy hidden>
+        {t.share.copy}
+      </button>
+    </li>
+    <li>
+      <button type="button" data-share-native hidden>
+        {t.share.native}
+      </button>
+    </li>
+  </ul>
+  <span class="share__status" role="status" data-share-status></span>
+</section>
+
+<script>
+  import { useStrings } from '../i18n';
+  const t = useStrings();
+  for (const root of document.querySelectorAll<HTMLElement>('[data-share]')) {
+    const url = root.dataset.url!;
+    const text = root.dataset.text ?? '';
+    const status = root.querySelector<HTMLElement>('[data-share-status]')!;
+    const copy = root.querySelector<HTMLButtonElement>('[data-share-copy]')!;
+    const native = root.querySelector<HTMLButtonElement>('[data-share-native]')!;
+    if (navigator.clipboard) {
+      copy.hidden = false;
+      copy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(url);
+          status.textContent = t.share.copied;
+        } catch {
+          status.textContent = '';
+        }
+      });
+    }
+    if (typeof navigator.share === 'function') {
+      native.hidden = false;
+      native.addEventListener('click', () => navigator.share({ url, text }).catch(() => {}));
+    }
+  }
+</script>
+
+<style>
+  .share {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  .share__heading {
+    margin: 0 0 var(--space-2xs);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 600;
+    font-variant: normal;
+    letter-spacing: 0;
+  }
+
+  .share__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .share__list li:has([hidden]) {
+    display: none;
+  }
+
+  .share a,
+  .share button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0 var(--space-s);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .share a:hover,
+  .share button:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-strong);
+  }
+
+  .share__status {
+    display: inline-block;
+    margin-top: var(--space-2xs);
+    font-weight: 600;
+    color: var(--color-accent-strong);
+  }
+
+  @media print {
+    .share {
+      display: none;
+    }
+  }
+</style>

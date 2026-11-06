@@ -18,7 +18,8 @@
         "publisher": "dead.net",
         "url": "https://www.dead.net/features/documenting-dead/documenting-dead-taping-dead"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "radiohead",
@@ -39,7 +40,8 @@
         "publisher": "NPR",
         "url": "https://www.npr.org/blogs/monitormix/2009/11/the_in_rainbows_experiment_did.html"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "nine-inch-nails",
@@ -60,7 +62,8 @@
         "publisher": "Creative Commons",
         "url": "https://creativecommons.org/2009/01/05/nins-cc-licensed-best-selling-mp3-album/"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "jonathan-coulton",
@@ -81,7 +84,8 @@
         "publisher": "Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Jonathan_Coulton"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "amanda-palmer",
@@ -102,7 +106,8 @@
         "publisher": "Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Theatre_Is_Evil"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "cory-doctorow",
@@ -123,7 +128,8 @@
         "publisher": "Netribution",
         "url": "https://www.netribution.co.uk/stories/copyrights/doctorows-creative-commons-licensed-book-enters-fifth-week-on-ny-times-bestsellers-list"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "andy-weir",
@@ -144,7 +150,8 @@
         "publisher": "Reason",
         "url": "https://reason.com/2015/12/12/the-man-behind-the-martian/"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "red-hat",
@@ -165,7 +172,8 @@
         "publisher": "IOL Business Report",
         "url": "https://iol.co.za/business-report/international/2019-07-10-ibm-closes-deal-to-buy-red-hat/"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "sqlite",
@@ -186,7 +194,8 @@
         "publisher": "Wikipedia",
         "url": "https://en.wikipedia.org/wiki/SQLite"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "blender",
@@ -207,7 +216,8 @@
         "publisher": "Wikipedia",
         "url": "https://en.wikipedia.org/wiki/Big_Buck_Bunny"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "fashion",
@@ -223,7 +233,8 @@
         "publisher": "Stanford Center for Internet and Society",
         "url": "https://cyberlaw.stanford.edu/publications/knockoff-economy-how-imitation-sparks-innovation-659540c250a93208327675db"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "chefs",
@@ -244,7 +255,8 @@
         "publisher": "Stanford Center for Internet and Society",
         "url": "https://cyberlaw.stanford.edu/publications/knockoff-economy-how-imitation-sparks-innovation-659540c250a93208327675db"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "comedians",
@@ -265,7 +277,8 @@
         "publisher": "WNYC, On the Media",
         "url": "https://www.wnycstudios.org/podcasts/otm/segments/132742-take-my-joke-please"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   },
   {
     "id": "tesla",
@@ -286,6 +299,7 @@
         "publisher": "Mondaq",
         "url": "https://www.mondaq.com/canada/patent/330160/teslas-patent-pledge-is-it-enough"
       }
-    ]
+    ],
+    "added": "2026-11-06"
   }
 ]

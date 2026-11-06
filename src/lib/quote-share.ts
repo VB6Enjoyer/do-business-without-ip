@@ -1,7 +1,10 @@
+import { shareTargets } from './share';
+
 interface QuoteStrings {
   attribution: string;
   siteName: string;
   copied: string;
+  shareOn: string;
 }
 
 const CARD = { width: 1200, height: 630, pad: 88 };
@@ -104,6 +107,26 @@ export function initQuoteShare(): void {
       status.textContent = '';
       native.hidden = typeof navigator.share !== 'function';
       preview.removeAttribute('src');
+      // Social links for this quote (plain links, built on demand).
+      const social = $<HTMLUListElement>('[data-quote-social]');
+      social.replaceChildren(
+        ...shareTargets(
+          shareUrl(),
+          `“${current.text}” — ${strings.attribution}`,
+          strings.attribution,
+        ).map((target) => {
+          const li = document.createElement('li');
+          const a = Object.assign(document.createElement('a'), {
+            href: target.href,
+            textContent: target.name,
+            rel: 'noopener noreferrer',
+          });
+          if (target.id !== 'email') a.target = '_blank';
+          a.setAttribute('aria-label', strings.shareOn.replace('{network}', target.name));
+          li.append(a);
+          return li;
+        }),
+      );
       dialog.showModal();
       canvas = await drawCard(current.text, strings);
       preview.src = canvas.toDataURL('image/png');

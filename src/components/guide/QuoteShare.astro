@@ -7,7 +7,12 @@
 import { useStrings } from '../../i18n';
 
 const s = useStrings().tools.quote;
-const strings = { attribution: s.attribution, siteName: s.siteName, copied: s.copied };
+const strings = {
+  attribution: s.attribution,
+  siteName: s.siteName,
+  copied: s.copied,
+  shareOn: useStrings().share.on,
+};
 ---
 
 <dialog id="quote-dialog" class="quote-dialog" aria-labelledby="quote-dialog-title">
@@ -39,6 +44,7 @@ const strings = { attribution: s.attribution, siteName: s.siteName, copied: s.co
       </button>
       <span class="quote-dialog__status" role="status" data-quote-status></span>
     </div>
+    <ul class="quote-dialog__social" role="list" data-quote-social aria-label={s.onSocial}></ul>
     <p class="quote-dialog__note">{s.note}</p>
   </div>
 </dialog>
@@ -145,6 +151,32 @@ const strings = { attribution: s.attribution, siteName: s.siteName, copied: s.co
     font-size: var(--step--1);
     font-weight: 600;
     color: var(--color-accent-strong);
+  }
+
+  .quote-dialog__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .quote-dialog__social :global(a) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0 var(--space-s);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .quote-dialog__social :global(a:hover) {
+    border-color: var(--color-accent);
   }
 
   .quote-dialog__note {

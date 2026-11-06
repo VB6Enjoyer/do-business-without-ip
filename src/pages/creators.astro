@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Illustration from '../components/Illustration.astro';
+import ShareLinks from '../components/ShareLinks.astro';
 import { defaultLang, useStrings } from '../i18n';
 import { links } from '../lib/links';
 
@@ -89,8 +90,14 @@ const usedFields = fieldOrder.filter((f) => creators.some((c) => c.field === f))
       ))}
     </ul>
 
+    <ShareLinks
+      url={new URL(Astro.url.pathname, Astro.site).href}
+      text={t.share.creatorsText}
+      class="creators-share"
+    />
+
     <p class="suggest">
-      <a href={`${links.repo}/issues/new`} rel="noopener">
+      <a href={`${links.repo}/issues/new?template=suggest-creator.yml`} rel="noopener">
         {s.suggest}
       </a>
     </p>
@@ -295,6 +302,10 @@ const usedFields = fieldOrder.filter((f) => creators.some((c) => c.field === f))
   .card__sources ul {
     margin: var(--space-2xs) 0 0;
     padding-inline-start: 1.1em;
+  }
+
+  :global(.creators-share) {
+    margin-top: var(--space-xl);
   }
 
   .suggest {
