@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: 'If you cite this web edition, please also cite the original guide by Stephan Kinsella.'
+title: 'Do Business Without Intellectual Property: web edition'
+type: software
+authors:
+  - alias: VB6Enjoyer
+license: Unlicense
+repository-code: 'https://github.com/VB6Enjoyer/do-business-without-ip'
+url: 'https://vb6enjoyer.github.io/do-business-without-ip/'
+abstract: >-
+  An unofficial, accessible web edition of Stephan Kinsella's 2014 guide, which
+  the author released under CC0. The author's text is reproduced verbatim;
+  editorial additions are marked as such.
+keywords:
+  - intellectual property
+  - patents
+  - copyright
+  - public domain
+references:
+  - type: report
+    title: 'Do Business Without Intellectual Property'
+    authors:
+      - family-names: Kinsella
+        given-names: Stephan
+    year: 2014
+    month: 7
+    publisher:
+      name: Liberty.me
+    url: 'https://stephankinsella.com/wp-content/uploads/publications/kinsella-do-business-without-ip-2014.pdf'
+    license: CC0-1.0

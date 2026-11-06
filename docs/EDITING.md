@@ -73,8 +73,7 @@ All interface strings, including those of the interactives, are in `src/i18n/en.
 ## Archiving
 
 - **Wayback Machine:** after every deploy, `deploy.yml` asks the Internet Archive to snapshot the main pages, the EPUB and the feed. This is best effort and never fails a deploy.
-- **Zenodo (citable DOI), a one-time manual step:** sign in at zenodo.org with GitHub, enable this repository under _GitHub_ in your Zenodo account, then publish a GitHub release. Each release is archived with a DOI.
-- **IPFS:** not set up. It needs an account with a pinning service and a build with relative links (the site currently uses the `/do-business-without-ip/` base path). It's worth revisiting after a custom domain.
+- **Zenodo (citable DOI):** the repository is connected to Zenodo. Publishing a GitHub release (Releases, then Draft a new release, with a tag such as `v1.0.0`) archives that version and mints a DOI. The record's metadata comes from `.zenodo.json`, and GitHub's “Cite this repository” comes from `CITATION.cff`. Keep both in sync.
 
 ## Moving to a custom domain
 

@@ -1,0 +1,33 @@
+{
+  "title": "Do Business Without Intellectual Property: web edition",
+  "description": "<p>An unofficial, accessible web edition of Stephan Kinsella’s guide <em>Do Business Without Intellectual Property</em> (Liberty.me Guide 1.0, July 2014), which the author released under CC0.</p><p>The author’s text is reproduced verbatim and checked word for word against the original PDF. Editorial additions are marked as such: link-health records with archived copies, sourced “Since 2014” updates, section summaries, term explanations, interactive explainers, a sourced gallery of creators who thrive without IP, and an EPUB edition.</p><p>Live site: https://vb6enjoyer.github.io/do-business-without-ip/</p>",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "unlicense",
+  "language": "eng",
+  "creators": [{ "name": "VB6Enjoyer" }],
+  "contributors": [{ "name": "Kinsella, Stephan", "type": "Other" }],
+  "keywords": [
+    "intellectual property",
+    "patents",
+    "copyright",
+    "libertarianism",
+    "public domain",
+    "CC0",
+    "web edition",
+    "Stephan Kinsella"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://stephankinsella.com/wp-content/uploads/publications/kinsella-do-business-without-ip-2014.pdf",
+      "relation": "isDerivedFrom",
+      "resource_type": "publication"
+    },
+    {
+      "identifier": "https://vb6enjoyer.github.io/do-business-without-ip/",
+      "relation": "isSupplementTo",
+      "resource_type": "other"
+    }
+  ],
+  "notes": "Stephan Kinsella is the author of the original 2014 guide; VB6Enjoyer created this web edition and its editorial additions. The original text is CC0; the edition's code and additions are released under the Unlicense."
+}
