@@ -41,6 +41,11 @@ export const en = {
     backToText: 'Back to the text for footnote {n}',
     since2014: 'Since 2014',
     aboutAuthor: 'About the author',
+    authorPhotoAlt: 'Portrait of Stephan Kinsella',
+    authorUpdate:
+      'Kinsella has since retired from practicing law. He continues to write on libertarian theory and intellectual property.',
+    authorUpdateSource: 'Source: his website',
+    authorSite: 'Stephan Kinsella’s website',
     originalPage: 'Page {n} of the original',
     readingProgress: 'Reading progress',
     inBrief: 'The argument in brief',
@@ -361,6 +366,12 @@ export const en = {
     },
   },
   about: {
+    credits: 'Credits',
+    creditsAuthor:
+      'The guide was written by {name}, a retired patent attorney and libertarian writer.',
+    creditsEdition:
+      'This web edition, including its design, illustrations and editorial additions, was made by',
+    creditsPhoto: 'The author’s photo is not part of this edition’s public-domain dedication.',
     linkStats: 'Link status',
     live: 'Original page still works',
     archived: 'Served from an archived copy',

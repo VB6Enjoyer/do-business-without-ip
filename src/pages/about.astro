@@ -1,5 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import kinsellaPhoto from '../assets/kinsella.webp';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { defaultLang, useStrings } from '../i18n';
 import { getFootnotes, usesArchive } from '../lib/footnotes';
@@ -9,6 +11,7 @@ import '../styles/prose.css';
 
 const lang = defaultLang;
 const t = useStrings(lang);
+const [creditsBefore, creditsAfter] = t.about.creditsAuthor.split('{name}');
 
 const about = await getEntry('meta', `${lang}/about`);
 const { Content } = await render(about!);
@@ -31,6 +34,36 @@ const updates = (await getCollection('updates', (e) => e.id.startsWith(`${lang}/
   <article class="about prose container">
     <h1>{about!.data.title}</h1>
     <Content />
+
+    <section aria-labelledby="credits">
+      <h2 id="credits">{t.about.credits}</h2>
+      <div class="credits">
+        <Image
+          src={kinsellaPhoto}
+          alt={t.guide.authorPhotoAlt}
+          width={160}
+          height={160}
+          class="credits__photo"
+        />
+        <div>
+          <p>
+            {creditsBefore}
+            <a href={links.authorSite} rel="noopener">
+              Stephan Kinsella
+            </a>
+            {creditsAfter}
+          </p>
+          <p>
+            {t.about.creditsEdition}{' '}
+            <a href="https://github.com/VB6Enjoyer" rel="noopener">
+              VB6Enjoyer
+            </a>
+            .
+          </p>
+          <p class="muted">{t.about.creditsPhoto}</p>
+        </div>
+      </div>
+    </section>
 
     <section aria-labelledby="link-stats">
       <h2 id="link-stats">{t.about.linkStats}</h2>
@@ -86,6 +119,30 @@ const updates = (await getCollection('updates', (e) => e.id.startsWith(`${lang}/
     font-size: var(--step-2);
     margin-top: var(--space-xl);
     margin-bottom: var(--space-s);
+  }
+
+  .credits {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+
+  .credits > div {
+    flex: 1 1 18rem;
+  }
+
+  .credits p {
+    margin: 0 0 var(--space-xs);
+  }
+
+  :global(.credits__photo) {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-surface);
+    box-shadow: 0 0 0 1px var(--color-border);
   }
 
   .stats {

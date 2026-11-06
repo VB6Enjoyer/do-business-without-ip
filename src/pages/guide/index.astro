@@ -1,5 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import kinsellaPhoto from '../../assets/kinsella.webp';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Fn from '../../components/guide/Fn.astro';
 import Ref from '../../components/guide/Ref.astro';
@@ -270,7 +272,31 @@ const tocExtra = [
 
       <section id="author" class="author" aria-labelledby="author-title">
         <h2 id="author-title">{t.guide.aboutAuthor}</h2>
-        <AuthorBio />
+        <div class="author__body">
+          <Image
+            src={kinsellaPhoto}
+            alt={t.guide.authorPhotoAlt}
+            width={144}
+            height={144}
+            class="author__photo"
+          />
+          <div>
+            <AuthorBio />
+            <p class="author__update">
+              <span class="author__update-label">{t.guide.since2014}</span>
+              {t.guide.authorUpdate}{' '}
+              <a href={links.authorAbout} rel="noopener">
+                {t.guide.authorUpdateSource}
+              </a>
+              .
+            </p>
+            <p class="author__site">
+              <a href={links.authorSite} rel="noopener">
+                {t.guide.authorSite} →
+              </a>
+            </p>
+          </div>
+        </div>
       </section>
 
       <section class="disclaimer" aria-labelledby="disclaimer-title">
@@ -610,6 +636,50 @@ const tocExtra = [
   .disclaimer h2 {
     font-size: var(--step-2);
     margin-bottom: var(--space-s);
+  }
+
+  .author__body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+
+  .author__body > div {
+    flex: 1 1 18rem;
+  }
+
+  :global(.author__photo) {
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-surface);
+    box-shadow: 0 0 0 1px var(--color-border);
+  }
+
+  .author__update {
+    margin: var(--space-s) 0 var(--space-2xs);
+    padding: var(--space-xs) var(--space-s);
+    border-radius: var(--radius-s);
+    background: var(--color-highlight);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  .author__update-label {
+    margin-inline-end: var(--space-2xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-strong);
+  }
+
+  .author__site {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 600;
   }
 
   .disclaimer {
