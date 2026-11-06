@@ -121,3 +121,12 @@ Two interactive figures sit inside the guide. Each is framed and labelled "Inter
 Every pull quote also has a **Share** button (shown only with JavaScript). It copies the quote with attribution and a link to it, downloads it as a 1200×630 image card, or opens the system share sheet. Source: `src/components/guide/QuoteShare.astro`, `src/lib/quote-share.ts`.
 
 The timeline is simplified: renewals are counted as always made, and the interim extensions of 1962–1974 are left out. Both simplifications are stated under the chart. Source: U.S. Copyright Office, Circular 15A. The patent holder in the covenant demo ("OrangeCo Holdings") is fictional and labelled as such.
+
+## Summaries and term explainers
+
+Two more kinds of editorial addition, both marked as such on the page:
+
+- **“The argument in brief”:** two or three bullet points per section, summarizing Kinsella’s argument in this edition’s words. They are collapsed by default and labelled as an editorial summary. They live in each section’s `summary` frontmatter, which `check:text` ignores.
+- **Term explainers:** 17 terms in the text (for example _restrictive covenant_, _negative servitudes_, _orphan works_, _patent trolling_, _DMCA_) have a dotted underline. Selecting one opens a plain-language explanation with an optional “learn more” link. The explanations live in `src/content/glossary/en.json` and are also listed in a Glossary section at the end of the guide. The `<Term id="…">` marker wraps the author’s own words without changing them. Terms the guide defines itself (copyright, patent, trademark, trade secret) are not explained again.
+
+Both are left out of the EPUB and of print.

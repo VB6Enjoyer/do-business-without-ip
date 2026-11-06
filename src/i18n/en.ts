@@ -42,6 +42,13 @@ export const en = {
     aboutAuthor: 'About the author',
     originalPage: 'Page {n} of the original',
     readingProgress: 'Reading progress',
+    inBrief: 'The argument in brief',
+    inBriefNote: 'An editorial summary added in this edition, not the author’s words.',
+    glossary: 'Glossary',
+    glossaryIntro:
+      'Plain-language explanations of terms used in the guide, added in this edition. In the text, terms with a dotted underline open these explanations.',
+    termLearnMore: 'Learn more',
+    termClose: 'Close explanation',
     downloadEpub: 'Download EPUB',
     downloadEpubHint:
       'For e-readers. The text, notes and author bio, without the interactive parts.',

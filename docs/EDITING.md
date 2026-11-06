@@ -36,6 +36,11 @@ Each entry in `src/content/footnotes/en.json` has `originalUrl` (as printed in 2
 2. Put `<Since2014 id="<id>" />` right after the sentence it updates.
 3. Add a row to the table in `docs/EDITION.md`.
 
+## Summaries and term explainers
+
+- **Summaries:** edit the `summary` list in a section’s frontmatter (1–4 short bullets, in your own words). They show as “The argument in brief” under the section heading.
+- **Explaining a new term:** add an entry to `src/content/glossary/en.json` (`id`, `term`, `definition`, optional `learnMore`), then wrap the term’s first appearance in the text with `<Term id="…">…</Term>`. Use each id once, never inside a `<Ref>` link or a pull quote. `check:links` also checks the `learnMore` links.
+
 ## Illustrations and images
 
 The illustrations are original line-art SVGs in `src/assets/illustrations/`: `hero.svg` on the home page, and one opener per guide section, named after the section's slug (for example `history.svg`). They are drawn by `scripts/generate-illustrations.py`.

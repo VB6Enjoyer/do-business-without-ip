@@ -11,6 +11,8 @@ const guide = defineCollection({
     order: z.number().int().positive(),
     /** Page of the 2014 PDF where the section starts. */
     originalPage: z.number().int().positive(),
+    /** Editorial summary ("The argument in brief"); not the author's words. */
+    summary: z.array(z.string()).min(1).max(4).optional(),
   }),
 });
 
@@ -63,6 +65,26 @@ const updates = defineCollection({
   }),
 });
 
+/** Plain-language explanations of terms, attached in the text with <Term id="…">. */
+const glossary = defineCollection({
+  loader: file('src/content/glossary/en.json', {
+    parser: (text) =>
+      (JSON.parse(text) as Array<{ id: string }>).map((t) => ({
+        ...t,
+        id: `en-${t.id}`,
+        slug: t.id,
+        lang: 'en',
+      })),
+  }),
+  schema: z.object({
+    lang: z.string(),
+    slug: z.string(),
+    term: z.string(),
+    definition: z.string(),
+    learnMore: z.url().nullable(),
+  }),
+});
+
 /** Supporting text: author bio, disclaimer. */
 const meta = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/meta' }),
@@ -73,4 +95,4 @@ const meta = defineCollection({
   }),
 });
 
-export const collections = { guide, footnotes, updates, meta };
+export const collections = { guide, footnotes, updates, glossary, meta };

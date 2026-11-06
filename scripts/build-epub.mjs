@@ -34,7 +34,9 @@ const escapeXml = (s) =>
 
 /** Removes web-only elements and attributes, and points footnote markers at notes.xhtml. */
 function clean(node) {
+  for (const term of node.querySelectorAll('button.term')) term.replaceWith(term.text);
   for (const sel of [
+    '[popover]',
     '.pull-quote',
     '.interactive',
     'astro-island',

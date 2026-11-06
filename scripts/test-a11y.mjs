@@ -8,6 +8,7 @@
  * - archive links for dead footnotes; "Since 2014" updates in the drawer
  * - interactives: covenant demo outcomes, copyright timeline values and readouts
  * - tools: self-check suggestions, pre-sale calculator, release notice, quote sharing
+ * - section summaries and term explainers (also without JavaScript)
  * - no-JS fallback: footnote markers jump to the notes list
  * - mobile contents bar opens and closes after following a link
  */
@@ -399,6 +400,58 @@ try {
     await ctx.close();
   }
 
+  console.log('\nSummaries and term explainers');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    check((await page.locator('details.in-brief').count()) === 12, 'every section has a summary');
+    const brief = page.locator('#what-is-ip details.in-brief');
+    check(!(await brief.locator('li').first().isVisible()), 'summaries start collapsed');
+    await brief.locator('summary').click();
+    check(await brief.locator('li').first().isVisible(), 'a summary opens on click');
+
+    const term = page.locator('button.term[data-term="restrictive-covenant"]');
+    await term.scrollIntoViewIfNeeded();
+    await term.click();
+    const pop = page.locator('#term-restrictive-covenant');
+    check(await pop.isVisible(), 'clicking a term opens its explanation');
+    check(
+      (await pop.textContent())?.includes('private agreement'),
+      'the explanation shows the definition',
+    );
+    // The popover's toggle event (which positions it) is dispatched asynchronously.
+    await page
+      .waitForFunction(
+        () =>
+          document.getElementById('term-restrictive-covenant')?.classList.contains('positioned'),
+        null,
+        {
+          timeout: 2000,
+        },
+      )
+      .catch(() => {});
+    const near = await page.evaluate(() => {
+      const t = document
+        .querySelector('button.term[data-term="restrictive-covenant"]')
+        .getBoundingClientRect();
+      const p = document.getElementById('term-restrictive-covenant').getBoundingClientRect();
+      return Math.abs(p.top - t.bottom) < 40 || Math.abs(t.top - p.bottom) < 40;
+    });
+    check(near, 'the explanation appears next to the term');
+    await axe(page, 'term explanation open');
+    await page.keyboard.press('Escape');
+    check(!(await pop.isVisible()), 'Esc closes the explanation');
+    check(
+      (await page.locator('#glossary dl > div').count()) === 17,
+      'the glossary lists all 17 terms',
+    );
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
   console.log('\nWithout JavaScript');
   {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
@@ -407,6 +460,8 @@ try {
     await page.click('#fnref-3');
     check(new URL(page.url()).hash === '#fn-3', 'marker jumps to the notes list');
     check(!(await page.isVisible('#fn-drawer')), 'drawer stays closed');
+    await page.click('button.term[data-term="orphan-works"]');
+    check(await page.isVisible('#term-orphan-works'), 'term explanations work without JavaScript');
     check(
       (await page.locator('[data-quote-share]:visible').count()) === 0,
       'quote share buttons stay hidden',

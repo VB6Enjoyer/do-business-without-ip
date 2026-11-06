@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Link checker for the guide's footnotes and the sources of "Since 2014" updates.
+ * Link checker for the guide's footnotes, glossary links and the sources of "Since 2014" updates.
  *
  * - Footnotes marked `live` must still resolve (2xx after redirects).
  * - Archived copies (web.archive.org) must exist.
@@ -86,6 +86,12 @@ for (const fn of footnotes) {
     console.log(`  ! fn ${fn.n}: ${fn.linkStatus}, no archived copy`);
   }
 }
+
+console.log(`\nGlossary (${lang})`);
+const glossary = JSON.parse(
+  readFileSync(join(root, 'src/content/glossary', `${lang}.json`), 'utf8'),
+);
+for (const g of glossary) if (g.learnMore) await check(`glossary ${g.id}`, g.learnMore);
 
 console.log(`\nUpdate sources (${lang})`);
 for (const { file, url } of sources) await check(file, url);

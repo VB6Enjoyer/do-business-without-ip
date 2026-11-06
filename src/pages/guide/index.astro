@@ -6,6 +6,7 @@ import Ref from '../../components/guide/Ref.astro';
 import PullQuote from '../../components/guide/PullQuote.astro';
 import Standfirst from '../../components/guide/Standfirst.astro';
 import Since2014 from '../../components/guide/Since2014.astro';
+import Term from '../../components/guide/Term.astro';
 import Covenant from '../../components/interactive/Covenant.astro';
 import Timeline from '../../components/interactive/Timeline.astro';
 import SelfCheck from '../../components/interactive/SelfCheckFigure.astro';
@@ -36,6 +37,9 @@ const sections = await Promise.all(
   })),
 );
 const footnotes = await getFootnotes(lang);
+const glossary = (await getCollection('glossary', (e) => e.data.lang === lang))
+  .map((e) => e.data)
+  .sort((a, b) => a.term.localeCompare(b.term, lang));
 const updates = await Promise.all(
   (await getCollection('updates', (e) => e.id.startsWith(`${lang}/`)))
     .sort((a, b) => a.data.order - b.data.order)
@@ -70,6 +74,7 @@ const components = {
   PullQuote,
   Standfirst,
   Since2014,
+  Term,
   Covenant,
   Timeline,
   SelfCheck,
@@ -84,6 +89,7 @@ const tocSections = sections.map((s) => ({
 const tocExtra = [
   { slug: 'notes', title: t.guide.notes },
   { slug: 'updates', title: t.guide.updates },
+  { slug: 'glossary', title: t.guide.glossary },
   { slug: 'author', title: t.guide.aboutAuthor },
 ];
 ---
@@ -138,6 +144,17 @@ const tocExtra = [
             <p class="section-page">
               {t.guide.originalPage.replace('{n}', String(data.originalPage))}
             </p>
+            {data.summary && (
+              <details class="in-brief">
+                <summary>{t.guide.inBrief}</summary>
+                <ul>
+                  {data.summary.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+                <p class="in-brief__note">{t.guide.inBriefNote}</p>
+              </details>
+            )}
           </header>
           <Content components={components} />
         </section>
@@ -208,6 +225,29 @@ const tocExtra = [
         ))}
       </section>
 
+      <section id="glossary" class="glossary" aria-labelledby="glossary-title">
+        <h2 id="glossary-title">{t.guide.glossary}</h2>
+        <p class="updates-intro">{t.guide.glossaryIntro}</p>
+        <dl>
+          {glossary.map((g) => (
+            <div id={`glossary-${g.slug}`}>
+              <dt>{g.term}</dt>
+              <dd>
+                {g.definition}
+                {g.learnMore && (
+                  <>
+                    {' '}
+                    <a href={g.learnMore} rel="noopener">
+                      {t.guide.termLearnMore}
+                    </a>
+                  </>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <section id="author" class="author" aria-labelledby="author-title">
         <h2 id="author-title">{t.guide.aboutAuthor}</h2>
         <AuthorBio />
@@ -273,6 +313,7 @@ const tocExtra = [
   .guide-section,
   .notes,
   .updates,
+  .glossary,
   .author,
   .disclaimer {
     margin-top: var(--space-2xl);
@@ -494,6 +535,29 @@ const tocExtra = [
 
   .update-sources ul {
     margin: 0;
+  }
+
+  .glossary dl {
+    margin: 0;
+    font-size: var(--step--1);
+  }
+
+  .glossary dl > div {
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .glossary dt {
+    font-weight: 600;
+  }
+
+  .glossary dd {
+    margin: var(--space-3xs) 0 0;
+  }
+
+  .glossary h2 {
+    font-size: var(--step-2);
+    margin-bottom: var(--space-s);
   }
 
   .back {
