@@ -20,7 +20,8 @@
     "test:a11y": "node scripts/test-a11y.mjs",
     "check:links": "node scripts/check-links.mjs",
     "assets": "node scripts/generate-assets.mjs",
-    "check:epub": "python3 -I scripts/check-epub.py dist/downloads/do-business-without-ip.epub"
+    "check:epub": "python3 -I scripts/check-epub.py dist/downloads/do-business-without-ip.epub",
+    "illustrations": "python3 -I scripts/generate-illustrations.py"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.2",

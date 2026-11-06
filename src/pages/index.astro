@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Illustration from '../components/Illustration.astro';
 import { useStrings } from '../i18n';
 import { withBase } from '../lib/paths';
 
@@ -25,12 +25,7 @@ const t = useStrings();
         <span class="reading-time">{t.home.readingTime}</span>
       </p>
     </div>
-    <ImagePlaceholder
-      class="art"
-      label="Hero illustration"
-      subject="Ideas flowing freely between people: a lightbulb or open hands motif, no stock-photo businessman"
-      ratio="4 / 5"
-    />
+    <Illustration class="art" name="hero" label={t.home.heroAlt} />
   </section>
 </BaseLayout>
 

@@ -36,12 +36,16 @@ Each entry in `src/content/footnotes/en.json` has `originalUrl` (as printed in 2
 2. Put `<Since2014 id="<id>" />` right after the sentence it updates.
 3. Add a row to the table in `docs/EDITION.md`.
 
-## Images
+## Illustrations and images
 
-The site still uses placeholders:
+The illustrations are original line-art SVGs in `src/assets/illustrations/`: `hero.svg` on the home page, and one opener per guide section, named after the section's slug (for example `history.svg`). They are drawn by `scripts/generate-illustrations.py`.
 
-- The home page hero is an `ImagePlaceholder` (`src/pages/index.astro`). Its `subject` describes the intended artwork. Replace it with an image from `src/assets/` using Astro's `<Image />`, and record the image's source and license in `src/assets/CREDITS.md`.
-- The social preview image and app icons are rendered from HTML by `scripts/generate-assets.mjs`. Edit that script and run `npm run assets`, or overwrite the PNGs in `public/` with your own (keep 1200×630 for `og/default.png`).
+- **Changing a drawing:** edit its function in the script and run `npm run illustrations`. Don't hand-edit the SVGs, because the next run overwrites them.
+- **Style rules:** monoline strokes in the accent green, a single orange highlight, `paper` fills that match the page, and ink for anything standing for state power. Colors are the `--ill-*` custom properties in `src/styles/tokens.css`, so every drawing follows the light and dark themes.
+- **Placing one:** use `<Illustration name="…" />` (`src/components/Illustration.astro`). It is decorative by default; pass `label` when the image carries meaning, as the home hero does. A section without a matching file simply shows no opener.
+- **Photos or other artwork:** put them in `src/assets/`, use Astro's `<Image />`, and record the source and license in `src/assets/CREDITS.md`.
+
+The social preview image and app icons are rendered by `scripts/generate-assets.mjs` from the favicon and the hero illustration. Run `npm run assets` after changing either.
 
 ## Interface text
 

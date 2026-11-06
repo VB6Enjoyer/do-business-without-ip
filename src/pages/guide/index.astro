@@ -12,6 +12,7 @@ import SelfCheck from '../../components/interactive/SelfCheckFigure.astro';
 import Presale from '../../components/interactive/PresaleFigure.astro';
 import ReleaseTool from '../../components/interactive/ReleaseFigure.astro';
 import Toc from '../../components/guide/Toc.astro';
+import Illustration from '../../components/Illustration.astro';
 import ReadingProgress from '../../components/guide/ReadingProgress.astro';
 import FootnoteDrawer from '../../components/guide/FootnoteDrawer.astro';
 import QuoteShare from '../../components/guide/QuoteShare.astro';
@@ -129,6 +130,7 @@ const tocExtra = [
       {sections.map(({ slug, data, Content }) => (
         <section id={slug} class="guide-section" aria-labelledby={`${slug}-title`}>
           <header class="section-head">
+            <Illustration name={slug} class="section-art" />
             <span class="section-num" aria-hidden="true">
               {String(data.order).padStart(2, '0')}
             </span>
@@ -298,6 +300,11 @@ const tocExtra = [
     .download {
       display: none;
     }
+  }
+
+  .guide :global(.section-art) {
+    margin: 0 0 var(--space-s);
+    max-width: 40rem;
   }
 
   /* ---------- Mobile / tablet contents bar ---------- */

@@ -54,13 +54,14 @@ npm run test:a11y    # axe + behaviour tests in a real browser (needs a build)
 npm run check:links  # footnote links, archived copies and update sources
 ```
 
-Other scripts: `npm run format` (Prettier, write) and `npm run assets` (regenerate the social image and icons).
+Other scripts: `npm run format` (Prettier, write), `npm run illustrations` (regenerate the line-art SVGs) and `npm run assets` (regenerate the social image and icons).
 
 ## Project layout
 
 ```
 src/
-  components/      UI pieces (Header, Footer, ThemeToggle, ImagePlaceholder)
+  assets/          Line-art illustrations (generated SVG)
+  components/      UI pieces (Header, Footer, ThemeToggle, Illustration)
     guide/         Used inside the guide's MDX (Ref, Fn, PullQuote, Since2014, drawer, …)
     interactive/   Svelte islands embedded in the guide
   content/         The guide (MDX per section), footnotes, updates, bio, disclaimer, about
