@@ -10,6 +10,7 @@
  * - tools: self-check suggestions, pre-sale calculator, release notice, quote sharing
  * - section summaries and term explainers (also without JavaScript)
  * - myth cards and the scroll-driven covenant diagram
+ * - creators gallery filters
  * - no-JS fallback: footnote markers jump to the notes list
  * - mobile contents bar opens and closes after following a link
  */
@@ -66,7 +67,7 @@ try {
     console.log(`\naxe (${scheme})`);
     const ctx = await browser.newContext({ colorScheme: scheme, reducedMotion: 'reduce' });
     const page = await ctx.newPage();
-    for (const path of ['', 'guide/', 'about/', 'this-page-does-not-exist/']) {
+    for (const path of ['', 'guide/', 'about/', 'creators/', 'this-page-does-not-exist/']) {
       await page.goto(BASE + path, { waitUntil: 'networkidle' });
       await axe(page, `/${path || ''} ${scheme}`);
     }
@@ -125,11 +126,14 @@ try {
     await page.mouse.click(10, 10); // backdrop
     check(!(await page.isVisible('#fn-drawer')), 'clicking the backdrop closes the drawer');
 
+    await page.goto('about:blank');
+
     await page.goto(BASE + 'guide/#fn-12', { waitUntil: 'networkidle' });
     await page.waitForSelector('#fn-drawer[open]');
     check((await kicker())?.includes('12 of 41'), 'deep link #fn-12 opens footnote 12');
 
     console.log('\nLinks in the drawer');
+    await page.goto('about:blank');
     await page.goto(BASE + 'guide/#fn-4', { waitUntil: 'networkidle' });
     await page.waitForSelector('#fn-drawer[open]');
     check(
@@ -171,6 +175,7 @@ try {
       .then(() => true)
       .catch(() => false);
     check(backToUpdate, 'focus returns to the marker of the update last shown');
+    await page.goto('about:blank');
     await page.goto(BASE + 'guide/#since-motorola', { waitUntil: 'networkidle' });
     await page.waitForSelector('#fn-drawer[open]');
     check(
@@ -527,6 +532,40 @@ try {
     await ctx.close();
   }
 
+  console.log('\nCreators gallery');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'creators/', { waitUntil: 'networkidle' });
+    const visible = () => page.locator('.card:not([hidden])').count();
+    check((await visible()) === 14, 'all 14 creators are listed');
+    check(await page.isVisible('[data-filters]'), 'filters appear with JavaScript');
+    await page.getByRole('button', { name: 'Music', exact: true }).click();
+    check((await visible()) === 5, 'filtering by Music shows the 5 music entries');
+    check(
+      (await page.textContent('[data-count]'))?.includes('5 of 14'),
+      'the count announces how many are shown',
+    );
+    check(
+      (await page.getAttribute('[data-filter="music"]', 'aria-pressed')) === 'true',
+      'the active filter is marked as pressed',
+    );
+    await page.getByRole('button', { name: 'All', exact: true }).click();
+    check((await visible()) === 14, 'All shows every entry again');
+    const sources = page.locator('#tesla .card__sources');
+    await sources.locator('summary').click();
+    check((await sources.locator('a').count()) >= 1, 'each entry lists its sources');
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    check(
+      (await page.getAttribute('.creators-callout a', 'href'))?.endsWith('/creators/'),
+      'the guide links to the gallery',
+    );
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
   console.log('\nWithout JavaScript');
   {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
@@ -535,6 +574,13 @@ try {
     await page.click('#fnref-3');
     check(new URL(page.url()).hash === '#fn-3', 'marker jumps to the notes list');
     check(!(await page.isVisible('#fn-drawer')), 'drawer stays closed');
+    await page.goto(BASE + 'creators/');
+    check(
+      (await page.locator('.card:visible').count()) === 14 &&
+        !(await page.isVisible('[data-filters]')),
+      'without JavaScript the gallery shows every entry and hides the filters',
+    );
+    await page.goto(BASE + 'guide/');
     check(
       (await page.getAttribute('[data-scrolly-figure]', 'data-step')) === '5',
       'without JavaScript the diagram shows its final state',

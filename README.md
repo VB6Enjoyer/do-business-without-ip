@@ -68,7 +68,7 @@ src/
   i18n/            Interface strings per language
   layouts/         Page shell (meta tags, theme bootstrap, skip link)
   lib/             Helpers (paths, theme, footnotes, drawer, scrollspy, quote cards, data)
-  pages/           Routes: /, /guide/, /about/, 404
+  pages/           Routes: /, /guide/, /creators/, /about/, 404
   styles/          Design tokens (light/dark), prose and print styles
 scripts/           Text check, link check, EPUB build and check, a11y tests, asset generation
 docs/              Edition notes, editing and translation guides, roadmap

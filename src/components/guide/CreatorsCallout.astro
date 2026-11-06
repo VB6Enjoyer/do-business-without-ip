@@ -1,0 +1,58 @@
+---
+/** Points readers from the guide's own list of examples to the creators gallery. */
+import { getCollection } from 'astro:content';
+import { defaultLang, useStrings } from '../../i18n';
+import { withBase } from '../../lib/paths';
+
+const s = useStrings().creators;
+const count = (await getCollection('creators', (e) => e.data.lang === defaultLang)).length;
+---
+
+<aside class="creators-callout" aria-labelledby="creators-callout-title">
+  <p class="creators-callout__badge">{s.calloutBadge}</p>
+  <p class="creators-callout__title" id="creators-callout-title">
+    {s.calloutTitle}
+  </p>
+  <a href={withBase('/creators/')}>{s.calloutText.replace('{n}', String(count))} →</a>
+</aside>
+
+<style>
+  .creators-callout {
+    clear: both;
+    margin: var(--space-m) 0;
+    padding: var(--space-s) var(--space-m);
+    border: 1px solid var(--color-border);
+    border-inline-start: 4px solid var(--ill-orange);
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  .creators-callout p {
+    margin: 0;
+  }
+
+  .creators-callout__badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .creators-callout__title {
+    font-weight: 700;
+    margin: var(--space-3xs) 0 !important;
+  }
+
+  .creators-callout a {
+    font-weight: 600;
+  }
+
+  @media print {
+    .creators-callout {
+      display: none;
+    }
+  }
+</style>

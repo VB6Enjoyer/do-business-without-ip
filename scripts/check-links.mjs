@@ -93,6 +93,12 @@ const glossary = JSON.parse(
 );
 for (const g of glossary) if (g.learnMore) await check(`glossary ${g.id}`, g.learnMore);
 
+console.log(`\nCreators gallery (${lang})`);
+const creators = JSON.parse(
+  readFileSync(join(root, 'src/content/creators', `${lang}.json`), 'utf8'),
+);
+for (const c of creators) for (const src of c.sources) await check(`creator ${c.id}`, src.url);
+
 console.log(`\nUpdate sources (${lang})`);
 for (const { file, url } of sources) await check(file, url);
 

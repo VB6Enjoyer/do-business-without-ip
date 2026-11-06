@@ -108,6 +108,47 @@ const myths = defineCollection({
   }),
 });
 
+/** Creators gallery: sourced real-world examples of thriving without relying on IP. */
+const creators = defineCollection({
+  loader: file('src/content/creators/en.json', {
+    parser: (text) =>
+      (JSON.parse(text) as Array<{ id: string }>).map((c) => ({
+        ...c,
+        id: `en-${c.id}`,
+        slug: c.id,
+        lang: 'en',
+      })),
+  }),
+  schema: z.object({
+    lang: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    field: z.enum([
+      'music',
+      'writing',
+      'software',
+      'film',
+      'fashion-food',
+      'performance',
+      'business',
+    ]),
+    year: z.number().int().nullable(),
+    approach: z.enum([
+      'free-release',
+      'open-license',
+      'allowed-copying',
+      'pre-sale',
+      'public-domain',
+      'no-protection',
+      'community-norms',
+      'patent-pledge',
+    ]),
+    headline: z.string(),
+    story: z.string(),
+    sources: z.array(z.object({ title: z.string(), publisher: z.string(), url: z.url() })).min(1),
+  }),
+});
+
 /** Supporting text: author bio, disclaimer. */
 const meta = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/meta' }),
@@ -118,4 +159,4 @@ const meta = defineCollection({
   }),
 });
 
-export const collections = { guide, footnotes, updates, glossary, myths, meta };
+export const collections = { guide, footnotes, updates, glossary, myths, creators, meta };

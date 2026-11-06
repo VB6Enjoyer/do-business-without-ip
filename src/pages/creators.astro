@@ -1,0 +1,310 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Illustration from '../components/Illustration.astro';
+import { defaultLang, useStrings } from '../i18n';
+import { links } from '../lib/links';
+
+const lang = defaultLang;
+const t = useStrings(lang);
+const s = t.creators;
+
+type Field = keyof typeof s.fields;
+const fieldOrder = Object.keys(s.fields) as Field[];
+const creators = (await getCollection('creators', (e) => e.data.lang === lang))
+  .map((e) => e.data)
+  .sort(
+    (a, b) =>
+      fieldOrder.indexOf(a.field) - fieldOrder.indexOf(b.field) || (a.year ?? 0) - (b.year ?? 0),
+  );
+const usedFields = fieldOrder.filter((f) => creators.some((c) => c.field === f));
+---
+
+<BaseLayout title={s.title} description={s.lede}>
+  <article class="creators container">
+    <header class="creators__header">
+      <div>
+        <p class="kicker">{s.kicker}</p>
+        <h1>{s.title}</h1>
+        <p class="lede">{s.lede}</p>
+      </div>
+      <Illustration name="innovation-and-freedom" class="creators__art" />
+    </header>
+
+    <p class="note">{s.note}</p>
+
+    <div class="filters" data-filters hidden>
+      <p class="filters__label" id="filter-label">
+        {s.filterLabel}
+      </p>
+      <div class="filters__buttons" role="group" aria-labelledby="filter-label">
+        <button type="button" data-filter="all" aria-pressed="true">
+          {s.all}
+        </button>
+        {usedFields.map((f) => (
+          <button type="button" data-filter={f} aria-pressed="false">
+            {s.fields[f]}
+          </button>
+        ))}
+      </div>
+      <p class="filters__count" role="status" data-count data-template={s.showing}>
+        {s.showing
+          .replace('{n}', String(creators.length))
+          .replace('{total}', String(creators.length))}
+      </p>
+    </div>
+
+    <ul class="grid" role="list">
+      {creators.map((c) => (
+        <li class="card" id={c.slug} data-field={c.field}>
+          <article aria-labelledby={`${c.slug}-name`}>
+            <p class="card__meta">
+              <span class="card__field">{s.fields[c.field]}</span>
+              {c.year && <span>{c.year}</span>}
+            </p>
+            <h2 id={`${c.slug}-name`}>{c.name}</h2>
+            <p class="card__headline">{c.headline}</p>
+            <p class="card__approach">
+              <span class="visually-hidden">{s.approachLabel}: </span>
+              {s.approaches[c.approach]}
+            </p>
+            <p class="card__story">{c.story}</p>
+            <details class="card__sources">
+              <summary>
+                {s.sources} ({c.sources.length})
+              </summary>
+              <ul>
+                {c.sources.map((src) => (
+                  <li>
+                    <a href={src.url} rel="noopener">
+                      {src.title}
+                    </a>
+                    , {src.publisher}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </article>
+        </li>
+      ))}
+    </ul>
+
+    <p class="suggest">
+      <a href={`${links.repo}/issues/new`} rel="noopener">
+        {s.suggest}
+      </a>
+    </p>
+  </article>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-filters]');
+  if (root) {
+    root.hidden = false;
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const cards = [...document.querySelectorAll<HTMLElement>('.card[data-field]')];
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    const template = count.dataset.template ?? '{n}';
+
+    const apply = (filter: string) => {
+      let shown = 0;
+      for (const card of cards) {
+        const visible = filter === 'all' || card.dataset.field === filter;
+        card.hidden = !visible;
+        if (visible) shown++;
+      }
+      for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.filter === filter));
+      count.textContent = template
+        .replace('{n}', String(shown))
+        .replace('{total}', String(cards.length));
+    };
+
+    for (const b of buttons) b.addEventListener('click', () => apply(b.dataset.filter!));
+  }
+</script>
+
+<style>
+  .creators {
+    padding-block: var(--space-xl);
+  }
+
+  .creators__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-l);
+  }
+
+  .kicker {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  h1 {
+    font-size: var(--step-4);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    font-size: var(--step-1);
+    max-width: 40ch;
+  }
+
+  .note {
+    max-width: 70ch;
+    margin: var(--space-m) 0;
+    padding: var(--space-s) var(--space-m);
+    border-radius: var(--radius-m);
+    background: var(--color-highlight);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  .filters {
+    display: grid;
+    gap: var(--space-2xs);
+    margin: var(--space-l) 0 var(--space-m);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  .filters[hidden] {
+    display: none;
+  }
+
+  .filters__label {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .filters__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .filters button {
+    min-height: 2.25rem;
+    padding: 0 var(--space-s);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .filters button[aria-pressed='true'] {
+    border-color: var(--color-accent);
+    background: var(--color-highlight);
+    font-weight: 600;
+  }
+
+  .filters__count {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: var(--space-m);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card[hidden] {
+    display: none;
+  }
+
+  .card article {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    height: 100%;
+    padding: var(--space-m);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
+  }
+
+  .card__meta {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .card__field {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .card h2 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .card__headline {
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .card__approach {
+    align-self: start;
+    margin: 0;
+    padding: 0.15em 0.65em;
+    border: 1px solid color-mix(in srgb, var(--ill-orange) 60%, transparent);
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .card__story {
+    margin: 0;
+    font-size: var(--step--1);
+    line-height: 1.55;
+  }
+
+  .card__sources {
+    margin-top: auto;
+    padding-top: var(--space-2xs);
+    border-top: 1px solid var(--color-border);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+  }
+
+  .card__sources summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-accent-strong);
+  }
+
+  .card__sources ul {
+    margin: var(--space-2xs) 0 0;
+    padding-inline-start: 1.1em;
+  }
+
+  .suggest {
+    margin-top: var(--space-l);
+    font-family: var(--font-sans);
+  }
+
+  @media (max-width: 48rem) {
+    .creators__header {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

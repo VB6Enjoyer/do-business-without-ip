@@ -45,6 +45,10 @@ Each entry in `src/content/footnotes/en.json` has `originalUrl` (as printed in 2
 
 Edit `src/content/myths/en.json`. Each card has a `claim`, an `answer` in your own words, a `quote` and the `section` slug it links to. The quote must be the author's exact words: `npm run check:text` fails if it isn't found verbatim in the guide.
 
+## Creators gallery
+
+Add or edit entries in `src/content/creators/en.json`: `name`, `field`, `year` (or `null`), `approach`, a one-line `headline`, a short `story` in your own words, and at least one source. Stick to what the sources support, and say so when figures are estimates. Field and approach labels are in `src/i18n/en.ts` under `creators`.
+
 ## Illustrations and images
 
 The illustrations are original line-art SVGs in `src/assets/illustrations/`: `hero.svg` on the home page, and one opener per guide section, named after the section's slug (for example `history.svg`). They are drawn by `scripts/generate-illustrations.py`.

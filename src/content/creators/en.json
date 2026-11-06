@@ -1,0 +1,291 @@
+[
+  {
+    "id": "grateful-dead",
+    "name": "Grateful Dead",
+    "field": "music",
+    "year": 1984,
+    "approach": "allowed-copying",
+    "headline": "Let fans record every concert and trade the tapes.",
+    "story": "Taping had long been tolerated at Grateful Dead shows, and in 1984 the band gave it a home: a dedicated tapers’ section behind the soundboard. Fans could record and trade as much as they liked, as long as nobody sold the tapes. The trading network that grew out of it is widely credited with building the band’s devoted touring audience.",
+    "sources": [
+      {
+        "title": "Taper (concert)",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Taper_(concert)"
+      },
+      {
+        "title": "Documenting the Dead: Taping the Dead",
+        "publisher": "dead.net",
+        "url": "https://www.dead.net/features/documenting-dead/documenting-dead-taping-dead"
+      }
+    ]
+  },
+  {
+    "id": "radiohead",
+    "name": "Radiohead",
+    "field": "music",
+    "year": 2007,
+    "approach": "free-release",
+    "headline": "Released an album online at whatever price fans chose, including nothing.",
+    "story": "Radiohead sold the download of In Rainbows from its own site and let buyers name their price. One outside estimate found that most downloaders paid nothing and the rest paid about $6 on average; the band never confirmed figures. When the CD came out a few months later, it still topped the charts in the US and the UK.",
+    "sources": [
+      {
+        "title": "First results of Radiohead’s pay-what-you-want experiment are in",
+        "publisher": "CBS News",
+        "url": "https://www.cbsnews.com/news/first-results-of-radioheads-pay-what-you-want-experiment-are-in"
+      },
+      {
+        "title": "The In Rainbows experiment: did it work?",
+        "publisher": "NPR",
+        "url": "https://www.npr.org/blogs/monitormix/2009/11/the_in_rainbows_experiment_did.html"
+      }
+    ]
+  },
+  {
+    "id": "nine-inch-nails",
+    "name": "Nine Inch Nails",
+    "field": "music",
+    "year": 2008,
+    "approach": "open-license",
+    "headline": "Put an album under a Creative Commons license and still topped the sales charts.",
+    "story": "Ghosts I–IV, 36 instrumental tracks, came out under a license that lets anyone share and remix it non-commercially. Fans could also buy downloads, CDs and a $300 limited edition, which sold out. The band reported about $1.6 million in its first week, and it was Amazon’s best-selling MP3 album of 2008.",
+    "sources": [
+      {
+        "title": "Nine Inch Nails’ “Ghosts” tops Amazon MP3 sales chart",
+        "publisher": "Rolling Stone",
+        "url": "https://www.rollingstone.com/music/music-news/nine-inch-nails-ghosts-tops-amazon-mp3-sales-chart-66774/"
+      },
+      {
+        "title": "NIN’s CC-licensed best-selling MP3 album",
+        "publisher": "Creative Commons",
+        "url": "https://creativecommons.org/2009/01/05/nins-cc-licensed-best-selling-mp3-album/"
+      }
+    ]
+  },
+  {
+    "id": "jonathan-coulton",
+    "name": "Jonathan Coulton",
+    "field": "music",
+    "year": 2005,
+    "approach": "open-license",
+    "headline": "Gave his songs away under Creative Commons and quit his day job.",
+    "story": "Coulton, then a software developer, began releasing songs under a license that lets fans share and reuse them non-commercially. Within about a year he was making music full time, with no record label, selling directly to fans. He later reported earning around half a million dollars from music in a single year.",
+    "sources": [
+      {
+        "title": "Commoner Letter #3: Jonathan Coulton",
+        "publisher": "Creative Commons",
+        "url": "https://creativecommons.org/2008/11/17/commoner-letter-3-jonathan-coulton/"
+      },
+      {
+        "title": "Jonathan Coulton",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Jonathan_Coulton"
+      }
+    ]
+  },
+  {
+    "id": "amanda-palmer",
+    "name": "Amanda Palmer",
+    "field": "music",
+    "year": 2012,
+    "approach": "pre-sale",
+    "headline": "Had fans fund a new album before it was made.",
+    "story": "Instead of signing with a label, Palmer asked fans to pay in advance for her next record, an art book and a tour. She had aimed for $100,000; nearly 25,000 backers pledged about $1.2 million, at the time the most ever raised for a music project on Kickstarter. It is the guide’s pre-sale thought experiment, done for real.",
+    "sources": [
+      {
+        "title": "Most money pledged for a Kickstarter music project",
+        "publisher": "Guinness World Records",
+        "url": "https://www.guinnessworldrecords.com/world-records/114322-most-money-pledged-for-a-kickstarter-music-project"
+      },
+      {
+        "title": "Theatre Is Evil",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Theatre_Is_Evil"
+      }
+    ]
+  },
+  {
+    "id": "cory-doctorow",
+    "name": "Cory Doctorow",
+    "field": "writing",
+    "year": 2008,
+    "approach": "open-license",
+    "headline": "Publishes his novels as free downloads alongside the print editions.",
+    "story": "Doctorow releases his books under Creative Commons, free to download from his site, while a publisher sells the paper editions. His young-adult novel Little Brother spent weeks on the New York Times bestseller list. He argues, as the guide quotes him, that an author’s real problem is obscurity, not piracy.",
+    "sources": [
+      {
+        "title": "About Little Brother",
+        "publisher": "craphound.com",
+        "url": "https://craphound.com/littlebrother/about/"
+      },
+      {
+        "title": "Doctorow’s Creative Commons-licensed book enters fifth week on NY Times bestsellers list",
+        "publisher": "Netribution",
+        "url": "https://www.netribution.co.uk/stories/copyrights/doctorows-creative-commons-licensed-book-enters-fifth-week-on-ny-times-bestsellers-list"
+      }
+    ]
+  },
+  {
+    "id": "andy-weir",
+    "name": "Andy Weir",
+    "field": "writing",
+    "year": 2011,
+    "approach": "free-release",
+    "headline": "Posted The Martian free online, chapter by chapter.",
+    "story": "After literary agents turned him down, Weir published his novel as a free serial on his website. Readers asked for an e-book, so he put it on Kindle for 99 cents, the lowest price Amazon allowed, and kept the free version up. It climbed to the top of Amazon’s science-fiction list, which led to a deal with a major publisher and, in 2015, a Hollywood film.",
+    "sources": [
+      {
+        "title": "The Martian author Andy Weir on going from self-published to the red carpet",
+        "publisher": "Uproxx",
+        "url": "https://uproxx.com/life/the-martian-author-andy-weir-shares-how-going-from-self-published-to-the-red-carpet-changed-his-life"
+      },
+      {
+        "title": "The man behind The Martian",
+        "publisher": "Reason",
+        "url": "https://reason.com/2015/12/12/the-man-behind-the-martian/"
+      }
+    ]
+  },
+  {
+    "id": "red-hat",
+    "name": "Red Hat",
+    "field": "software",
+    "year": 2019,
+    "approach": "open-license",
+    "headline": "Built a multibillion-dollar company on software anyone can copy.",
+    "story": "Red Hat’s products are built on open-source software such as Linux, which anyone may copy, modify and share. The company earned its money from what it does around the code rather than from exclusive rights to it. In 2019 IBM bought Red Hat for about $34 billion.",
+    "sources": [
+      {
+        "title": "IBM completes $34B acquisition of Red Hat",
+        "publisher": "GovCon Wire",
+        "url": "https://www.govconwire.com/2019/07/ibm-completes-34b-acquisition-of-red-hat-ginni-rometty-jim-whitehurst-quoted/"
+      },
+      {
+        "title": "IBM closes deal to buy Red Hat",
+        "publisher": "IOL Business Report",
+        "url": "https://iol.co.za/business-report/international/2019-07-10-ibm-closes-deal-to-buy-red-hat/"
+      }
+    ]
+  },
+  {
+    "id": "sqlite",
+    "name": "SQLite",
+    "field": "software",
+    "year": 2000,
+    "approach": "public-domain",
+    "headline": "Put a database engine in the public domain. It now runs almost everywhere.",
+    "story": "SQLite’s code carries no license at all: it is dedicated to the public domain, free for any use. Its developers believe it is the most widely deployed database engine in the world, built into major web browsers, phones and operating systems.",
+    "sources": [
+      {
+        "title": "SQLite is public domain",
+        "publisher": "sqlite.org",
+        "url": "https://www.sqlite.org/copyright.html"
+      },
+      {
+        "title": "SQLite",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/SQLite"
+      }
+    ]
+  },
+  {
+    "id": "blender",
+    "name": "Blender",
+    "field": "film",
+    "year": 2008,
+    "approach": "open-license",
+    "headline": "A free 3D suite, and short films released with every production file.",
+    "story": "Blender is free, open-source 3D software, paid for by a development fund that individuals and companies such as Adobe, Nvidia and Ubisoft contribute to. Its studio makes open movies: Big Buck Bunny (2008) and the rest are released under Creative Commons, with all their production files free to download.",
+    "sources": [
+      {
+        "title": "About the Blender Development Fund",
+        "publisher": "blender.org",
+        "url": "https://fund.blender.org/about"
+      },
+      {
+        "title": "Big Buck Bunny",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Big_Buck_Bunny"
+      }
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "The fashion industry",
+    "field": "fashion-food",
+    "year": null,
+    "approach": "no-protection",
+    "headline": "Copies freely, and keeps reinventing itself.",
+    "story": "In the United States the cut of a garment has never been protected by copyright, so designs are copied constantly. The industry thrives anyway. Law professors Kal Raustiala and Christopher Sprigman argue that copying actually speeds up the cycle of trends that keeps people buying new clothes.",
+    "sources": [
+      {
+        "title": "The Knockoff Economy: How Imitation Sparks Innovation",
+        "publisher": "Stanford Center for Internet and Society",
+        "url": "https://cyberlaw.stanford.edu/publications/knockoff-economy-how-imitation-sparks-innovation-659540c250a93208327675db"
+      }
+    ]
+  },
+  {
+    "id": "chefs",
+    "name": "Chefs and restaurants",
+    "field": "fashion-food",
+    "year": null,
+    "approach": "no-protection",
+    "headline": "Compete on skill and reputation, because recipes can’t be owned.",
+    "story": "Under US law, a recipe’s list of ingredients is not protected by copyright: anyone may cook a dish they have tasted or read about. Cuisine still flourishes, with chefs competing on technique, quality and reputation. High cuisine is one of the fields Raustiala and Sprigman study.",
+    "sources": [
+      {
+        "title": "Works Not Protected by Copyright (Circular 33)",
+        "publisher": "U.S. Copyright Office",
+        "url": "https://www.copyright.gov/circs/circ33.pdf"
+      },
+      {
+        "title": "The Knockoff Economy: How Imitation Sparks Innovation",
+        "publisher": "Stanford Center for Internet and Society",
+        "url": "https://cyberlaw.stanford.edu/publications/knockoff-economy-how-imitation-sparks-innovation-659540c250a93208327675db"
+      }
+    ]
+  },
+  {
+    "id": "comedians",
+    "name": "Stand-up comedians",
+    "field": "performance",
+    "year": null,
+    "approach": "community-norms",
+    "headline": "Police joke theft with their own norms, not lawsuits.",
+    "story": "Copyright does little for comedians, because it protects exact wording rather than the idea behind a joke. Instead, comics enforce a strong shared norm against performing another comic’s material, and a reputation as a joke thief can stall a career. Researchers found that these norms do much of the work copyright is supposed to do.",
+    "sources": [
+      {
+        "title": "There’s No Free Laugh (Anymore): The Emergence of Intellectual Property Norms in Stand-Up Comedy",
+        "publisher": "Virginia Law Review",
+        "url": "https://virginialawreview.org/wp-content/uploads/2020/12/oliar_sprigman.pdf"
+      },
+      {
+        "title": "Take my joke, please",
+        "publisher": "WNYC, On the Media",
+        "url": "https://www.wnycstudios.org/podcasts/otm/segments/132742-take-my-joke-please"
+      }
+    ]
+  },
+  {
+    "id": "tesla",
+    "name": "Tesla",
+    "field": "business",
+    "year": 2014,
+    "approach": "patent-pledge",
+    "headline": "Promised not to sue anyone who uses its patents in good faith.",
+    "story": "In 2014 Elon Musk announced that Tesla would not start patent lawsuits against anyone using its electric-car technology in good faith, saying openness would grow the whole market. Lawyers noted that the pledge is loosely worded and untested in court, but it set an example in a famously litigious industry.",
+    "sources": [
+      {
+        "title": "Elon Musk ‘clears a path’ for electric cars by opening Tesla’s patents",
+        "publisher": "Engadget",
+        "url": "https://www.engadget.com/2014/06/12/tesla-patents-open-source/"
+      },
+      {
+        "title": "Tesla’s patent pledge: is it enough?",
+        "publisher": "Mondaq",
+        "url": "https://www.mondaq.com/canada/patent/330160/teslas-patent-pledge-is-it-enough"
+      }
+    ]
+  }
+]

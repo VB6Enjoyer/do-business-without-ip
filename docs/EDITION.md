@@ -132,3 +132,11 @@ Two more kinds of editorial addition, both marked as such on the page:
 - **Term explainers:** 17 terms in the text (for example _restrictive covenant_, _negative servitudes_, _orphan works_, _patent trolling_, _DMCA_) have a dotted underline. Selecting one opens a plain-language explanation with an optional “learn more” link. The explanations live in `src/content/glossary/en.json` and are also listed in a Glossary section at the end of the guide. The `<Term id="…">` marker wraps the author’s own words without changing them. Terms the guide defines itself (copyright, patent, trademark, trade secret) are not explained again.
 
 Both are left out of the EPUB and of print.
+
+## Creators gallery
+
+`/creators/` collects 14 real-world examples of people and companies who thrive without leaning on IP: musicians, writers, software projects, fashion, chefs, comedians and a patent pledge. It is an addition of this edition, labelled as such, and linked from the header and from a callout after the guide's own list of further examples in _Publishing and Copyright_.
+
+- Each entry is written in this edition's words and cites at least one source (enforced by the schema). Where sources disagree or figures were never confirmed, the entry says so, as with Radiohead's download numbers.
+- Each entry is tagged with its approach: free or pay-what-you-want, open license, allowed copying, funded in advance, public domain, no IP protection, community norms or patent pledge. Open licenses and pledges still rest on IP law, and the page says so.
+- Data: `src/content/creators/en.json`. `check:links` covers every source.
