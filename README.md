@@ -16,8 +16,12 @@ A modern, accessible web edition of Stephan Kinsella's guide _Do Business Withou
   - the pre-sale calculator
   - a CC0/CC BY notice generator
   - quote cards to share
-- **Reading features:** light and dark themes, a print stylesheet, and an EPUB download.
+- **Reading features:** light and dark themes, resume-where-you-left-off, a print stylesheet, an EPUB download, share links (no trackers) and an [RSS feed](https://vb6enjoyer.github.io/do-business-without-ip/rss.xml) of new additions.
 - **Accessibility:** WCAG 2.2 AA, checked with axe on every pull request. Lighthouse scores are 100 across the board.
+
+## Contributing
+
+Suggestions, corrections, broken links and translations are welcome. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and the issue forms.
 
 ## Documentation
 
@@ -54,20 +58,21 @@ npm run test:a11y    # axe + behaviour tests in a real browser (needs a build)
 npm run check:links  # footnote links, archived copies and update sources
 ```
 
-Other scripts: `npm run format` (Prettier, write) and `npm run assets` (regenerate the social image and icons).
+Other scripts: `npm run format` (Prettier, write), `npm run illustrations` (regenerate the line-art SVGs) and `npm run assets` (regenerate the social image and icons).
 
 ## Project layout
 
 ```
 src/
-  components/      UI pieces (Header, Footer, ThemeToggle, ImagePlaceholder)
+  assets/          Line-art illustrations (generated SVG)
+  components/      UI pieces (Header, Footer, ThemeToggle, Illustration)
     guide/         Used inside the guide's MDX (Ref, Fn, PullQuote, Since2014, drawer, …)
     interactive/   Svelte islands embedded in the guide
   content/         The guide (MDX per section), footnotes, updates, bio, disclaimer, about
   i18n/            Interface strings per language
   layouts/         Page shell (meta tags, theme bootstrap, skip link)
   lib/             Helpers (paths, theme, footnotes, drawer, scrollspy, quote cards, data)
-  pages/           Routes: /, /guide/, /about/, 404
+  pages/           Routes: /, /guide/, /creators/, /about/, 404
   styles/          Design tokens (light/dark), prose and print styles
 scripts/           Text check, link check, EPUB build and check, a11y tests, asset generation
 docs/              Edition notes, editing and translation guides, roadmap

@@ -114,6 +114,8 @@ Two interactive figures sit inside the guide. Each is framed and labelled "Inter
 | **Who gets a veto over your house?** Kinsella's neighborhood example: try painting your house orange under a covenant you choose whether to sign, then under a patent you never agreed to.                                                                                      | The end of _IP Versus Property Rights_                       | `src/components/interactive/CovenantDemo.svelte`                                            |
 | **How long does copyright last?** The maximum US copyright term by year from 1790, with the Statute of Anne for comparison. Sliders set the author's age at creation and death (terms since 1978 depend on the author's life). There is a corporate-work mode and a table view. | The first paragraph of _Dying without Intellectual Property_ | `src/components/interactive/CopyrightTimeline.svelte`, data in `src/lib/copyright-terms.ts` |
 
+| **Myth or reality?** Six common claims about IP as cards. Turning one over shows the guide's answer in this edition's words, a verbatim quote from the guide (checked by `check:text`), and a link to the section that makes the case. Built on `<details>`, no JavaScript needed. | The end of the _Introduction_ | `src/components/interactive/MythCards.astro`, data in `src/content/myths/en.json` |
+| **Consent makes the difference.** A scroll-driven diagram that builds the covenant argument in five steps: owners, the covenant, the owner who opts out, the patent holder's veto, co-ownership without consent. Without JavaScript it shows the final picture with all steps listed. | Before the covenant demo in _IP Versus Property Rights_ | `src/components/interactive/CovenantScrolly.astro` |
 | **To IP or not to IP: a self-check.** Pick what you make and answer the guide's six questions; it suggests sections to read next. No score, nothing stored. | The six questions in _To IP or Not to IP_ | `src/components/interactive/SelfCheck.svelte` |
 | **The pre-sale thought experiment.** The Rowling example as a calculator: audience, share who pre-order, price and number of books; plus the pre-orders needed for a target income. Defaults reproduce the text's $10 million per book and $50 million total. | The Rowling paragraph in _Publishing and Copyright_ | `src/components/interactive/PresaleCalculator.svelte` |
 | **Release your work.** Generates a CC0 or CC BY 4.0 notice in plain text, Markdown or HTML, with an optional defensive patent pledge. The pledge wording is original to this edition, not copied from Twitter's agreement. | The CC-BY / CC0 recommendation in _Publishing and Copyright_ | `src/components/interactive/ReleaseTool.svelte` |
@@ -121,3 +123,20 @@ Two interactive figures sit inside the guide. Each is framed and labelled "Inter
 Every pull quote also has a **Share** button (shown only with JavaScript). It copies the quote with attribution and a link to it, downloads it as a 1200×630 image card, or opens the system share sheet. Source: `src/components/guide/QuoteShare.astro`, `src/lib/quote-share.ts`.
 
 The timeline is simplified: renewals are counted as always made, and the interim extensions of 1962–1974 are left out. Both simplifications are stated under the chart. Source: U.S. Copyright Office, Circular 15A. The patent holder in the covenant demo ("OrangeCo Holdings") is fictional and labelled as such.
+
+## Summaries and term explainers
+
+Two more kinds of editorial addition, both marked as such on the page:
+
+- **“The argument in brief”:** two or three bullet points per section, summarizing Kinsella’s argument in this edition’s words. They are collapsed by default and labelled as an editorial summary. They live in each section’s `summary` frontmatter, which `check:text` ignores.
+- **Term explainers:** 17 terms in the text (for example _restrictive covenant_, _negative servitudes_, _orphan works_, _patent trolling_, _DMCA_) have a dotted underline. Selecting one opens a plain-language explanation with an optional “learn more” link. The explanations live in `src/content/glossary/en.json` and are also listed in a Glossary section at the end of the guide. The `<Term id="…">` marker wraps the author’s own words without changing them. Terms the guide defines itself (copyright, patent, trademark, trade secret) are not explained again.
+
+Both are left out of the EPUB and of print.
+
+## Creators gallery
+
+`/creators/` collects 14 real-world examples of people and companies who thrive without leaning on IP: musicians, writers, software projects, fashion, chefs, comedians and a patent pledge. It is an addition of this edition, labelled as such, and linked from the header and from a callout after the guide's own list of further examples in _Publishing and Copyright_.
+
+- Each entry is written in this edition's words and cites at least one source (enforced by the schema). Where sources disagree or figures were never confirmed, the entry says so, as with Radiohead's download numbers.
+- Each entry is tagged with its approach: free or pay-what-you-want, open license, allowed copying, funded in advance, public domain, no IP protection, community norms or patent pledge. Open licenses and pledges still rest on IP law, and the page says so.
+- Data: `src/content/creators/en.json`. `check:links` covers every source.

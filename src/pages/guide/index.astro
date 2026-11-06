@@ -6,15 +6,22 @@ import Ref from '../../components/guide/Ref.astro';
 import PullQuote from '../../components/guide/PullQuote.astro';
 import Standfirst from '../../components/guide/Standfirst.astro';
 import Since2014 from '../../components/guide/Since2014.astro';
+import Term from '../../components/guide/Term.astro';
+import CreatorsCallout from '../../components/guide/CreatorsCallout.astro';
 import Covenant from '../../components/interactive/Covenant.astro';
+import CovenantScrolly from '../../components/interactive/CovenantScrolly.astro';
+import MythCards from '../../components/interactive/MythCards.astro';
 import Timeline from '../../components/interactive/Timeline.astro';
 import SelfCheck from '../../components/interactive/SelfCheckFigure.astro';
 import Presale from '../../components/interactive/PresaleFigure.astro';
 import ReleaseTool from '../../components/interactive/ReleaseFigure.astro';
 import Toc from '../../components/guide/Toc.astro';
+import Illustration from '../../components/Illustration.astro';
 import ReadingProgress from '../../components/guide/ReadingProgress.astro';
 import FootnoteDrawer from '../../components/guide/FootnoteDrawer.astro';
 import QuoteShare from '../../components/guide/QuoteShare.astro';
+import ResumePrompt from '../../components/guide/ResumePrompt.astro';
+import ShareLinks from '../../components/ShareLinks.astro';
 import { defaultLang, useStrings } from '../../i18n';
 import { links } from '../../lib/links';
 import { withBase } from '../../lib/paths';
@@ -35,6 +42,9 @@ const sections = await Promise.all(
   })),
 );
 const footnotes = await getFootnotes(lang);
+const glossary = (await getCollection('glossary', (e) => e.data.lang === lang))
+  .map((e) => e.data)
+  .sort((a, b) => a.term.localeCompare(b.term, lang));
 const updates = await Promise.all(
   (await getCollection('updates', (e) => e.id.startsWith(`${lang}/`)))
     .sort((a, b) => a.data.order - b.data.order)
@@ -69,7 +79,11 @@ const components = {
   PullQuote,
   Standfirst,
   Since2014,
+  Term,
+  CreatorsCallout,
   Covenant,
+  CovenantScrolly,
+  MythCards,
   Timeline,
   SelfCheck,
   Presale,
@@ -83,6 +97,7 @@ const tocSections = sections.map((s) => ({
 const tocExtra = [
   { slug: 'notes', title: t.guide.notes },
   { slug: 'updates', title: t.guide.updates },
+  { slug: 'glossary', title: t.guide.glossary },
   { slug: 'author', title: t.guide.aboutAuthor },
 ];
 ---
@@ -124,11 +139,17 @@ const tocExtra = [
           </a>
           <span>{t.guide.downloadEpubHint}</span>
         </p>
+        <ShareLinks
+          url={new URL(Astro.url.pathname, Astro.site).href}
+          text={t.share.guideText}
+          class="guide-share"
+        />
       </header>
 
       {sections.map(({ slug, data, Content }) => (
         <section id={slug} class="guide-section" aria-labelledby={`${slug}-title`}>
           <header class="section-head">
+            <Illustration name={slug} class="section-art" />
             <span class="section-num" aria-hidden="true">
               {String(data.order).padStart(2, '0')}
             </span>
@@ -136,10 +157,28 @@ const tocExtra = [
             <p class="section-page">
               {t.guide.originalPage.replace('{n}', String(data.originalPage))}
             </p>
+            {data.summary && (
+              <details class="in-brief">
+                <summary>{t.guide.inBrief}</summary>
+                <ul>
+                  {data.summary.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+                <p class="in-brief__note">{t.guide.inBriefNote}</p>
+              </details>
+            )}
           </header>
           <Content components={components} />
         </section>
       ))}
+
+      <ShareLinks
+        url={new URL(Astro.url.pathname, Astro.site).href}
+        text={t.share.guideText}
+        heading={t.share.guideHeading}
+        class="guide-share guide-share--end"
+      />
 
       <section id="notes" class="notes" aria-labelledby="notes-title">
         <h2 id="notes-title">{t.guide.notes}</h2>
@@ -206,6 +245,29 @@ const tocExtra = [
         ))}
       </section>
 
+      <section id="glossary" class="glossary" aria-labelledby="glossary-title">
+        <h2 id="glossary-title">{t.guide.glossary}</h2>
+        <p class="updates-intro">{t.guide.glossaryIntro}</p>
+        <dl>
+          {glossary.map((g) => (
+            <div id={`glossary-${g.slug}`}>
+              <dt>{g.term}</dt>
+              <dd>
+                {g.definition}
+                {g.learnMore && (
+                  <>
+                    {' '}
+                    <a href={g.learnMore} rel="noopener">
+                      {t.guide.termLearnMore}
+                    </a>
+                  </>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <section id="author" class="author" aria-labelledby="author-title">
         <h2 id="author-title">{t.guide.aboutAuthor}</h2>
         <AuthorBio />
@@ -219,6 +281,7 @@ const tocExtra = [
   </div>
 
   <QuoteShare />
+  <ResumePrompt />
   <FootnoteDrawer
     footnotes={footnotes}
     updates={updates.map((u) => ({ id: u.id, title: u.data.title }))}
@@ -271,6 +334,7 @@ const tocExtra = [
   .guide-section,
   .notes,
   .updates,
+  .glossary,
   .author,
   .disclaimer {
     margin-top: var(--space-2xl);
@@ -298,6 +362,23 @@ const tocExtra = [
     .download {
       display: none;
     }
+  }
+
+  .guide :global(.section-art) {
+    margin: 0 0 var(--space-s);
+    max-width: 40rem;
+  }
+
+  :global(.guide-share) {
+    margin-top: var(--space-m);
+  }
+
+  :global(.guide-share--end) {
+    margin-top: var(--space-2xl);
+    padding: var(--space-m);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
   }
 
   /* ---------- Mobile / tablet contents bar ---------- */
@@ -487,6 +568,29 @@ const tocExtra = [
 
   .update-sources ul {
     margin: 0;
+  }
+
+  .glossary dl {
+    margin: 0;
+    font-size: var(--step--1);
+  }
+
+  .glossary dl > div {
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .glossary dt {
+    font-weight: 600;
+  }
+
+  .glossary dd {
+    margin: var(--space-3xs) 0 0;
+  }
+
+  .glossary h2 {
+    font-size: var(--step-2);
+    margin-bottom: var(--space-s);
   }
 
   .back {

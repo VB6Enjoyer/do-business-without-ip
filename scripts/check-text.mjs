@@ -9,7 +9,7 @@
  *
  * Usage: node scripts/check-text.mjs [lang]   (default: en)
  */
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const lang = process.argv[2] ?? 'en';
@@ -114,6 +114,18 @@ ops.forEach(([op], i) => {
   if (problems.length && i - problems.at(-1).end <= 3) problems.at(-1).end = i;
   else problems.push({ start: i, end: i });
 });
+
+// Quotes used elsewhere on the site (myth cards) must be the author's exact words.
+const flatGuide = ` ${ours.join(' ')} `;
+const mythFile = join(root, 'src/content/myths', `${lang}.json`);
+const badQuotes = existsSync(mythFile)
+  ? JSON.parse(readFileSync(mythFile, 'utf8')).filter(
+      (m) => !flatGuide.includes(` ${tokenize(m.quote).join(' ')} `),
+    )
+  : [];
+for (const m of badQuotes)
+  console.error(`✗ myth card "${m.id}": quote not found verbatim in the guide`);
+if (badQuotes.length) process.exit(1);
 
 if (problems.length === 0) {
   console.log(`✓ ${lang}: ${ours.length} words match the 2014 reference text.`);

@@ -1,0 +1,155 @@
+---
+/**
+ * Myth vs. reality cards. Each card is a native <details>: the claim is the
+ * summary, the guide's answer is revealed on activation. No JavaScript.
+ */
+import { getCollection } from 'astro:content';
+import InteractiveFigure from './InteractiveFigure.astro';
+import { defaultLang, useStrings } from '../../i18n';
+
+const t = useStrings();
+const s = t.interactive.myths;
+const myths = (await getCollection('myths', (e) => e.data.lang === defaultLang)).map((e) => e.data);
+const titles = Object.fromEntries(
+  (await getCollection('guide', (e) => e.id.startsWith(`${defaultLang}/`))).map((e) => [
+    e.id.replace(/^[a-z]+\/\d+-/, ''),
+    e.data.title,
+  ]),
+);
+---
+
+<InteractiveFigure id="myth-cards" title={s.title} intro={s.intro}>
+  <div class="myths">
+    {myths.map((m) => (
+      <details class="myth" id={`myth-${m.slug}`}>
+        <summary>
+          <span class="myth__label">{s.claimLabel}</span>
+          <span class="myth__claim">{m.claim}</span>
+          <span class="myth__turn" aria-hidden="true">
+            {s.reveal} ↻
+          </span>
+        </summary>
+        <div class="myth__back">
+          <span class="myth__label">{s.answerLabel}</span>
+          <p>{m.answer}</p>
+          <blockquote>
+            <span class="myth__in">{s.inTheGuide}</span> “{m.quote}”
+          </blockquote>
+          <a href={`#${m.section}`}>
+            {s.readSection.replace('{section}', titles[m.section] ?? m.section)}
+          </a>
+        </div>
+      </details>
+    ))}
+  </div>
+</InteractiveFigure>
+
+<style>
+  .myths {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: var(--space-s);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+  }
+
+  .myth {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-m);
+    background: var(--color-bg);
+    transition: border-color var(--duration) var(--ease);
+  }
+
+  .myth[open] {
+    border-color: var(--color-accent);
+    background: var(--color-highlight);
+  }
+
+  .myth summary {
+    display: grid;
+    gap: var(--space-2xs);
+    min-height: 9rem;
+    padding: var(--space-s);
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .myth summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .myth[open] summary {
+    min-height: 0;
+    padding-bottom: var(--space-2xs);
+  }
+
+  .myth__label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .myth__claim {
+    font-family: var(--font-serif);
+    font-size: var(--step-0);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .myth[open] .myth__claim {
+    text-decoration: line-through;
+    text-decoration-color: var(--ill-orange);
+    text-decoration-thickness: 2px;
+    color: var(--color-text-muted);
+  }
+
+  .myth__turn {
+    align-self: end;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .myth[open] .myth__turn {
+    display: none;
+  }
+
+  .myth__back {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: 0 var(--space-s) var(--space-s);
+    animation: myth-in var(--duration) var(--ease);
+  }
+
+  .myth__back p {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .myth__back blockquote {
+    margin: 0;
+    padding-inline-start: var(--space-xs);
+    border-inline-start: 2px solid var(--color-accent);
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  .myth__in {
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .myth__back a {
+    font-weight: 600;
+  }
+
+  @keyframes myth-in {
+    from {
+      opacity: 0;
+      transform: rotateX(-12deg);
+    }
+  }
+</style>

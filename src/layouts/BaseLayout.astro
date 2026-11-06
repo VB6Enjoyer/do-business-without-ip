@@ -50,6 +50,12 @@ const ogImage = new URL(withBase('/og/default.png'), Astro.site);
     <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
     <link rel="manifest" href={withBase('/site.webmanifest')} />
     <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={t.rss.title}
+      href={withBase('/rss.xml')}
+    />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f8f5ef" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#15171a" media="(prefers-color-scheme: dark)" />

@@ -11,6 +11,8 @@ const guide = defineCollection({
     order: z.number().int().positive(),
     /** Page of the 2014 PDF where the section starts. */
     originalPage: z.number().int().positive(),
+    /** Editorial summary ("The argument in brief"); not the author's words. */
+    summary: z.array(z.string()).min(1).max(4).optional(),
   }),
 });
 
@@ -59,6 +61,94 @@ const updates = defineCollection({
     title: z.string(),
     /** Display order; should follow the order of the markers in the guide. */
     order: z.number().int().positive(),
+    /** Date the update was added (used by the RSS feed). */
+    added: z.coerce.date(),
+    sources: z.array(z.object({ title: z.string(), publisher: z.string(), url: z.url() })).min(1),
+  }),
+});
+
+/** Plain-language explanations of terms, attached in the text with <Term id="…">. */
+const glossary = defineCollection({
+  loader: file('src/content/glossary/en.json', {
+    parser: (text) =>
+      (JSON.parse(text) as Array<{ id: string }>).map((t) => ({
+        ...t,
+        id: `en-${t.id}`,
+        slug: t.id,
+        lang: 'en',
+      })),
+  }),
+  schema: z.object({
+    lang: z.string(),
+    slug: z.string(),
+    term: z.string(),
+    definition: z.string(),
+    learnMore: z.url().nullable(),
+  }),
+});
+
+/** Myth vs. reality cards: a common claim, the guide's answer, and a verbatim quote from it. */
+const myths = defineCollection({
+  loader: file('src/content/myths/en.json', {
+    parser: (text) =>
+      (JSON.parse(text) as Array<{ id: string }>).map((m) => ({
+        ...m,
+        id: `en-${m.id}`,
+        slug: m.id,
+        lang: 'en',
+      })),
+  }),
+  schema: z.object({
+    lang: z.string(),
+    slug: z.string(),
+    claim: z.string(),
+    answer: z.string(),
+    /** Must be the author's exact words (checked by check:text). */
+    quote: z.string(),
+    /** Section slug where the guide makes the case. */
+    section: z.string(),
+  }),
+});
+
+/** Creators gallery: sourced real-world examples of thriving without relying on IP. */
+const creators = defineCollection({
+  loader: file('src/content/creators/en.json', {
+    parser: (text) =>
+      (JSON.parse(text) as Array<{ id: string }>).map((c) => ({
+        ...c,
+        id: `en-${c.id}`,
+        slug: c.id,
+        lang: 'en',
+      })),
+  }),
+  schema: z.object({
+    lang: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    field: z.enum([
+      'music',
+      'writing',
+      'software',
+      'film',
+      'fashion-food',
+      'performance',
+      'business',
+    ]),
+    year: z.number().int().nullable(),
+    approach: z.enum([
+      'free-release',
+      'open-license',
+      'allowed-copying',
+      'pre-sale',
+      'public-domain',
+      'no-protection',
+      'community-norms',
+      'patent-pledge',
+    ]),
+    headline: z.string(),
+    story: z.string(),
+    /** Date the entry was added (used by the RSS feed). */
+    added: z.coerce.date(),
     sources: z.array(z.object({ title: z.string(), publisher: z.string(), url: z.url() })).min(1),
   }),
 });
@@ -73,4 +163,4 @@ const meta = defineCollection({
   }),
 });
 
-export const collections = { guide, footnotes, updates, meta };
+export const collections = { guide, footnotes, updates, glossary, myths, creators, meta };

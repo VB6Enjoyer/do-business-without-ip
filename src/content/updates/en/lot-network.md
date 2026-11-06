@@ -1,4 +1,5 @@
 ---
+added: 2026-11-05
 title: 'Defensive patent pools took off'
 order: 6
 sources:

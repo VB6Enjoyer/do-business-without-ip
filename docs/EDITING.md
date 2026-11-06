@@ -36,16 +36,45 @@ Each entry in `src/content/footnotes/en.json` has `originalUrl` (as printed in 2
 2. Put `<Since2014 id="<id>" />` right after the sentence it updates.
 3. Add a row to the table in `docs/EDITION.md`.
 
-## Images
+## Summaries and term explainers
 
-The site still uses placeholders:
+- **Summaries:** edit the `summary` list in a section’s frontmatter (1–4 short bullets, in your own words). They show as “The argument in brief” under the section heading.
+- **Explaining a new term:** add an entry to `src/content/glossary/en.json` (`id`, `term`, `definition`, optional `learnMore`), then wrap the term’s first appearance in the text with `<Term id="…">…</Term>`. Use each id once, never inside a `<Ref>` link or a pull quote. `check:links` also checks the `learnMore` links.
 
-- The home page hero is an `ImagePlaceholder` (`src/pages/index.astro`). Its `subject` describes the intended artwork. Replace it with an image from `src/assets/` using Astro's `<Image />`, and record the image's source and license in `src/assets/CREDITS.md`.
-- The social preview image and app icons are rendered from HTML by `scripts/generate-assets.mjs`. Edit that script and run `npm run assets`, or overwrite the PNGs in `public/` with your own (keep 1200×630 for `og/default.png`).
+## Myth cards
+
+Edit `src/content/myths/en.json`. Each card has a `claim`, an `answer` in your own words, a `quote` and the `section` slug it links to. The quote must be the author's exact words: `npm run check:text` fails if it isn't found verbatim in the guide.
+
+## Creators gallery
+
+Add or edit entries in `src/content/creators/en.json`: `name`, `field`, `year` (or `null`), `approach`, a one-line `headline`, a short `story` in your own words, and at least one source. Stick to what the sources support, and say so when figures are estimates. Field and approach labels are in `src/i18n/en.ts` under `creators`.
+
+## Illustrations and images
+
+The illustrations are original line-art SVGs in `src/assets/illustrations/`: `hero.svg` on the home page, and one opener per guide section, named after the section's slug (for example `history.svg`). They are drawn by `scripts/generate-illustrations.py`.
+
+- **Changing a drawing:** edit its function in the script and run `npm run illustrations`. Don't hand-edit the SVGs, because the next run overwrites them.
+- **Style rules:** monoline strokes in the accent green, a single orange highlight, `paper` fills that match the page, and ink for anything standing for state power. Colors are the `--ill-*` custom properties in `src/styles/tokens.css`, so every drawing follows the light and dark themes.
+- **Placing one:** use `<Illustration name="…" />` (`src/components/Illustration.astro`). It is decorative by default; pass `label` when the image carries meaning, as the home hero does. A section without a matching file simply shows no opener.
+- **Photos or other artwork:** put them in `src/assets/`, use Astro's `<Image />`, and record the source and license in `src/assets/CREDITS.md`.
+
+The social preview image and app icons are rendered by `scripts/generate-assets.mjs` from the favicon and the hero illustration. Run `npm run assets` after changing either.
 
 ## Interface text
 
 All interface strings, including those of the interactives, are in `src/i18n/en.ts`. Components never hard-code text. The `UIStrings` type means TypeScript flags a missing or misspelled key.
+
+## Sharing, resume reading and the feed
+
+- **Share links** (`src/components/ShareLinks.astro`, URLs in `src/lib/share.ts`) are plain links to each network's share page. No third-party script is loaded, so nothing tracks readers. To add or remove a network, edit `shareTargets`.
+- **Resume reading** (`src/lib/resume.ts`) stores the last section read in the reader's own browser (`localStorage`). It is never sent anywhere, and the site sets no cookies.
+- **The RSS feed** (`/rss.xml`, `src/pages/rss.xml.ts`) lists "Since 2014" updates and gallery entries by their `added` date. Set `added` on every new entry.
+
+## Archiving
+
+- **Wayback Machine:** after every deploy, `deploy.yml` asks the Internet Archive to snapshot the main pages, the EPUB and the feed. This is best effort and never fails a deploy.
+- **Zenodo (citable DOI), a one-time manual step:** sign in at zenodo.org with GitHub, enable this repository under _GitHub_ in your Zenodo account, then publish a GitHub release. Each release is archived with a DOI.
+- **IPFS:** not set up. It needs an account with a pinning service and a build with relative links (the site currently uses the `/do-business-without-ip/` base path). It's worth revisiting after a custom domain.
 
 ## Moving to a custom domain
 

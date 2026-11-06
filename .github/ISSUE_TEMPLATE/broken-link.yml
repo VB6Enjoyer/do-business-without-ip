@@ -1,0 +1,24 @@
+name: Report a broken link
+description: A footnote, update source or gallery source that no longer works.
+title: 'Broken link: '
+labels: [links]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where is the link?
+      description: 'For example "footnote 12", "Since 2014: TPP" or "gallery: Radiohead".'
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: The link
+      placeholder: https://
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What happens?
+      description: Not found, wrong page, moved somewhere else (if you know the new address, include it)…

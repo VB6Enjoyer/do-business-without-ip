@@ -225,3 +225,116 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+/* Term explainers (native popovers). */
+.prose .term {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  cursor: help;
+}
+
+.prose .term:hover {
+  text-decoration-style: solid;
+}
+
+.term-pop {
+  max-width: min(20rem, calc(100vw - 24px));
+  padding: var(--space-s);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.18);
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  hyphens: manual;
+}
+
+.term-pop.positioned {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+}
+
+.term-pop:popover-open {
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+.term-pop__head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+.term-pop__close {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.term-pop__more {
+  font-weight: 600;
+}
+
+/* "The argument in brief" summaries. */
+.in-brief {
+  hyphens: manual;
+  margin: var(--space-s) 0 var(--space-m);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  background: var(--color-surface);
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+}
+
+.in-brief summary {
+  padding: var(--space-xs) var(--space-s);
+  font-weight: 600;
+  color: var(--color-accent-strong);
+  cursor: pointer;
+}
+
+.in-brief ul {
+  margin: 0;
+  padding: 0 var(--space-s) 0 calc(var(--space-s) + 1.1em);
+}
+
+.in-brief li {
+  margin-bottom: var(--space-2xs);
+}
+
+.in-brief__note {
+  margin: 0;
+  padding: var(--space-2xs) var(--space-s) var(--space-xs);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+@media print {
+  .in-brief,
+  .term-pop {
+    display: none !important;
+  }
+
+  .prose .term {
+    text-decoration: none;
+  }
+}

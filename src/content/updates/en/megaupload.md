@@ -1,4 +1,5 @@
 ---
+added: 2026-11-05
 title: 'Kim Dotcom is still fighting extradition'
 order: 3
 sources:

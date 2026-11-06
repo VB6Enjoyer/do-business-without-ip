@@ -1,0 +1,104 @@
+[
+  {
+    "id": "monopoly-privilege",
+    "term": "Monopoly privilege",
+    "definition": "An exclusive right granted by the state that forbids others from competing in some activity, such as making or selling a product.",
+    "learnMore": "https://en.wikipedia.org/wiki/Legal_monopoly"
+  },
+  {
+    "id": "restrictive-covenant",
+    "term": "Restrictive covenant",
+    "definition": "A private agreement, usually attached to a property deed, that limits how the owners who signed it may use their land.",
+    "learnMore": "https://en.wikipedia.org/wiki/Restrictive_covenant"
+  },
+  {
+    "id": "negative-servitude",
+    "term": "Negative servitude",
+    "definition": "A right over someone else’s property that lets you forbid certain uses of it rather than use it yourself, such as stopping a neighbor from building above a certain height. Also called a negative easement.",
+    "learnMore": "https://en.wikipedia.org/wiki/Easement"
+  },
+  {
+    "id": "mercantilism",
+    "term": "Mercantilism",
+    "definition": "An early modern economic policy of using state grants, monopolies and trade restrictions to enrich the crown and favored domestic producers.",
+    "learnMore": "https://en.wikipedia.org/wiki/Mercantilism"
+  },
+  {
+    "id": "creative-commons",
+    "term": "Creative Commons licenses",
+    "definition": "Free, standardized licenses that let creators give permission in advance, for example to share a work as long as they are credited, instead of negotiating each use.",
+    "learnMore": "https://creativecommons.org/about/cclicenses/"
+  },
+  {
+    "id": "patent-bargain",
+    "term": "Patent bargain",
+    "definition": "The usual justification for patents: inventors get a temporary monopoly in exchange for publicly disclosing how their invention works.",
+    "learnMore": null
+  },
+  {
+    "id": "sopa-pipa",
+    "term": "SOPA and PIPA",
+    "definition": "Two US bills (2011–2012) that would have let authorities and rights holders block websites accused of piracy. They were shelved in January 2012 after widespread online protests.",
+    "learnMore": "https://en.wikipedia.org/wiki/Protests_against_SOPA_and_PIPA"
+  },
+  {
+    "id": "tpp",
+    "term": "Trans-Pacific Partnership (TPP)",
+    "definition": "A trade agreement among twelve Pacific Rim countries, including the United States, whose intellectual-property chapter would have lengthened copyright terms and toughened enforcement.",
+    "learnMore": "https://en.wikipedia.org/wiki/Trans-Pacific_Partnership"
+  },
+  {
+    "id": "utilitarian",
+    "term": "Utilitarian thinking",
+    "definition": "Judging a policy by its estimated total costs and benefits, rather than by principles such as property rights or justice.",
+    "learnMore": "https://en.wikipedia.org/wiki/Utilitarianism"
+  },
+  {
+    "id": "austrian-libertarians",
+    "term": "Austrian libertarians",
+    "definition": "Libertarians influenced by the Austrian school of economics (Ludwig von Mises, Murray Rothbard and others), which reasons from principles of human action rather than statistical models.",
+    "learnMore": "https://en.wikipedia.org/wiki/Austrian_school_of_economics"
+  },
+  {
+    "id": "statute-of-anne",
+    "term": "Statute of Anne",
+    "definition": "The first British copyright law (1710). It gave authors, rather than the printers’ guild, the exclusive right to print their books for a limited term: 14 years, renewable once.",
+    "learnMore": "https://en.wikipedia.org/wiki/Statute_of_Anne"
+  },
+  {
+    "id": "stationers-company",
+    "term": "Stationers’ Company",
+    "definition": "The London guild of printers and booksellers, which held a crown-granted monopoly over printing in England until the late 1600s.",
+    "learnMore": "https://en.wikipedia.org/wiki/Worshipful_Company_of_Stationers_and_Newspaper_Makers"
+  },
+  {
+    "id": "orphan-works",
+    "term": "Orphan works",
+    "definition": "Works still under copyright whose owners can’t be identified or found, so nobody can get permission to reprint or reuse them.",
+    "learnMore": "https://en.wikipedia.org/wiki/Orphan_work"
+  },
+  {
+    "id": "patent-troll",
+    "term": "Patent trolling",
+    "definition": "The practice of companies that own patents but make nothing, earning money mainly by threatening or filing infringement lawsuits.",
+    "learnMore": "https://en.wikipedia.org/wiki/Patent_troll"
+  },
+  {
+    "id": "dmca",
+    "term": "Digital Millennium Copyright Act (DMCA)",
+    "definition": "A 1998 US copyright law. Its notice-and-takedown procedure lets anyone claiming a copyright get material removed from sites like YouTube, usually without a court looking at it first.",
+    "learnMore": "https://en.wikipedia.org/wiki/Digital_Millennium_Copyright_Act"
+  },
+  {
+    "id": "defensive-patent",
+    "term": "Defensive patent",
+    "definition": "A patent obtained mainly to deter lawsuits: if a competitor sues, you can countersue with patents of your own.",
+    "learnMore": "https://en.wikipedia.org/wiki/Defensive_patent_aggregation"
+  },
+  {
+    "id": "patent-pool",
+    "term": "Patent defense pool",
+    "definition": "An arrangement in which companies share patents with one another, often so that members can defend themselves against lawsuits together.",
+    "learnMore": "https://en.wikipedia.org/wiki/Patent_pool"
+  }
+]

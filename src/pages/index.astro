@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Illustration from '../components/Illustration.astro';
+import ShareLinks from '../components/ShareLinks.astro';
 import { useStrings } from '../i18n';
 import { withBase } from '../lib/paths';
 
@@ -24,13 +25,13 @@ const t = useStrings();
         </a>
         <span class="reading-time">{t.home.readingTime}</span>
       </p>
+      <ShareLinks
+        url={new URL(withBase('/'), Astro.site).href}
+        text={t.share.guideText}
+        class="home-share"
+      />
     </div>
-    <ImagePlaceholder
-      class="art"
-      label="Hero illustration"
-      subject="Ideas flowing freely between people: a lightbulb or open hands motif, no stock-photo businessman"
-      ratio="4 / 5"
-    />
+    <Illustration class="art" name="hero" label={t.home.heroAlt} />
   </section>
 </BaseLayout>
 
@@ -73,6 +74,10 @@ const t = useStrings();
   .lede {
     font-size: var(--step-1);
     max-width: 38ch;
+  }
+
+  .copy :global(.home-share) {
+    margin-top: var(--space-l);
   }
 
   .actions {

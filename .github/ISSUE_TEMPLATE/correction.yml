@@ -1,0 +1,26 @@
+name: Report an error
+description: A mistake in the site's text, an editorial note, a summary or a definition.
+title: 'Correction: '
+labels: [correction]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Kinsella's own text is reproduced **verbatim** from the 2014 guide, so word changes to it aren't made (known slips are listed in `docs/EDITION.md`). Typographic slips, and anything written for this edition (summaries, "Since 2014" notes, definitions, gallery entries), can be fixed.
+  - type: input
+    id: where
+    attributes:
+      label: Where is it?
+      description: Section, card or page, and a few words of the text.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong, and what should it say?
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources (for factual corrections)

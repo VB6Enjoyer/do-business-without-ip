@@ -1,0 +1,64 @@
+---
+/**
+ * A term with a plain-language explanation. Uses the native Popover API, so it
+ * opens, closes on Esc or outside click, and is announced as expanded without
+ * any JavaScript; a small script only positions it next to the term.
+ * Use once per term id (the popover id is derived from it).
+ */
+import { getEntry } from 'astro:content';
+import { defaultLang, useStrings } from '../../i18n';
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const t = useStrings();
+const entry = await getEntry('glossary', `${defaultLang}-${id}`);
+if (!entry) throw new Error(`Term references unknown glossary entry "${id}"`);
+const { term, definition, learnMore } = entry.data;
+const popId = `term-${id}`;
+---
+
+<!-- prettier-ignore -->
+<button type="button" class="term" popovertarget={popId} data-term={id}><slot /></button>
+<span class="term-pop" id={popId} popover role="note" aria-label={term}>
+  <span class="term-pop__head">
+    <strong>{term}</strong>
+    <button
+      type="button"
+      class="term-pop__close"
+      popovertarget={popId}
+      popovertargetaction="hide"
+      aria-label={t.guide.termClose}
+    >
+      ×
+    </button>
+  </span>
+  <span class="term-pop__text">{definition}</span>
+  {learnMore && (
+    <a class="term-pop__more" href={learnMore} rel="noopener">
+      {t.guide.termLearnMore}
+    </a>
+  )}
+</span>
+
+<script>
+  // Place each popover just below (or above) its term once it opens.
+  document.querySelectorAll<HTMLElement>('.term-pop').forEach((pop) => {
+    pop.addEventListener('toggle', (event) => {
+      if ((event as ToggleEvent).newState !== 'open') return;
+      const trigger = document.querySelector<HTMLElement>(`[popovertarget="${pop.id}"].term`);
+      if (!trigger) return;
+      const r = trigger.getBoundingClientRect();
+      pop.classList.add('positioned');
+      const width = Math.min(320, innerWidth - 24);
+      const left = Math.max(12, Math.min(r.left, innerWidth - width - 12));
+      const below = r.bottom + 8;
+      pop.style.left = `${left}px`;
+      pop.style.width = `${width}px`;
+      const fitsBelow = below + pop.offsetHeight < innerHeight - 12;
+      pop.style.top = `${fitsBelow ? below : Math.max(12, r.top - pop.offsetHeight - 8)}px`;
+    });
+  });
+</script>

@@ -1,0 +1,48 @@
+---
+/**
+ * Inlines one of the line-art illustrations from src/assets/illustrations so
+ * its colors follow the theme (they use the --ill-* custom properties).
+ * Decorative by default; pass `label` to expose it as an image.
+ */
+interface Props {
+  /** File name without .svg, e.g. "hero" or a section slug. */
+  name: string;
+  /** Accessible description. Omit for decorative illustrations. */
+  label?: string;
+  class?: string;
+}
+
+const files = import.meta.glob<string>('../assets/illustrations/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+const { name, label, class: className } = Astro.props;
+const raw = files[`../assets/illustrations/${name}.svg`];
+const markup = raw
+  ? label
+    ? raw
+        .replace(/<title>.*?<\/title>/, '')
+        .replace('<svg ', `<svg role="img" aria-label="${label.replace(/"/g, '&quot;')}" `)
+    : raw
+        .replace(/<title>.*?<\/title>/, '')
+        .replace('<svg ', '<svg aria-hidden="true" focusable="false" ')
+  : null;
+---
+
+{markup && <div class:list={['illustration', className]} set:html={markup} />}
+
+<style>
+  .illustration :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media print {
+    .illustration {
+      display: none;
+    }
+  }
+</style>

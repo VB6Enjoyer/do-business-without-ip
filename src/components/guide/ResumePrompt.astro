@@ -1,0 +1,104 @@
+---
+import { useStrings } from '../../i18n';
+
+const t = useStrings();
+---
+
+<div class="resume" data-resume role="region" aria-label={t.resume.label} hidden>
+  <p>
+    <span class="resume__lead">{t.resume.lead}</span>
+    <span class="resume__title" data-resume-title></span>
+  </p>
+  <div class="resume__actions">
+    <button type="button" class="resume__go" data-resume-go>
+      {t.resume.go}
+    </button>
+    <button type="button" class="resume__dismiss" data-resume-dismiss aria-label={t.resume.dismiss}>
+      ×
+    </button>
+  </div>
+</div>
+
+<script>
+  import { initResume } from '../../lib/resume';
+  initResume();
+</script>
+
+<style>
+  .resume {
+    position: fixed;
+    inset: auto var(--space-s) var(--space-s) auto;
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    max-width: min(26rem, calc(100vw - 2 * var(--space-s)));
+    padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-s);
+    border: 1px solid var(--color-border);
+    border-inline-start: 4px solid var(--color-accent);
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
+    box-shadow: 0 8px 28px rgb(0 0 0 / 0.18);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    animation: resume-in var(--duration) var(--ease);
+  }
+
+  .resume[hidden] {
+    display: none;
+  }
+
+  .resume p {
+    margin: 0;
+    display: grid;
+  }
+
+  .resume__lead {
+    color: var(--color-text-muted);
+  }
+
+  .resume__title {
+    font-weight: 600;
+  }
+
+  .resume__actions {
+    display: flex;
+    gap: var(--space-2xs);
+    margin-inline-start: auto;
+  }
+
+  .resume button {
+    min-height: 2.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .resume__go {
+    padding: 0 var(--space-s);
+    background: var(--color-accent) !important;
+    border-color: var(--color-accent) !important;
+    color: var(--color-accent-contrast) !important;
+  }
+
+  .resume__dismiss {
+    width: 2.25rem;
+  }
+
+  @keyframes resume-in {
+    from {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  }
+
+  @media print {
+    .resume {
+      display: none !important;
+    }
+  }
+</style>

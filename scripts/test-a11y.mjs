@@ -8,6 +8,10 @@
  * - archive links for dead footnotes; "Since 2014" updates in the drawer
  * - interactives: covenant demo outcomes, copyright timeline values and readouts
  * - tools: self-check suggestions, pre-sale calculator, release notice, quote sharing
+ * - section summaries and term explainers (also without JavaScript)
+ * - myth cards and the scroll-driven covenant diagram
+ * - creators gallery filters
+ * - resume reading, share links and the RSS feed
  * - no-JS fallback: footnote markers jump to the notes list
  * - mobile contents bar opens and closes after following a link
  */
@@ -64,7 +68,7 @@ try {
     console.log(`\naxe (${scheme})`);
     const ctx = await browser.newContext({ colorScheme: scheme, reducedMotion: 'reduce' });
     const page = await ctx.newPage();
-    for (const path of ['', 'guide/', 'about/', 'this-page-does-not-exist/']) {
+    for (const path of ['', 'guide/', 'about/', 'creators/', 'this-page-does-not-exist/']) {
       await page.goto(BASE + path, { waitUntil: 'networkidle' });
       await axe(page, `/${path || ''} ${scheme}`);
     }
@@ -123,11 +127,14 @@ try {
     await page.mouse.click(10, 10); // backdrop
     check(!(await page.isVisible('#fn-drawer')), 'clicking the backdrop closes the drawer');
 
+    await page.goto('about:blank');
+
     await page.goto(BASE + 'guide/#fn-12', { waitUntil: 'networkidle' });
     await page.waitForSelector('#fn-drawer[open]');
     check((await kicker())?.includes('12 of 41'), 'deep link #fn-12 opens footnote 12');
 
     console.log('\nLinks in the drawer');
+    await page.goto('about:blank');
     await page.goto(BASE + 'guide/#fn-4', { waitUntil: 'networkidle' });
     await page.waitForSelector('#fn-drawer[open]');
     check(
@@ -169,6 +176,7 @@ try {
       .then(() => true)
       .catch(() => false);
     check(backToUpdate, 'focus returns to the marker of the update last shown');
+    await page.goto('about:blank');
     await page.goto(BASE + 'guide/#since-motorola', { waitUntil: 'networkidle' });
     await page.waitForSelector('#fn-drawer[open]');
     check(
@@ -399,6 +407,249 @@ try {
     await ctx.close();
   }
 
+  console.log('\nSummaries and term explainers');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    check((await page.locator('details.in-brief').count()) === 12, 'every section has a summary');
+    const brief = page.locator('#what-is-ip details.in-brief');
+    check(!(await brief.locator('li').first().isVisible()), 'summaries start collapsed');
+    await brief.locator('summary').click();
+    check(await brief.locator('li').first().isVisible(), 'a summary opens on click');
+
+    const term = page.locator('button.term[data-term="restrictive-covenant"]');
+    await term.scrollIntoViewIfNeeded();
+    await term.click();
+    const pop = page.locator('#term-restrictive-covenant');
+    check(await pop.isVisible(), 'clicking a term opens its explanation');
+    check(
+      (await pop.textContent())?.includes('private agreement'),
+      'the explanation shows the definition',
+    );
+    // The popover's toggle event (which positions it) is dispatched asynchronously.
+    await page
+      .waitForFunction(
+        () =>
+          document.getElementById('term-restrictive-covenant')?.classList.contains('positioned'),
+        null,
+        {
+          timeout: 2000,
+        },
+      )
+      .catch(() => {});
+    const near = await page.evaluate(() => {
+      const t = document
+        .querySelector('button.term[data-term="restrictive-covenant"]')
+        .getBoundingClientRect();
+      const p = document.getElementById('term-restrictive-covenant').getBoundingClientRect();
+      return Math.abs(p.top - t.bottom) < 40 || Math.abs(t.top - p.bottom) < 40;
+    });
+    check(near, 'the explanation appears next to the term');
+    await axe(page, 'term explanation open');
+    await page.keyboard.press('Escape');
+    check(!(await pop.isVisible()), 'Esc closes the explanation');
+    check(
+      (await page.locator('#glossary dl > div').count()) === 17,
+      'the glossary lists all 17 terms',
+    );
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
+  console.log('\nMyth cards and scroll diagram');
+  {
+    const ctx = await browser.newContext({
+      reducedMotion: 'reduce',
+      viewport: { width: 1280, height: 900 },
+    });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+
+    const cards = page.locator('#myth-cards details.myth');
+    check((await cards.count()) === 6, 'six myth cards');
+    const card = page.locator('#myth-innovation');
+    await card.scrollIntoViewIfNeeded();
+    check(
+      !(await card.locator('.myth__back').isVisible()),
+      'cards start with only the claim showing',
+    );
+    await card.locator('summary').click();
+    check(await card.locator('.myth__back').isVisible(), 'turning a card over shows the answer');
+    check(
+      (await card.locator('.myth__back a').getAttribute('href')) === '#should-we-abolish-ip',
+      'the card links to the section that makes the case',
+    );
+    await page.keyboard.press('Enter');
+    check(
+      !(await card.locator('.myth__back').isVisible()),
+      'the card turns back with the keyboard',
+    );
+
+    const fig = page.locator('[data-scrolly-figure]');
+    check(
+      (await fig.getAttribute('data-step')) === '1',
+      'the diagram starts at step 1 once enhanced',
+    );
+    const opacity = (steps) =>
+      page.$eval(
+        `[data-scrolly-figure] .layer[data-steps="${steps}"]`,
+        (el) => getComputedStyle(el).opacity,
+      );
+    check((await opacity('4 5')) === '0', 'the patent holder is hidden at step 1');
+    for (const n of [2, 4, 5]) {
+      await page.evaluate((n) => {
+        const el = document.querySelector(`.scrolly__step[data-step="${n}"]`);
+        scrollTo(
+          0,
+          el.getBoundingClientRect().top + scrollY - innerHeight / 2 + el.offsetHeight / 2,
+        );
+      }, n);
+      await page
+        .waitForFunction(
+          (n) => document.querySelector('[data-scrolly-figure]')?.dataset.step === String(n),
+          n,
+          {
+            timeout: 3000,
+          },
+        )
+        .catch(() => {});
+      check(
+        (await fig.getAttribute('data-step')) === String(n),
+        `scrolling to step ${n} updates the diagram`,
+      );
+    }
+    check((await opacity('4 5')) === '1', 'the patent holder appears in the final steps');
+    check(
+      (await fig.getAttribute('aria-label'))?.includes('part-owner'),
+      'the diagram’s label describes the current step',
+    );
+    await axe(page, 'guide with myth card open and diagram at step 5');
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
+  console.log('\nCreators gallery');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(BASE + 'creators/', { waitUntil: 'networkidle' });
+    const visible = () => page.locator('.card:not([hidden])').count();
+    check((await visible()) === 14, 'all 14 creators are listed');
+    check(await page.isVisible('[data-filters]'), 'filters appear with JavaScript');
+    await page.getByRole('button', { name: 'Music', exact: true }).click();
+    check((await visible()) === 5, 'filtering by Music shows the 5 music entries');
+    check(
+      (await page.textContent('[data-count]'))?.includes('5 of 14'),
+      'the count announces how many are shown',
+    );
+    check(
+      (await page.getAttribute('[data-filter="music"]', 'aria-pressed')) === 'true',
+      'the active filter is marked as pressed',
+    );
+    await page.getByRole('button', { name: 'All', exact: true }).click();
+    check((await visible()) === 14, 'All shows every entry again');
+    const sources = page.locator('#tesla .card__sources');
+    await sources.locator('summary').click();
+    check((await sources.locator('a').count()) >= 1, 'each entry lists its sources');
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    check(
+      (await page.getAttribute('.creators-callout a', 'href'))?.endsWith('/creators/'),
+      'the guide links to the gallery',
+    );
+    check(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join('; ') : ''}`);
+    await ctx.close();
+  }
+
+  console.log('\nResume reading');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    check(await page.locator('[data-resume]').isHidden(), 'no prompt on a first visit');
+    const goTo = async (id) => {
+      await page.evaluate((id) => {
+        const el = document.getElementById(id);
+        scrollTo(0, el.getBoundingClientRect().top + scrollY - 60);
+      }, id);
+      await page.waitForTimeout(1200);
+      await page.mouse.wheel(0, 40); // a second scroll event after the 1s throttle
+      await page.waitForTimeout(300);
+    };
+    await goTo('history');
+    const saved = await page.evaluate(() =>
+      JSON.parse(localStorage.getItem('resume:guide') ?? 'null'),
+    );
+    check(saved?.id === 'history', 'the reading position is saved on the device');
+    await page.goto('about:blank');
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const prompt = page.locator('[data-resume]');
+    check(await prompt.isVisible(), 'returning readers are offered to resume');
+    check(
+      (await prompt.textContent())?.includes('History of Patent'),
+      'the prompt names the section',
+    );
+    await prompt.getByRole('button', { name: 'Continue' }).click();
+    const top = await page.evaluate(
+      () => document.getElementById('history').getBoundingClientRect().top,
+    );
+    check(Math.abs(top) < 200, 'Continue goes back to that section');
+    check(await prompt.isHidden(), 'the prompt closes after continuing');
+    await page.goto('about:blank');
+    await page.goto(BASE + 'guide/#fn-3', { waitUntil: 'networkidle' });
+    check(
+      await page.locator('[data-resume]').isHidden(),
+      'no prompt when following a link to a specific spot',
+    );
+    await ctx.close();
+  }
+
+  console.log('\nShare links and feed');
+  {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    await ctx.grantPermissions(['clipboard-read', 'clipboard-write']);
+    const page = await ctx.newPage();
+    await page.goto(BASE + 'guide/', { waitUntil: 'networkidle' });
+    const bar = page.locator('.guide-share').first();
+    const x = await bar.locator('a', { hasText: 'X' }).first().getAttribute('href');
+    check(
+      x?.startsWith('https://x.com/intent/post?') &&
+        x.includes(encodeURIComponent('/do-business-without-ip/guide/')),
+      'the X link shares the guide’s address',
+    );
+    check((await bar.locator('a').count()) >= 8, 'eight networks are offered');
+    check(
+      (await bar.locator('a[target="_blank"]').first().getAttribute('rel'))?.includes('noopener'),
+      'share links open safely in a new tab',
+    );
+    await bar.getByRole('button', { name: 'Copy link' }).click();
+    const clip = await page.evaluate(() => navigator.clipboard.readText());
+    check(clip.endsWith('/do-business-without-ip/guide/'), 'Copy link copies the page address');
+    await page.locator('[data-quote-share]').first().click();
+    await page.waitForSelector('#quote-dialog[open]');
+    const quoteX = await page
+      .locator('[data-quote-social] a', { hasText: 'X' })
+      .getAttribute('href');
+    check(
+      decodeURIComponent(quoteX ?? '').includes('An IP-free world'),
+      'the quote dialog offers social links with the quote',
+    );
+    await page.keyboard.press('Escape');
+    const feed = await (await fetch(BASE + 'rss.xml')).text();
+    check((feed.match(/<item>/g) ?? []).length === 20, 'the RSS feed lists the 20 additions');
+    check(
+      (await page.getAttribute('link[type="application/rss+xml"]', 'href'))?.endsWith('/rss.xml'),
+      'pages advertise the feed',
+    );
+    await ctx.close();
+  }
+
   console.log('\nWithout JavaScript');
   {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
@@ -407,6 +658,24 @@ try {
     await page.click('#fnref-3');
     check(new URL(page.url()).hash === '#fn-3', 'marker jumps to the notes list');
     check(!(await page.isVisible('#fn-drawer')), 'drawer stays closed');
+    await page.goto(BASE + 'creators/');
+    check(
+      (await page.locator('.card:visible').count()) === 14 &&
+        !(await page.isVisible('[data-filters]')),
+      'without JavaScript the gallery shows every entry and hides the filters',
+    );
+    await page.goto(BASE + 'guide/');
+    check(
+      (await page.getAttribute('[data-scrolly-figure]', 'data-step')) === '5',
+      'without JavaScript the diagram shows its final state',
+    );
+    await page.click('#myth-free-market summary');
+    check(
+      await page.isVisible('#myth-free-market .myth__back'),
+      'myth cards work without JavaScript',
+    );
+    await page.click('button.term[data-term="orphan-works"]');
+    check(await page.isVisible('#term-orphan-works'), 'term explanations work without JavaScript');
     check(
       (await page.locator('[data-quote-share]:visible').count()) === 0,
       'quote share buttons stay hidden',

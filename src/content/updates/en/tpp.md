@@ -1,4 +1,5 @@
 ---
+added: 2026-11-05
 title: 'The TPP’s IP chapter was shelved'
 order: 1
 sources:

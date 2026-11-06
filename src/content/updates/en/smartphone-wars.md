@@ -1,4 +1,5 @@
 ---
+added: 2026-11-05
 title: 'The Apple–Samsung “smartphone wars” ended in 2018'
 order: 2
 sources:

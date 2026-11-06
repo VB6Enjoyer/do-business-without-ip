@@ -2,7 +2,7 @@
   "name": "do-business-without-ip",
   "version": "0.1.0",
   "private": true,
-  "description": "A modern web edition of Stephan Kinsella\u2019s CC0 guide \u201cDo Business Without Intellectual Property\u201d (2014).",
+  "description": "A modern web edition of Stephan Kinsella’s CC0 guide “Do Business Without Intellectual Property” (2014).",
   "license": "Unlicense",
   "type": "commonjs",
   "engines": {
@@ -20,10 +20,12 @@
     "test:a11y": "node scripts/test-a11y.mjs",
     "check:links": "node scripts/check-links.mjs",
     "assets": "node scripts/generate-assets.mjs",
-    "check:epub": "python3 -I scripts/check-epub.py dist/downloads/do-business-without-ip.epub"
+    "check:epub": "python3 -I scripts/check-epub.py dist/downloads/do-business-without-ip.epub",
+    "illustrations": "python3 -I scripts/generate-illustrations.py"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.2",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/svelte": "^9.1.2",
     "@fontsource-variable/inter": "^5.3.0",

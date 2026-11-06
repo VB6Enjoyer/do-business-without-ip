@@ -22,6 +22,7 @@ export const en = {
   nav: {
     home: 'Home',
     guide: 'Read the guide',
+    creators: 'Creators',
     about: 'About',
   },
   home: {
@@ -29,6 +30,7 @@ export const en = {
     byline: 'by Stephan Kinsella',
     lede: 'Why patents and copyright are incompatible with a free market, and what entrepreneurs and creators can do about it today.',
     startReading: 'Start reading',
+    heroAlt: 'One lit lightbulb lighting a cascade of others: an idea copied loses nothing.',
     readingTime: 'About a 30-minute read',
   },
   guide: {
@@ -41,6 +43,13 @@ export const en = {
     aboutAuthor: 'About the author',
     originalPage: 'Page {n} of the original',
     readingProgress: 'Reading progress',
+    inBrief: 'The argument in brief',
+    inBriefNote: 'An editorial summary added in this edition, not the author’s words.',
+    glossary: 'Glossary',
+    glossaryIntro:
+      'Plain-language explanations of terms used in the guide, added in this edition. In the text, terms with a dotted underline open these explanations.',
+    termLearnMore: 'Learn more',
+    termClose: 'Close explanation',
     downloadEpub: 'Download EPUB',
     downloadEpubHint:
       'For e-readers. The text, notes and author bio, without the interactive parts.',
@@ -50,6 +59,30 @@ export const en = {
     sources: 'Sources',
     archivedCopy: 'archived copy',
     backToUpdate: 'Back to the text for “{title}”',
+  },
+  rss: {
+    title: 'Do Business Without IP: updates',
+    description:
+      'New “Since 2014” updates and new entries in the creators gallery of the web edition of Stephan Kinsella’s guide.',
+    updatePrefix: 'Since 2014',
+    creatorPrefix: 'New in the gallery',
+  },
+  share: {
+    heading: 'Share',
+    guideHeading: 'Share the guide',
+    on: 'Share on {network} (opens in a new tab)',
+    copy: 'Copy link',
+    copied: 'Link copied',
+    native: 'More…',
+    guideText: 'Do Business Without Intellectual Property, by Stephan Kinsella: a free web edition',
+    creatorsText:
+      'Thriving without IP: creators and companies who succeed without patents and copyright',
+  },
+  resume: {
+    label: 'Resume reading',
+    lead: 'Pick up where you left off?',
+    go: 'Continue',
+    dismiss: 'Dismiss',
   },
   drawer: {
     kicker: 'Footnote {n} of {total}',
@@ -72,6 +105,29 @@ export const en = {
   },
   interactive: {
     badge: 'Interactive · added in this edition',
+    myths: {
+      title: 'Myth or reality?',
+      intro:
+        'Common claims about IP, and how the guide answers them. Turn a card over to see the answer and where the guide makes the case.',
+      claimLabel: 'The claim',
+      answerLabel: 'The guide’s answer',
+      reveal: 'Turn over',
+      inTheGuide: 'In the guide:',
+      readSection: 'Read “{section}”',
+    },
+    scrolly: {
+      title: 'Consent makes the difference',
+      intro:
+        'The neighborhood argument, step by step. Scroll through the steps to build the picture.',
+      figureLabel: 'Diagram of a neighborhood of eight houses. Current step: {step}',
+      steps: [
+        'A neighborhood of eight houses. Each owner decides how to use their own home.',
+        'Seven owners sign a covenant: no orange houses without the neighbors’ permission. Each gives up a little control over their own house in exchange for the same say over the others.',
+        'Because they agreed, the covenant is an exercise of their property rights, not a violation of them. The eighth owner never signed, so it doesn’t bind them: they can paint their house orange.',
+        'Now a patent holder outside the neighborhood gets a veto over every house, granted by the state. Nobody signed anything.',
+        'In effect, the patent holder has become a part-owner of every house: a negative servitude imposed without anyone’s consent.',
+      ],
+    },
     covenant: {
       title: 'Who gets a veto over your house?',
       intro:
@@ -267,6 +323,41 @@ export const en = {
       attribution: 'Stephan Kinsella, Do Business Without Intellectual Property',
       note: 'The guide is in the public domain (CC0), so share it however you like.',
       siteName: 'Do Business Without IP',
+      onSocial: 'Share on social media',
+    },
+  },
+  creators: {
+    title: 'Thriving without IP',
+    kicker: 'Creators gallery · added in this edition',
+    lede: 'Musicians, writers, programmers, designers, cooks and comedians who succeed without leaning on patents and copyright, each with sources.',
+    note: 'These examples were chosen for this edition; they are not part of Kinsella’s guide. They show different strategies: some creators simply let people copy, others work in fields with no IP protection at all, and some use open licenses or pledges, which still rest on IP law but give its power away.',
+    filterLabel: 'Filter by field',
+    all: 'All',
+    showing: 'Showing {n} of {total}',
+    approachLabel: 'Approach',
+    sources: 'Sources',
+    suggest: 'Know a good example? Suggest it on GitHub.',
+    calloutTitle: 'More examples',
+    calloutText: 'See {n} creators and companies who thrive without leaning on IP',
+    calloutBadge: 'Added in this edition',
+    fields: {
+      music: 'Music',
+      writing: 'Writing',
+      software: 'Software',
+      film: 'Film & animation',
+      'fashion-food': 'Fashion & food',
+      performance: 'Comedy & performance',
+      business: 'Business',
+    },
+    approaches: {
+      'free-release': 'Free or pay-what-you-want',
+      'open-license': 'Open license',
+      'allowed-copying': 'Allowed copying',
+      'pre-sale': 'Funded in advance',
+      'public-domain': 'Public domain',
+      'no-protection': 'No IP protection',
+      'community-norms': 'Community norms',
+      'patent-pledge': 'Patent pledge',
     },
   },
   about: {
@@ -281,10 +372,8 @@ export const en = {
     license:
       'The original guide was released by Stephan Kinsella under CC0. This web edition is unofficial and is also dedicated to the public domain.',
     originalPdf: 'Original PDF (2014)',
+    rss: 'RSS feed',
     source: 'Source code',
-  },
-  placeholder: {
-    label: 'Image placeholder',
   },
 } as const;
 

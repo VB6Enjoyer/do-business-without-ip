@@ -15,7 +15,14 @@ const fontUrl = (pkg, file) =>
   `data:font/woff2;base64,${readFileSync(join(fontDir, pkg, 'files', file)).toString('base64')}`;
 const serif = fontUrl('source-serif-4', 'source-serif-4-latin-opsz-normal.woff2');
 const sans = fontUrl('inter', 'inter-latin-wght-normal.woff2');
-const bulb = readFileSync(join(pub, 'favicon.svg'), 'utf8').replace(/<style>.*?<\/style>/, '');
+// Light-theme colors for the favicon classes and the illustration variables.
+const bulb = readFileSync(join(pub, 'favicon.svg'), 'utf8').replace(
+  /<style>.*?<\/style>/,
+  '<style>.b{stroke:#2f6b3c}.f{stroke:#e2731f}</style>',
+);
+const hero = readFileSync(join(root, 'src/assets/illustrations/hero.svg'), 'utf8');
+const illVars =
+  '--ill-ink:#1f1c18;--ill-accent:#2f6b3c;--ill-soft:#e3efd9;--ill-paper:#f8f5ef;--ill-muted:#b9b0a3;--ill-orange:#e2731f';
 
 const baseCss = `
   @font-face { font-family: 'CardSerif'; src: url(${serif}) format('woff2'); font-weight: 200 900; }
@@ -28,11 +35,14 @@ const og = `<!doctype html><html><head><style>${baseCss}
   body { width: 1200px; height: 630px; padding: 88px; display: flex; flex-direction: column;
          justify-content: center; border-left: 14px solid #2f6b3c; }
   .kicker { font: 700 22px 'CardSans'; letter-spacing: .1em; text-transform: uppercase; color: #2f6b3c; }
-  h1 { font: 300 84px/1.05 'CardSerif'; letter-spacing: -.015em; margin: 28px 0 24px; }
+  h1 { font: 300 76px/1.05 'CardSerif'; letter-spacing: -.015em; margin: 28px 0 24px; }
   h1 b { font-weight: 800; }
   .by { font: italic 400 36px 'CardSerif'; color: #5d5650; }
   .foot { position: absolute; bottom: 64px; left: 102px; font: 600 22px 'CardSans'; color: #5d5650; }
-</style></head><body>
+  .art { position: absolute; right: 70px; top: 50%; transform: translateY(-50%); width: 360px; ${illVars} }
+  .art svg { display: block; width: 100%; height: auto; }
+  h1 { max-width: 700px; }
+</style></head><body><div class="art">${hero}</div>
   <p class="kicker">Guide 1.0 · 2014 · Web edition</p>
   <h1>Do Business <b>Without</b><br>Intellectual Property</h1>
   <p class="by">by Stephan Kinsella</p>
